@@ -194,59 +194,132 @@ export default function HomePage() {
         className="py-32 px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative z-10 overflow-hidden"
       >
         <div className="absolute inset-0">
-          <div className="absolute inset-0 opacity-5">
+          {/* Sacred geometry grid pattern inspired by Destiny 2 */}
+          <div className="absolute inset-0 opacity-[0.02]">
             <div
               className="absolute inset-0"
               style={{
                 backgroundImage: `
-                  polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%),
-                  polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)
+                  linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+                  linear-gradient(0deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+                  linear-gradient(45deg, rgba(148, 163, 184, 0.01) 1px, transparent 1px),
+                  linear-gradient(-45deg, rgba(148, 163, 184, 0.01) 1px, transparent 1px)
                 `,
-                backgroundSize: "80px 69px",
-                backgroundPosition: "0 0, 40px 35px",
-                maskImage: `
-                  radial-gradient(circle at 25% 25%, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
-                  radial-gradient(circle at 75% 75%, rgba(148, 163, 184, 0.03) 1px, transparent 1px)
-                `,
+                backgroundSize: "40px 40px, 40px 40px, 80px 80px, 80px 80px",
+                backgroundPosition: "0 0, 0 0, 0 0, 0 0",
+                transform: `translateY(${scrollY * 0.1}px)`,
               }}
             />
           </div>
 
-          <div className="absolute inset-0 opacity-4">
+          {/* Floating geometric shapes with mathematical precision */}
+          <div className="absolute inset-0 opacity-[0.015]">
+            {/* Hexagonal patterns */}
             <div
-              className="absolute top-20 left-20 w-16 h-16 border border-slate-400/8 transform rotate-45"
-              style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+              className="absolute top-20 left-20 w-32 h-32 border border-slate-300/8"
+              style={{
+                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                animation: "geo-rotate 180s linear infinite",
+                transform: `translateY(${scrollY * 0.05}px)`,
+              }}
             />
             <div
-              className="absolute top-40 right-32 w-12 h-12 border border-slate-400/8 transform -rotate-30"
-              style={{ clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }}
+              className="absolute top-40 right-32 w-24 h-24 border border-slate-300/6"
+              style={{
+                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                animation: "geo-rotate 120s linear infinite reverse",
+                transform: `translateY(${scrollY * -0.03}px)`,
+              }}
+            />
+
+            {/* Triangular elements */}
+            <div
+              className="absolute bottom-32 left-40 w-28 h-28 border border-slate-300/4"
+              style={{
+                clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
+                animation: "geo-float 100s ease-in-out infinite",
+                transform: `translateX(${scrollY * 0.02}px)`,
+              }}
             />
             <div
-              className="absolute bottom-32 left-40 w-20 h-20 border border-slate-400/6 transform rotate-12"
-              style={{ clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)" }}
+              className="absolute bottom-20 right-20 w-20 h-20 border border-slate-300/6"
+              style={{
+                clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
+                animation: "geo-rotate 90s linear infinite",
+                transform: `translateX(${scrollY * -0.04}px)`,
+              }}
             />
+
+            {/* Octagonal shapes */}
             <div
-              className="absolute bottom-20 right-20 w-14 h-14 border border-slate-400/8 transform -rotate-60"
-              style={{ clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }}
+              className="absolute top-1/3 left-1/4 w-36 h-36 border border-slate-300/3"
+              style={{
+                clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+                animation: "geo-pulse 140s ease-in-out infinite",
+                transform: `translateY(${scrollY * 0.08}px)`,
+              }}
             />
           </div>
 
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-3">
-            <div className="relative w-32 h-32">
-              <div className="absolute inset-0 border border-slate-400/6 rounded-full" />
-              <div className="absolute inset-4 border border-slate-400/8 rounded-full" />
-              <div className="absolute inset-8 border border-slate-400/10 rounded-full" />
-              <div className="absolute top-1/2 left-0 w-full h-px bg-slate-400/6" />
-              <div className="absolute top-0 left-1/2 w-px h-full bg-slate-400/6" />
-              <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-slate-400/10 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+          {/* Central sacred geometry mandala */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-[0.008]">
+            <div className="relative w-96 h-96">
+              {/* Concentric circles with Destiny 2 styling */}
+              <div className="absolute inset-0 border border-slate-300/4 rounded-full" />
+              <div className="absolute inset-8 border border-slate-300/6 rounded-full" />
+              <div className="absolute inset-16 border border-slate-300/8 rounded-full" />
+              <div className="absolute inset-24 border border-slate-300/6 rounded-full" />
+              <div className="absolute inset-32 border border-slate-300/4 rounded-full" />
+
+              {/* Radial lines creating sacred geometry */}
+              {[...Array(12)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute top-1/2 left-1/2 w-48 h-px bg-slate-300/3 origin-left"
+                  style={{
+                    transform: `translate(-50%, -50%) rotate(${i * 30}deg)`,
+                  }}
+                />
+              ))}
+
+              {/* Central hexagon */}
+              <div
+                className="absolute top-1/2 left-1/2 w-24 h-24 border border-slate-300/8 transform -translate-x-1/2 -translate-y-1/2"
+                style={{
+                  clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                  animation: "geo-rotate 200s linear infinite",
+                }}
+              />
+
+              {/* Orbital elements */}
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-3 h-3 bg-slate-300/6 rounded-full"
+                  style={{
+                    top: "50%",
+                    left: "50%",
+                    transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateY(-120px)`,
+                    animation: `geo-orbit ${120 + i * 20}s linear infinite`,
+                  }}
+                />
+              ))}
             </div>
           </div>
 
+          {/* Scanning lines effect */}
           <div className="absolute inset-0 overflow-hidden">
             <div
-              className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/6 to-transparent"
+              className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/4 to-transparent"
               style={{
-                animation: "scan-vertical 40s linear infinite",
+                animation: "geo-scan 80s linear infinite",
+              }}
+            />
+            <div
+              className="absolute w-px h-full bg-gradient-to-b from-transparent via-slate-300/3 to-transparent"
+              style={{
+                animation: "geo-scan-vertical 100s linear infinite",
+                animationDelay: "20s",
               }}
             />
           </div>
@@ -257,53 +330,66 @@ export default function HomePage() {
             <div className="text-center mb-20">
               <div className="relative mb-16">
                 <div
-                  className={`absolute transition-all duration-3000 ease-out border border-slate-300/12 bg-gradient-to-r from-slate-500/1 via-slate-400/2 to-slate-500/1 backdrop-blur-xl shadow-2xl shadow-slate-500/2 ${
-                    showPerimeter ? "inset-0 rounded-2xl" : "top-[60px] bottom-[60px] left-[45%] right-[45%] rounded-lg"
+                  className={`absolute transition-all duration-3000 ease-out border border-slate-300/12 bg-gradient-to-r from-slate-500/2 via-slate-400/3 to-slate-500/2 backdrop-blur-xl shadow-2xl shadow-slate-500/5 ${
+                    showPerimeter ? "inset-0 rounded-3xl" : "top-[60px] bottom-[60px] left-[45%] right-[45%] rounded-xl"
                   }`}
                   style={{
                     clipPath: showPerimeter
-                      ? "polygon(24px 0%, calc(100% - 24px) 0%, 100% 24px, 100% calc(100% - 24px), calc(100% - 24px) 100%, 24px 100%, 0% calc(100% - 24px), 0% 24px)"
-                      : "polygon(12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px), 0% 12px)",
+                      ? "polygon(40px 0%, calc(100% - 40px) 0%, 100% 40px, 100% calc(100% - 40px), calc(100% - 40px) 100%, 40px 100%, 0% calc(100% - 40px), 0% 40px)"
+                      : "polygon(20px 0%, calc(100% - 20px) 0%, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0% calc(100% - 20px), 0% 20px)",
                   }}
                 />
 
+                {/* Destiny 2 inspired corner elements */}
                 <div
-                  className={`absolute -top-1 -left-1 w-8 h-8 border-t border-l border-slate-300/20 transition-opacity duration-1000 ${
+                  className={`absolute -top-2 -left-2 w-16 h-16 border-t-2 border-l-2 border-slate-300/15 transition-opacity duration-1000 ${
                     showPerimeter ? "opacity-100 delay-1000" : "opacity-0"
                   }`}
-                  style={{ clipPath: "polygon(0 0, 100% 0, 75% 25%, 25% 25%, 25% 75%, 0% 100%)" }}
+                  style={{
+                    clipPath: "polygon(0 0, 100% 0, 80% 20%, 20% 20%, 20% 80%, 0% 100%)",
+                    borderImage: "linear-gradient(135deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                  }}
                 />
                 <div
-                  className={`absolute -top-1 -right-1 w-8 h-8 border-t border-r border-slate-300/20 transition-opacity duration-1000 ${
+                  className={`absolute -top-2 -right-2 w-16 h-16 border-t-2 border-r-2 border-slate-300/15 transition-opacity duration-1000 ${
                     showPerimeter ? "opacity-100 delay-1200" : "opacity-0"
                   }`}
-                  style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 75% 75%, 25% 75%, 25% 25%)" }}
+                  style={{
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 80% 80%, 80% 20%, 20% 20%)",
+                    borderImage: "linear-gradient(45deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                  }}
                 />
                 <div
-                  className={`absolute -bottom-1 -left-1 w-8 h-8 border-b border-l border-slate-300/20 transition-opacity duration-1000 ${
+                  className={`absolute -bottom-2 -left-2 w-16 h-16 border-b-2 border-l-2 border-slate-300/15 transition-opacity duration-1000 ${
                     showPerimeter ? "opacity-100 delay-1400" : "opacity-0"
                   }`}
-                  style={{ clipPath: "polygon(0 0, 25% 25%, 25% 75%, 75% 75%, 100% 100%, 0 100%)" }}
+                  style={{
+                    clipPath: "polygon(0 0, 20% 20%, 20% 80%, 80% 80%, 100% 100%, 0 100%)",
+                    borderImage: "linear-gradient(225deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                  }}
                 />
                 <div
-                  className={`absolute -bottom-1 -right-1 w-8 h-8 border-b border-r border-slate-300/20 transition-opacity duration-1000 ${
+                  className={`absolute -bottom-2 -right-2 w-16 h-16 border-b-2 border-r-2 border-slate-300/15 transition-opacity duration-1000 ${
                     showPerimeter ? "opacity-100 delay-1600" : "opacity-0"
                   }`}
-                  style={{ clipPath: "polygon(25% 25%, 75% 25%, 75% 75%, 100% 100%, 100% 0, 0 0)" }}
+                  style={{
+                    clipPath: "polygon(20% 20%, 80% 20%, 80% 80%, 100% 100%, 100% 0, 0 0)",
+                    borderImage: "linear-gradient(315deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                  }}
                 />
 
                 <div className="relative px-12 py-10">
                   <div className="flex items-center justify-center mb-8">
-                    <div className="w-16 h-px bg-gradient-to-r from-transparent via-slate-300/20 to-transparent" />
+                    <div className="w-20 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent" />
                     <div
-                      className="mx-6 px-6 py-2 border border-slate-300/15 bg-gradient-to-r from-slate-400/5 to-slate-400/5 backdrop-blur-sm"
-                      style={{ clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
+                      className="mx-6 px-8 py-3 border border-slate-300/20 bg-gradient-to-r from-slate-400/8 to-slate-400/8 backdrop-blur-sm"
+                      style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
                     >
-                      <span className="text-slate-300 font-sans text-xs tracking-[0.2em] font-light">
+                      <span className="text-slate-300 font-sans text-xs tracking-[0.25em] font-light">
                         ◊ NAVIGATION SEGMENT ACTIVE ◊
                       </span>
                     </div>
-                    <div className="w-16 h-px bg-gradient-to-r from-transparent via-slate-300/20 to-transparent" />
+                    <div className="w-20 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent" />
                   </div>
 
                   <div className="flex items-center justify-center space-x-12 mb-8">
@@ -358,16 +444,16 @@ export default function HomePage() {
 
                   <div className="mb-8">
                     <div className="flex items-center justify-center mb-6">
-                      <div className="w-12 h-px bg-gradient-to-r from-transparent via-amber-300/25 to-transparent" />
+                      <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-300/30 to-transparent" />
                       <div
-                        className="mx-4 px-4 py-1 border border-amber-300/20 bg-gradient-to-r from-amber-400/5 to-amber-500/5 backdrop-blur-sm"
-                        style={{ clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)" }}
+                        className="mx-4 px-6 py-2 border border-amber-300/25 bg-gradient-to-r from-amber-400/8 to-amber-500/8 backdrop-blur-sm"
+                        style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
                       >
-                        <span className="text-amber-300/90 font-sans text-xs tracking-[0.15em] font-light">
+                        <span className="text-amber-300/95 font-sans text-xs tracking-[0.2em] font-light">
                           ◊ STATUS REPORT ◊
                         </span>
                       </div>
-                      <div className="w-12 h-px bg-gradient-to-r from-transparent via-amber-300/25 to-transparent" />
+                      <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-300/30 to-transparent" />
                     </div>
 
                     <div className="flex flex-col items-center space-y-1">
@@ -389,14 +475,14 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="flex justify-center space-x-3 mb-6">
-                    {[...Array(5)].map((_, i) => (
+                  <div className="flex justify-center space-x-4 mb-6">
+                    {[...Array(7)].map((_, i) => (
                       <div
                         key={i}
-                        className="w-px h-6 bg-gradient-to-t from-slate-300/10 to-slate-300/25"
+                        className="w-px h-8 bg-gradient-to-t from-slate-300/8 via-slate-300/20 to-slate-300/8"
                         style={{
-                          animation: "data-stream 8s ease-in-out infinite",
-                          animationDelay: `${i * 0.6}s`,
+                          animation: "data-stream 12s ease-in-out infinite",
+                          animationDelay: `${i * 0.8}s`,
                         }}
                       />
                     ))}
@@ -454,47 +540,48 @@ export default function HomePage() {
                 }`}
               >
                 <div className="relative">
+                  {/* Multiple orbital rings with Destiny 2 aesthetic */}
                   <div
-                    className="absolute inset-0 w-20 h-20 border border-slate-300/12 rounded-full"
+                    className="absolute inset-0 w-24 h-24 border border-slate-300/10 rounded-full"
                     style={{
-                      animation: "spin 30s linear infinite",
+                      animation: "geo-rotate 60s linear infinite",
                       clipPath: "polygon(0% 0%, 100% 0%, 100% 30%, 70% 30%, 70% 70%, 100% 70%, 100% 100%, 0% 100%)",
                     }}
                   />
                   <div
-                    className="absolute inset-1 w-18 h-18 border border-slate-300/15 rounded-full"
+                    className="absolute inset-1 w-22 h-22 border border-slate-300/12 rounded-full"
                     style={{
-                      animation: "spin 25s linear infinite reverse",
+                      animation: "geo-rotate 45s linear infinite reverse",
                       clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 70%, 30% 70%)",
                     }}
                   />
                   <div
-                    className="absolute inset-2 w-16 h-16 border border-slate-300/10 rounded-full"
+                    className="absolute inset-2 w-20 h-20 border border-slate-300/8 rounded-full"
                     style={{
-                      animation: "spin 35s linear infinite",
+                      animation: "geo-rotate 75s linear infinite",
                       clipPath: "polygon(0% 0%, 70% 0%, 70% 30%, 30% 30%, 30% 70%, 70% 70%, 70% 100%, 0% 100%)",
                     }}
                   />
                   <div
-                    className="absolute inset-3 w-14 h-14 border border-slate-300/8 rounded-full"
+                    className="absolute inset-3 w-18 h-18 border border-slate-300/6 rounded-full"
                     style={{
-                      animation: "spin 20s linear infinite reverse",
-                      clipPath: "polygon(40% 0%, 100% 0%, 100% 60%, 60% 60%, 60% 100%, 0% 100%, 0% 40%, 40% 40%)",
+                      animation: "geo-rotate 35s linear infinite reverse",
+                      clipPath: "polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%, 50% 100%, 0% 100%, 0% 50%, 50% 50%)",
                     }}
                   />
 
                   <button
                     onClick={() => setShowNavigation(!showNavigation)}
-                    className="relative w-20 h-20 border border-slate-300/25 rounded-full bg-gradient-to-br from-slate-400/3 via-slate-400/5 to-slate-400/3 backdrop-blur-sm shadow-lg shadow-slate-400/8 hover:border-slate-200/40 hover:shadow-slate-300/15 transition-all duration-700 group"
+                    className="relative w-24 h-24 border border-slate-300/20 rounded-full bg-gradient-to-br from-slate-400/5 via-slate-400/8 to-slate-400/5 backdrop-blur-sm shadow-lg shadow-slate-400/8 hover:border-slate-200/30 hover:shadow-slate-300/12 transition-all duration-700 group"
                     style={{
-                      boxShadow: "0 0 25px rgba(148, 163, 184, 0.06), inset 0 0 20px rgba(148, 163, 184, 0.02)",
+                      boxShadow: "0 0 30px rgba(148, 163, 184, 0.06), inset 0 0 20px rgba(148, 163, 184, 0.02)",
                     }}
                   >
                     <div
-                      className={`absolute top-1/2 left-1/2 w-6 h-px bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "rotate-45" : ""}`}
+                      className={`absolute top-1/2 left-1/2 w-8 h-px bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "rotate-45" : ""}`}
                     />
                     <div
-                      className={`absolute top-1/2 left-1/2 w-px h-6 bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "-rotate-45" : ""}`}
+                      className={`absolute top-1/2 left-1/2 w-px h-8 bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "-rotate-45" : ""}`}
                     />
                   </button>
                 </div>
@@ -520,30 +607,42 @@ export default function HomePage() {
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div
-                        className={`relative bg-gradient-to-br ${card.color} backdrop-blur-lg border ${card.borderColor} rounded-xl p-8 h-full transition-all duration-500 hover:shadow-xl ${card.glowColor} ${
-                          selectedCard === card.id ? "ring-2 ring-cyan-400/30 shadow-xl shadow-cyan-400/10" : ""
+                        className={`relative bg-gradient-to-br ${card.color} backdrop-blur-lg border ${card.borderColor} rounded-2xl p-8 h-full transition-all duration-500 hover:shadow-xl ${card.glowColor} ${
+                          selectedCard === card.id ? "ring-2 ring-cyan-400/25 shadow-xl shadow-cyan-400/8" : ""
                         }`}
                         style={{
                           clipPath:
-                            "polygon(16px 0%, calc(100% - 16px) 0%, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0% calc(100% - 16px), 0% 16px)",
+                            "polygon(24px 0%, calc(100% - 24px) 0%, 100% 24px, 100% calc(100% - 24px), calc(100% - 24px) 100%, 24px 100%, 0% calc(100% - 24px), 0% 24px)",
                         }}
                       >
+                        {/* Destiny 2 inspired corner brackets */}
                         <div
-                          className="absolute top-3 left-3 w-4 h-4 border-t border-l border-slate-300/30"
-                          style={{ clipPath: "polygon(0 0, 100% 0, 60% 40%, 40% 40%, 40% 60%, 0 100%)" }}
+                          className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-slate-300/25"
+                          style={{ clipPath: "polygon(0 0, 100% 0, 75% 25%, 25% 25%, 25% 75%, 0 100%)" }}
                         />
                         <div
-                          className="absolute top-3 right-3 w-4 h-4 border-t border-r border-slate-300/30"
-                          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 60% 60%, 40% 60%, 40% 40%)" }}
+                          className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-slate-300/25"
+                          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 75% 75%, 25% 75%, 25% 25%)" }}
                         />
                         <div
-                          className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-slate-300/30"
-                          style={{ clipPath: "polygon(0 0, 40% 40%, 40% 60%, 60% 60%, 100% 100%, 0 100%)" }}
+                          className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-slate-300/25"
+                          style={{ clipPath: "polygon(0 0, 25% 25%, 25% 75%, 75% 75%, 100% 100%, 0 100%)" }}
                         />
                         <div
-                          className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-slate-300/30"
-                          style={{ clipPath: "polygon(40% 40%, 60% 40%, 60% 60%, 100% 100%, 100% 0, 0 0)" }}
+                          className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-slate-300/25"
+                          style={{ clipPath: "polygon(25% 25%, 75% 25%, 75% 75%, 100% 100%, 100% 0, 0 0)" }}
                         />
+
+                        {/* Scanning line effect */}
+                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                          <div
+                            className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/15 to-transparent"
+                            style={{
+                              animation: "card-scan 8s linear infinite",
+                              animationDelay: `${index * 2}s`,
+                            }}
+                          />
+                        </div>
 
                         <div className="relative z-10">
                           <h3 className="font-sans font-medium text-xl text-white mb-2 group-hover:text-cyan-300 transition-colors tracking-wide">
@@ -559,10 +658,10 @@ export default function HomePage() {
 
                         {selectedCard === card.id && (
                           <div
-                            className="absolute top-5 right-5 w-3 h-3 bg-cyan-400/70 shadow-sm shadow-cyan-400/25"
+                            className="absolute top-6 right-6 w-5 h-5 bg-cyan-400/60 shadow-sm shadow-cyan-400/20"
                             style={{
-                              clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                              animation: "pulse 2.5s ease-in-out infinite",
+                              clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                              animation: "geo-pulse 4s ease-in-out infinite",
                             }}
                           />
                         )}
