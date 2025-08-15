@@ -194,504 +194,535 @@ export default function HomePage() {
         className="py-32 px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative z-10 overflow-hidden"
       >
         <div className="absolute inset-0">
-          {/* Sacred geometry grid pattern inspired by Destiny 2 */}
-          <div className="absolute inset-0 opacity-[0.02]">
+          {/* Advanced geometric grid with mathematical precision */}
+          <div className="absolute inset-0 opacity-[0.03]">
             <div
               className="absolute inset-0"
               style={{
                 backgroundImage: `
-                  linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
-                  linear-gradient(0deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
-                  linear-gradient(45deg, rgba(148, 163, 184, 0.01) 1px, transparent 1px),
-                  linear-gradient(-45deg, rgba(148, 163, 184, 0.01) 1px, transparent 1px)
+                  radial-gradient(circle at 25% 25%, rgba(148, 163, 184, 0.02) 2px, transparent 2px),
+                  radial-gradient(circle at 75% 75%, rgba(148, 163, 184, 0.015) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(148, 163, 184, 0.008) 1px, transparent 1px),
+                  linear-gradient(0deg, rgba(148, 163, 184, 0.008) 1px, transparent 1px),
+                  linear-gradient(45deg, rgba(148, 163, 184, 0.004) 1px, transparent 1px),
+                  linear-gradient(-45deg, rgba(148, 163, 184, 0.004) 1px, transparent 1px)
                 `,
-                backgroundSize: "40px 40px, 40px 40px, 80px 80px, 80px 80px",
-                backgroundPosition: "0 0, 0 0, 0 0, 0 0",
-                transform: `translateY(${scrollY * 0.1}px)`,
-              }}
-            />
-          </div>
-
-          {/* Floating geometric shapes with mathematical precision */}
-          <div className="absolute inset-0 opacity-[0.015]">
-            {/* Hexagonal patterns */}
-            <div
-              className="absolute top-20 left-20 w-32 h-32 border border-slate-300/8"
-              style={{
-                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
-                animation: "geo-rotate 180s linear infinite",
+                backgroundSize: "80px 80px, 120px 120px, 40px 40px, 40px 40px, 80px 80px, 80px 80px",
+                backgroundPosition: "0 0, 40px 40px, 0 0, 0 0, 0 0, 0 0",
                 transform: `translateY(${scrollY * 0.05}px)`,
               }}
             />
-            <div
-              className="absolute top-40 right-32 w-24 h-24 border border-slate-300/6"
-              style={{
-                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
-                animation: "geo-rotate 120s linear infinite reverse",
-                transform: `translateY(${scrollY * -0.03}px)`,
-              }}
-            />
-
-            {/* Triangular elements */}
-            <div
-              className="absolute bottom-32 left-40 w-28 h-28 border border-slate-300/4"
-              style={{
-                clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
-                animation: "geo-float 100s ease-in-out infinite",
-                transform: `translateX(${scrollY * 0.02}px)`,
-              }}
-            />
-            <div
-              className="absolute bottom-20 right-20 w-20 h-20 border border-slate-300/6"
-              style={{
-                clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
-                animation: "geo-rotate 90s linear infinite",
-                transform: `translateX(${scrollY * -0.04}px)`,
-              }}
-            />
-
-            {/* Octagonal shapes */}
-            <div
-              className="absolute top-1/3 left-1/4 w-36 h-36 border border-slate-300/3"
-              style={{
-                clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
-                animation: "geo-pulse 140s ease-in-out infinite",
-                transform: `translateY(${scrollY * 0.08}px)`,
-              }}
-            />
           </div>
 
-          {/* Central sacred geometry mandala */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-[0.008]">
-            <div className="relative w-96 h-96">
-              {/* Concentric circles with Destiny 2 styling */}
-              <div className="absolute inset-0 border border-slate-300/4 rounded-full" />
-              <div className="absolute inset-8 border border-slate-300/6 rounded-full" />
-              <div className="absolute inset-16 border border-slate-300/8 rounded-full" />
-              <div className="absolute inset-24 border border-slate-300/6 rounded-full" />
-              <div className="absolute inset-32 border border-slate-300/4 rounded-full" />
-
-              {/* Radial lines creating sacred geometry */}
-              {[...Array(12)].map((_, i) => (
+          {/* Large central mandala inspired by sacred geometry */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-[0.012]">
+            <div className="relative w-[800px] h-[800px]">
+              {/* Multiple concentric circles with Destiny 2 styling */}
+              {[...Array(8)].map((_, i) => (
                 <div
                   key={i}
-                  className="absolute top-1/2 left-1/2 w-48 h-px bg-slate-300/3 origin-left"
+                  className="absolute border border-slate-300/4 rounded-full"
                   style={{
-                    transform: `translate(-50%, -50%) rotate(${i * 30}deg)`,
+                    inset: `${i * 50}px`,
+                    animation: `geo-rotate ${120 + i * 30}s linear infinite ${i % 2 === 0 ? "" : "reverse"}`,
+                    clipPath:
+                      i % 2 === 0
+                        ? "polygon(0% 0%, 100% 0%, 100% 30%, 70% 30%, 70% 70%, 100% 70%, 100% 100%, 0% 100%)"
+                        : "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 70%, 30% 70%)",
                   }}
                 />
               ))}
 
-              {/* Central hexagon */}
-              <div
-                className="absolute top-1/2 left-1/2 w-24 h-24 border border-slate-300/8 transform -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
-                  animation: "geo-rotate 200s linear infinite",
-                }}
-              />
+              {/* Radial lines creating sacred geometry patterns */}
+              {[...Array(24)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute top-1/2 left-1/2 w-96 h-px bg-slate-300/3 origin-left"
+                  style={{
+                    transform: `translate(-50%, -50%) rotate(${i * 15}deg)`,
+                  }}
+                />
+              ))}
 
-              {/* Orbital elements */}
+              {/* Hexagonal patterns at key positions */}
               {[...Array(6)].map((_, i) => (
                 <div
                   key={i}
-                  className="absolute w-3 h-3 bg-slate-300/6 rounded-full"
+                  className="absolute w-24 h-24 border border-slate-300/6"
                   style={{
                     top: "50%",
                     left: "50%",
-                    transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateY(-120px)`,
-                    animation: `geo-orbit ${120 + i * 20}s linear infinite`,
+                    transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateY(-200px)`,
+                    clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                    animation: `geo-rotate ${180 + i * 40}s linear infinite`,
                   }}
                 />
               ))}
+
+              {/* Central complex geometric pattern */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="relative w-48 h-48">
+                  {/* Interlocking triangles */}
+                  <div
+                    className="absolute inset-0 border border-slate-300/8"
+                    style={{
+                      clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
+                      animation: "geo-rotate 300s linear infinite",
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0 border border-slate-300/8 rotate-180"
+                    style={{
+                      clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
+                      animation: "geo-rotate 300s linear infinite reverse",
+                    }}
+                  />
+
+                  {/* Central hexagon with inner patterns */}
+                  <div
+                    className="absolute top-1/2 left-1/2 w-16 h-16 border border-slate-300/12 transform -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                      animation: "geo-pulse 20s ease-in-out infinite",
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Scanning lines effect */}
+          {/* Floating geometric elements with scroll parallax */}
+          <div className="absolute inset-0 opacity-[0.008]">
+            {/* Corner geometric patterns */}
+            <div
+              className="absolute top-32 left-32 w-64 h-64 border border-slate-300/6"
+              style={{
+                clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+                animation: "geo-float 200s ease-in-out infinite",
+                transform: `translateY(${scrollY * 0.02}px) translateX(${scrollY * 0.01}px)`,
+              }}
+            />
+            <div
+              className="absolute top-32 right-32 w-48 h-48 border border-slate-300/4"
+              style={{
+                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                animation: "geo-rotate 180s linear infinite reverse",
+                transform: `translateY(${scrollY * -0.015}px) translateX(${scrollY * -0.02}px)`,
+              }}
+            />
+            <div
+              className="absolute bottom-32 left-32 w-56 h-56 border border-slate-300/5"
+              style={{
+                clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
+                animation: "geo-pulse 160s ease-in-out infinite",
+                transform: `translateY(${scrollY * 0.025}px) translateX(${scrollY * 0.015}px)`,
+              }}
+            />
+            <div
+              className="absolute bottom-32 right-32 w-40 h-40 border border-slate-300/7"
+              style={{
+                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                animation: "geo-rotate 140s linear infinite",
+                transform: `translateY(${scrollY * -0.02}px) translateX(${scrollY * -0.01}px)`,
+              }}
+            />
+          </div>
+
+          {/* Advanced scanning effects */}
           <div className="absolute inset-0 overflow-hidden">
             <div
               className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/4 to-transparent"
               style={{
-                animation: "geo-scan 80s linear infinite",
+                animation: "geo-scan 100s linear infinite",
               }}
             />
             <div
               className="absolute w-px h-full bg-gradient-to-b from-transparent via-slate-300/3 to-transparent"
               style={{
-                animation: "geo-scan-vertical 100s linear infinite",
-                animationDelay: "20s",
+                animation: "geo-scan-vertical 120s linear infinite",
+                animationDelay: "25s",
+              }}
+            />
+            <div
+              className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/2 to-transparent"
+              style={{
+                animation: "geo-scan 80s linear infinite",
+                animationDelay: "40s",
+                top: "75%",
               }}
             />
           </div>
-        </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <AdvancedScrollSection direction="fade" threshold={0.2}>
-            <div className="text-center mb-20">
-              <div className="relative mb-16">
-                <div
-                  className={`absolute transition-all duration-3000 ease-out border border-slate-300/12 bg-gradient-to-r from-slate-500/2 via-slate-400/3 to-slate-500/2 backdrop-blur-xl shadow-2xl shadow-slate-500/5 ${
-                    showPerimeter ? "inset-0 rounded-3xl" : "top-[60px] bottom-[60px] left-[45%] right-[45%] rounded-xl"
-                  }`}
-                  style={{
-                    clipPath: showPerimeter
-                      ? "polygon(40px 0%, calc(100% - 40px) 0%, 100% 40px, 100% calc(100% - 40px), calc(100% - 40px) 100%, 40px 100%, 0% calc(100% - 40px), 0% 40px)"
-                      : "polygon(20px 0%, calc(100% - 20px) 0%, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0% calc(100% - 20px), 0% 20px)",
-                  }}
-                />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <AdvancedScrollSection direction="fade" threshold={0.2}>
+              <div className="text-center mb-20">
+                <div className="relative mb-16">
+                  <div
+                    className={`absolute transition-all duration-3000 ease-out border border-slate-300/12 bg-gradient-to-r from-slate-500/2 via-slate-400/3 to-slate-500/2 backdrop-blur-xl shadow-2xl shadow-slate-500/5 ${
+                      showPerimeter
+                        ? "inset-0 rounded-3xl"
+                        : "top-[60px] bottom-[60px] left-[45%] right-[45%] rounded-xl"
+                    }`}
+                    style={{
+                      clipPath: showPerimeter
+                        ? "polygon(40px 0%, calc(100% - 40px) 0%, 100% 40px, 100% calc(100% - 40px), calc(100% - 40px) 100%, 40px 100%, 0% calc(100% - 40px), 0% 40px)"
+                        : "polygon(20px 0%, calc(100% - 20px) 0%, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0% calc(100% - 20px), 0% 20px)",
+                    }}
+                  />
 
-                {/* Destiny 2 inspired corner elements */}
-                <div
-                  className={`absolute -top-2 -left-2 w-16 h-16 border-t-2 border-l-2 border-slate-300/15 transition-opacity duration-1000 ${
-                    showPerimeter ? "opacity-100 delay-1000" : "opacity-0"
-                  }`}
-                  style={{
-                    clipPath: "polygon(0 0, 100% 0, 80% 20%, 20% 20%, 20% 80%, 0% 100%)",
-                    borderImage: "linear-gradient(135deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
-                  }}
-                />
-                <div
-                  className={`absolute -top-2 -right-2 w-16 h-16 border-t-2 border-r-2 border-slate-300/15 transition-opacity duration-1000 ${
-                    showPerimeter ? "opacity-100 delay-1200" : "opacity-0"
-                  }`}
-                  style={{
-                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 80% 80%, 80% 20%, 20% 20%)",
-                    borderImage: "linear-gradient(45deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
-                  }}
-                />
-                <div
-                  className={`absolute -bottom-2 -left-2 w-16 h-16 border-b-2 border-l-2 border-slate-300/15 transition-opacity duration-1000 ${
-                    showPerimeter ? "opacity-100 delay-1400" : "opacity-0"
-                  }`}
-                  style={{
-                    clipPath: "polygon(0 0, 20% 20%, 20% 80%, 80% 80%, 100% 100%, 0 100%)",
-                    borderImage: "linear-gradient(225deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
-                  }}
-                />
-                <div
-                  className={`absolute -bottom-2 -right-2 w-16 h-16 border-b-2 border-r-2 border-slate-300/15 transition-opacity duration-1000 ${
-                    showPerimeter ? "opacity-100 delay-1600" : "opacity-0"
-                  }`}
-                  style={{
-                    clipPath: "polygon(20% 20%, 80% 20%, 80% 80%, 100% 100%, 100% 0, 0 0)",
-                    borderImage: "linear-gradient(315deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
-                  }}
-                />
+                  {/* Destiny 2 inspired corner elements */}
+                  <div
+                    className={`absolute -top-2 -left-2 w-16 h-16 border-t-2 border-l-2 border-slate-300/15 transition-opacity duration-1000 ${
+                      showPerimeter ? "opacity-100 delay-1000" : "opacity-0"
+                    }`}
+                    style={{
+                      clipPath: "polygon(0 0, 100% 0, 80% 20%, 20% 20%, 20% 80%, 0% 100%)",
+                      borderImage: "linear-gradient(135deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                    }}
+                  />
+                  <div
+                    className={`absolute -top-2 -right-2 w-16 h-16 border-t-2 border-r-2 border-slate-300/15 transition-opacity duration-1000 ${
+                      showPerimeter ? "opacity-100 delay-1200" : "opacity-0"
+                    }`}
+                    style={{
+                      clipPath: "polygon(0 0, 100% 0, 100% 100%, 80% 80%, 80% 20%, 20% 20%)",
+                      borderImage: "linear-gradient(45deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                    }}
+                  />
+                  <div
+                    className={`absolute -bottom-2 -left-2 w-16 h-16 border-b-2 border-l-2 border-slate-300/15 transition-opacity duration-1000 ${
+                      showPerimeter ? "opacity-100 delay-1400" : "opacity-0"
+                    }`}
+                    style={{
+                      clipPath: "polygon(0 0, 20% 20%, 20% 80%, 80% 80%, 100% 100%, 0 100%)",
+                      borderImage: "linear-gradient(225deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                    }}
+                  />
+                  <div
+                    className={`absolute -bottom-2 -right-2 w-16 h-16 border-b-2 border-r-2 border-slate-300/15 transition-opacity duration-1000 ${
+                      showPerimeter ? "opacity-100 delay-1600" : "opacity-0"
+                    }`}
+                    style={{
+                      clipPath: "polygon(20% 20%, 80% 20%, 80% 80%, 100% 100%, 100% 0, 0 0)",
+                      borderImage: "linear-gradient(315deg, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0.05)) 1",
+                    }}
+                  />
 
-                <div className="relative px-12 py-10">
-                  <div className="flex items-center justify-center mb-8">
-                    <div className="w-20 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent" />
-                    <div
-                      className="mx-6 px-8 py-3 border border-slate-300/20 bg-gradient-to-r from-slate-400/8 to-slate-400/8 backdrop-blur-sm"
-                      style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
-                    >
-                      <span className="text-slate-300 font-sans text-xs tracking-[0.25em] font-light">
-                        ◊ NAVIGATION SEGMENT ACTIVE ◊
-                      </span>
-                    </div>
-                    <div className="w-20 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent" />
-                  </div>
-
-                  <div className="flex items-center justify-center space-x-12 mb-8">
-                    <div className="flex items-center space-x-2">
+                  <div className="relative px-12 py-10">
+                    <div className="flex items-center justify-center mb-8">
+                      <div className="w-20 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent" />
                       <div
-                        className="w-2 h-2 bg-emerald-400/80 shadow-sm shadow-emerald-400/20"
-                        style={{
-                          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                          animation: "pulse 4s ease-in-out infinite",
-                        }}
-                      />
-                      <span
-                        className="text-emerald-300/90 text-xs font-sans tracking-wider font-light"
-                        style={{ animation: "pulse 4s ease-in-out infinite" }}
+                        className="mx-6 px-8 py-3 border border-slate-300/20 bg-gradient-to-r from-slate-400/8 to-slate-400/8 backdrop-blur-sm"
+                        style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
                       >
-                        JUMP DRIVE READY
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div
-                        className="w-2 h-2 bg-sky-400/80 shadow-sm shadow-sky-400/20"
-                        style={{
-                          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                          animation: "pulse 4s ease-in-out infinite",
-                          animationDelay: "0.5s",
-                        }}
-                      />
-                      <span
-                        className="text-sky-300/90 text-xs font-sans tracking-wider font-light"
-                        style={{ animation: "pulse 4s ease-in-out infinite", animationDelay: "0.5s" }}
-                      >
-                        FREQUENCY MAP LOCATED
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div
-                        className="w-2 h-2 bg-rose-400/80 shadow-sm shadow-rose-400/20"
-                        style={{
-                          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                          animation: "pulse 2.5s ease-in-out infinite",
-                          animationDelay: "1s",
-                        }}
-                      />
-                      <span
-                        className="text-rose-300/90 text-xs font-sans tracking-wider font-light"
-                        style={{ animation: "pulse 2.5s ease-in-out infinite", animationDelay: "1s" }}
-                      >
-                        ENTER STAR CHART COORDINATES
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mb-8">
-                    <div className="flex items-center justify-center mb-6">
-                      <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-300/30 to-transparent" />
-                      <div
-                        className="mx-4 px-6 py-2 border border-amber-300/25 bg-gradient-to-r from-amber-400/8 to-amber-500/8 backdrop-blur-sm"
-                        style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
-                      >
-                        <span className="text-amber-300/95 font-sans text-xs tracking-[0.2em] font-light">
-                          ◊ STATUS REPORT ◊
+                        <span className="text-slate-300 font-sans text-xs tracking-[0.25em] font-light">
+                          ◊ NAVIGATION SEGMENT ACTIVE ◊
                         </span>
                       </div>
-                      <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-300/30 to-transparent" />
+                      <div className="w-20 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent" />
                     </div>
 
-                    <div className="flex flex-col items-center space-y-1">
-                      <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
-                        <span className="font-medium">ENGINES IN OPERATION:</span> 4/4, ELECTROMAGNETIC PLASMA JET
-                      </span>
-                      <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
-                        <span className="font-medium">SHIELD TOROID:</span> ACTIVE, ON OVERDRIVE
-                      </span>
-                      <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
-                        <span className="font-medium">ALERT SIGNAL:</span> GREEN ALERT
-                      </span>
-                      <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
-                        <span className="font-medium">LATEST ANNOUNCEMENT:</span> JUMP IMMINENT
-                      </span>
-                      <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
-                        <span className="font-medium">ARSENAL:</span> READY, ON STANDBY
-                      </span>
+                    <div className="flex items-center justify-center space-x-12 mb-8">
+                      <div className="flex items-center space-x-2">
+                        <div
+                          className="w-2 h-2 bg-emerald-400/80 shadow-sm shadow-emerald-400/20"
+                          style={{
+                            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+                            animation: "pulse 4s ease-in-out infinite",
+                          }}
+                        />
+                        <span
+                          className="text-emerald-300/90 text-xs font-sans tracking-wider font-light"
+                          style={{ animation: "pulse 4s ease-in-out infinite" }}
+                        >
+                          JUMP DRIVE READY
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div
+                          className="w-2 h-2 bg-sky-400/80 shadow-sm shadow-sky-400/20"
+                          style={{
+                            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+                            animation: "pulse 4s ease-in-out infinite",
+                            animationDelay: "0.5s",
+                          }}
+                        />
+                        <span
+                          className="text-sky-300/90 text-xs font-sans tracking-wider font-light"
+                          style={{ animation: "pulse 4s ease-in-out infinite", animationDelay: "0.5s" }}
+                        >
+                          FREQUENCY MAP LOCATED
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div
+                          className="w-2 h-2 bg-rose-400/80 shadow-sm shadow-rose-400/20"
+                          style={{
+                            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+                            animation: "pulse 2.5s ease-in-out infinite",
+                            animationDelay: "1s",
+                          }}
+                        />
+                        <span
+                          className="text-rose-300/90 text-xs font-sans tracking-wider font-light"
+                          style={{ animation: "pulse 2.5s ease-in-out infinite", animationDelay: "1s" }}
+                        >
+                          ENTER STAR CHART COORDINATES
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mb-8">
+                      <div className="flex items-center justify-center mb-6">
+                        <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-300/30 to-transparent" />
+                        <div
+                          className="mx-4 px-6 py-2 border border-amber-300/25 bg-gradient-to-r from-amber-400/8 to-amber-500/8 backdrop-blur-sm"
+                          style={{ clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)" }}
+                        >
+                          <span className="text-amber-300/95 font-sans text-xs tracking-[0.2em] font-light">
+                            ◊ STATUS REPORT ◊
+                          </span>
+                        </div>
+                        <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-300/30 to-transparent" />
+                      </div>
+
+                      <div className="flex flex-col items-center space-y-1">
+                        <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
+                          <span className="font-medium">ENGINES IN OPERATION:</span> 4/4, ELECTROMAGNETIC PLASMA JET
+                        </span>
+                        <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
+                          <span className="font-medium">SHIELD TOROID:</span> ACTIVE, ON OVERDRIVE
+                        </span>
+                        <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
+                          <span className="font-medium">ALERT SIGNAL:</span> GREEN ALERT
+                        </span>
+                        <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
+                          <span className="font-medium">LATEST ANNOUNCEMENT:</span> JUMP IMMINENT
+                        </span>
+                        <span className="text-slate-300/90 text-xs font-sans tracking-wide font-light">
+                          <span className="font-medium">ARSENAL:</span> READY, ON STANDBY
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-center space-x-4 mb-6">
+                      {[...Array(7)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="w-px h-8 bg-gradient-to-t from-slate-300/8 via-slate-300/20 to-slate-300/8"
+                          style={{
+                            animation: "data-stream 12s ease-in-out infinite",
+                            animationDelay: `${i * 0.8}s`,
+                          }}
+                        />
+                      ))}
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex justify-center space-x-4 mb-6">
-                    {[...Array(7)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-px h-8 bg-gradient-to-t from-slate-300/8 via-slate-300/20 to-slate-300/8"
-                        style={{
-                          animation: "data-stream 12s ease-in-out infinite",
-                          animationDelay: `${i * 0.8}s`,
-                        }}
-                      />
+                <div
+                  className={`relative mb-8 transition-all duration-1000 ${
+                    showPerimeter ? "opacity-100 translate-y-0 delay-2200" : "opacity-0 translate-y-8"
+                  }`}
+                >
+                  <h2
+                    className="font-sans font-light text-4xl md:text-6xl text-white tracking-[0.3em] relative z-20 mb-4"
+                    style={{
+                      textShadow: "0 0 30px rgba(148, 163, 184, 0.15), 0 0 60px rgba(148, 163, 184, 0.08)",
+                      filter: "drop-shadow(0 0 8px rgba(148, 163, 184, 0.1))",
+                      animation: "title-glow-strobe 12s ease-in-out infinite, title-text-fade 12s ease-in-out infinite",
+                    }}
+                  >
+                    ⟨ NAVIGATION ⟩
+                  </h2>
+
+                  <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                    {[...Array(3)].map((_, i) => (
+                      <div key={i} className="w-1 h-px bg-slate-300/40" style={{ animationDelay: `${i * 0.3}s` }} />
                     ))}
                   </div>
                 </div>
-              </div>
 
-              <div
-                className={`relative mb-8 transition-all duration-1000 ${
-                  showPerimeter ? "opacity-100 translate-y-0 delay-2200" : "opacity-0 translate-y-8"
-                }`}
-              >
-                <h2
-                  className="font-sans font-light text-4xl md:text-6xl text-white tracking-[0.3em] relative z-20 mb-4"
-                  style={{
-                    textShadow: "0 0 30px rgba(148, 163, 184, 0.15), 0 0 60px rgba(148, 163, 184, 0.08)",
-                    filter: "drop-shadow(0 0 8px rgba(148, 163, 184, 0.1))",
-                    animation: "title-glow-strobe 12s ease-in-out infinite, title-text-fade 12s ease-in-out infinite",
-                  }}
+                <div
+                  className={`relative transition-all duration-1000 ${
+                    showPerimeter ? "opacity-100 translate-y-0 delay-2400" : "opacity-0 translate-y-8"
+                  }`}
                 >
-                  ⟨ NAVIGATION ⟩
-                </h2>
+                  <p className="font-sans text-lg md:text-xl text-slate-200/90 max-w-2xl mx-auto leading-relaxed mb-12 tracking-wide font-light">
+                    <span className="text-slate-300/60" style={{ animation: "pulse 20s ease-in-out infinite" }}>
+                      ▶
+                    </span>{" "}
+                    Please select a destination.{" "}
+                    <span
+                      className="text-slate-300/60"
+                      style={{ animationDelay: "10s", animation: "pulse 20s ease-in-out infinite" }}
+                    >
+                      ◀
+                    </span>
+                  </p>
 
-                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
-                  {[...Array(3)].map((_, i) => (
-                    <div key={i} className="w-1 h-px bg-slate-300/40" style={{ animationDelay: `${i * 0.3}s` }} />
-                  ))}
+                  <div className="w-24 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent mx-auto" />
                 </div>
-              </div>
 
-              <div
-                className={`relative transition-all duration-1000 ${
-                  showPerimeter ? "opacity-100 translate-y-0 delay-2400" : "opacity-0 translate-y-8"
-                }`}
-              >
-                <p className="font-sans text-lg md:text-xl text-slate-200/90 max-w-2xl mx-auto leading-relaxed mb-12 tracking-wide font-light">
-                  <span className="text-slate-300/60" style={{ animation: "pulse 20s ease-in-out infinite" }}>
-                    ▶
-                  </span>{" "}
-                  Please select a destination.{" "}
-                  <span
-                    className="text-slate-300/60"
-                    style={{ animationDelay: "10s", animation: "pulse 20s ease-in-out infinite" }}
-                  >
-                    ◀
-                  </span>
-                </p>
-
-                <div className="w-24 h-px bg-gradient-to-r from-transparent via-slate-300/25 to-transparent mx-auto" />
-              </div>
-
-              <div
-                className={`flex items-center justify-center mt-12 transition-all duration-1000 ${
-                  showPerimeter ? "opacity-100 scale-100 delay-2600" : "opacity-0 scale-75"
-                }`}
-              >
-                <div className="relative">
-                  {/* Multiple orbital rings with Destiny 2 aesthetic */}
-                  <div
-                    className="absolute inset-0 w-24 h-24 border border-slate-300/10 rounded-full"
-                    style={{
-                      animation: "geo-rotate 60s linear infinite",
-                      clipPath: "polygon(0% 0%, 100% 0%, 100% 30%, 70% 30%, 70% 70%, 100% 70%, 100% 100%, 0% 100%)",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-1 w-22 h-22 border border-slate-300/12 rounded-full"
-                    style={{
-                      animation: "geo-rotate 45s linear infinite reverse",
-                      clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 70%, 30% 70%)",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-2 w-20 h-20 border border-slate-300/8 rounded-full"
-                    style={{
-                      animation: "geo-rotate 75s linear infinite",
-                      clipPath: "polygon(0% 0%, 70% 0%, 70% 30%, 30% 30%, 30% 70%, 70% 70%, 70% 100%, 0% 100%)",
-                    }}
-                  />
-                  <div
-                    className="absolute inset-3 w-18 h-18 border border-slate-300/6 rounded-full"
-                    style={{
-                      animation: "geo-rotate 35s linear infinite reverse",
-                      clipPath: "polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%, 50% 100%, 0% 100%, 0% 50%, 50% 50%)",
-                    }}
-                  />
-
-                  <button
-                    onClick={() => setShowNavigation(!showNavigation)}
-                    className="relative w-24 h-24 border border-slate-300/20 rounded-full bg-gradient-to-br from-slate-400/5 via-slate-400/8 to-slate-400/5 backdrop-blur-sm shadow-lg shadow-slate-400/8 hover:border-slate-200/30 hover:shadow-slate-300/12 transition-all duration-700 group"
-                    style={{
-                      boxShadow: "0 0 30px rgba(148, 163, 184, 0.06), inset 0 0 20px rgba(148, 163, 184, 0.02)",
-                    }}
-                  >
+                <div
+                  className={`flex items-center justify-center mt-12 transition-all duration-1000 ${
+                    showPerimeter ? "opacity-100 scale-100 delay-2600" : "opacity-0 scale-75"
+                  }`}
+                >
+                  <div className="relative">
+                    {/* Multiple orbital rings with Destiny 2 aesthetic */}
                     <div
-                      className={`absolute top-1/2 left-1/2 w-8 h-px bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "rotate-45" : ""}`}
+                      className="absolute inset-0 w-24 h-24 border border-slate-300/10 rounded-full"
+                      style={{
+                        animation: "geo-rotate 60s linear infinite",
+                        clipPath: "polygon(0% 0%, 100% 0%, 100% 30%, 70% 30%, 70% 70%, 100% 70%, 100% 100%, 0% 100%)",
+                      }}
                     />
                     <div
-                      className={`absolute top-1/2 left-1/2 w-px h-8 bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "-rotate-45" : ""}`}
+                      className="absolute inset-1 w-22 h-22 border border-slate-300/12 rounded-full"
+                      style={{
+                        animation: "geo-rotate 45s linear infinite reverse",
+                        clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 70%, 30% 70%)",
+                      }}
                     />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </AdvancedScrollSection>
-
-          {showNavigation && (
-            <AdvancedScrollSection direction="stagger" threshold={0.3} delay={300}>
-              <div className="relative">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                  {navigationCards.map((card, index) => (
                     <div
-                      key={card.id}
-                      onClick={() => handleCardSelect(card.id)}
-                      className={`group cursor-pointer transition-all duration-500 ${
-                        selectedCard === card.id
-                          ? "scale-110 z-20"
-                          : selectedCard
-                            ? "scale-95 opacity-50"
-                            : "hover:scale-105"
-                      }`}
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      className="absolute inset-2 w-20 h-20 border border-slate-300/8 rounded-full"
+                      style={{
+                        animation: "geo-rotate 75s linear infinite",
+                        clipPath: "polygon(0% 0%, 70% 0%, 70% 30%, 30% 30%, 30% 70%, 70% 70%, 70% 100%, 0% 100%)",
+                      }}
+                    />
+                    <div
+                      className="absolute inset-3 w-18 h-18 border border-slate-300/6 rounded-full"
+                      style={{
+                        animation: "geo-rotate 35s linear infinite reverse",
+                        clipPath: "polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%, 50% 100%, 0% 100%, 0% 50%, 50% 50%)",
+                      }}
+                    />
+
+                    <button
+                      onClick={() => setShowNavigation(!showNavigation)}
+                      className="relative w-24 h-24 border border-slate-300/20 rounded-full bg-gradient-to-br from-slate-400/5 via-slate-400/8 to-slate-400/5 backdrop-blur-sm shadow-lg shadow-slate-400/8 hover:border-slate-200/30 hover:shadow-slate-300/12 transition-all duration-700 group"
+                      style={{
+                        boxShadow: "0 0 30px rgba(148, 163, 184, 0.06), inset 0 0 20px rgba(148, 163, 184, 0.02)",
+                      }}
                     >
                       <div
-                        className={`relative bg-gradient-to-br ${card.color} backdrop-blur-lg border ${card.borderColor} rounded-2xl p-8 h-full transition-all duration-500 hover:shadow-xl ${card.glowColor} ${
-                          selectedCard === card.id ? "ring-2 ring-cyan-400/25 shadow-xl shadow-cyan-400/8" : ""
-                        }`}
-                        style={{
-                          clipPath:
-                            "polygon(24px 0%, calc(100% - 24px) 0%, 100% 24px, 100% calc(100% - 24px), calc(100% - 24px) 100%, 24px 100%, 0% calc(100% - 24px), 0% 24px)",
-                        }}
-                      >
-                        {/* Destiny 2 inspired corner brackets */}
-                        <div
-                          className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-slate-300/25"
-                          style={{ clipPath: "polygon(0 0, 100% 0, 75% 25%, 25% 25%, 25% 75%, 0 100%)" }}
-                        />
-                        <div
-                          className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-slate-300/25"
-                          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 75% 75%, 25% 75%, 25% 25%)" }}
-                        />
-                        <div
-                          className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-slate-300/25"
-                          style={{ clipPath: "polygon(0 0, 25% 25%, 25% 75%, 75% 75%, 100% 100%, 0 100%)" }}
-                        />
-                        <div
-                          className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-slate-300/25"
-                          style={{ clipPath: "polygon(25% 25%, 75% 25%, 75% 75%, 100% 100%, 100% 0, 0 0)" }}
-                        />
-
-                        {/* Scanning line effect */}
-                        <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                          <div
-                            className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/15 to-transparent"
-                            style={{
-                              animation: "card-scan 8s linear infinite",
-                              animationDelay: `${index * 2}s`,
-                            }}
-                          />
-                        </div>
-
-                        <div className="relative z-10">
-                          <h3 className="font-sans font-medium text-xl text-white mb-2 group-hover:text-cyan-300 transition-colors tracking-wide">
-                            {card.title}
-                          </h3>
-                          <p className="font-sans text-cyan-400/80 text-sm mb-4 tracking-wide font-light">
-                            {card.subtitle}
-                          </p>
-                          <p className="font-sans text-gray-300/90 text-sm leading-relaxed font-light">
-                            {card.description}
-                          </p>
-                        </div>
-
-                        {selectedCard === card.id && (
-                          <div
-                            className="absolute top-6 right-6 w-5 h-5 bg-cyan-400/60 shadow-sm shadow-cyan-400/20"
-                            style={{
-                              clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
-                              animation: "geo-pulse 4s ease-in-out infinite",
-                            }}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {selectedCard && (
-                  <div className="flex items-center justify-center space-x-6 mt-8">
-                    <button
-                      onClick={handleNavigate}
-                      className="px-6 py-3 bg-black/80 border border-cyan-400/60 text-cyan-400/90 font-sans font-medium tracking-wide hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 shadow-sm shadow-cyan-400/10"
-                      style={{ clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
-                    >
-                      ▶ INITIATE JUMP
-                    </button>
-
-                    <button
-                      onClick={handleGoBack}
-                      className="px-6 py-3 bg-black/80 border border-red-400/60 text-red-400/90 font-sans font-medium tracking-wide hover:bg-red-400/10 hover:border-red-400 transition-all duration-300 shadow-sm shadow-red-400/10"
-                      style={{ clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
-                    >
-                      ◀ ABORT SEQUENCE
+                        className={`absolute top-1/2 left-1/2 w-8 h-px bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "rotate-45" : ""}`}
+                      />
+                      <div
+                        className={`absolute top-1/2 left-1/2 w-px h-8 bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "-rotate-45" : ""}`}
+                      />
                     </button>
                   </div>
-                )}
+                </div>
               </div>
             </AdvancedScrollSection>
-          )}
+
+            {showNavigation && (
+              <AdvancedScrollSection direction="stagger" threshold={0.3} delay={300}>
+                <div className="relative">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                    {navigationCards.map((card, index) => (
+                      <div
+                        key={card.id}
+                        onClick={() => handleCardSelect(card.id)}
+                        className={`group cursor-pointer transition-all duration-500 ${
+                          selectedCard === card.id
+                            ? "scale-110 z-20"
+                            : selectedCard
+                              ? "scale-95 opacity-50"
+                              : "hover:scale-105"
+                        }`}
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <div
+                          className={`relative bg-gradient-to-br ${card.color} backdrop-blur-lg border ${card.borderColor} rounded-2xl p-8 h-full transition-all duration-500 hover:shadow-xl ${card.glowColor} ${
+                            selectedCard === card.id ? "ring-2 ring-cyan-400/25 shadow-xl shadow-cyan-400/8" : ""
+                          }`}
+                          style={{
+                            clipPath:
+                              "polygon(24px 0%, calc(100% - 24px) 0%, 100% 24px, 100% calc(100% - 24px), calc(100% - 24px) 100%, 24px 100%, 0% calc(100% - 24px), 0% 24px)",
+                          }}
+                        >
+                          {/* Destiny 2 inspired corner brackets */}
+                          <div
+                            className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-slate-300/25"
+                            style={{ clipPath: "polygon(0 0, 100% 0, 75% 25%, 25% 25%, 25% 75%, 0 100%)" }}
+                          />
+                          <div
+                            className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-slate-300/25"
+                            style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 75% 75%, 25% 75%, 25% 25%)" }}
+                          />
+                          <div
+                            className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-slate-300/25"
+                            style={{ clipPath: "polygon(0 0, 25% 25%, 25% 75%, 75% 75%, 100% 100%, 0 100%)" }}
+                          />
+                          <div
+                            className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-slate-300/25"
+                            style={{ clipPath: "polygon(25% 25%, 75% 25%, 75% 75%, 100% 100%, 100% 0, 0 0)" }}
+                          />
+
+                          {/* Scanning line effect */}
+                          <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                            <div
+                              className="absolute w-full h-px bg-gradient-to-r from-transparent via-slate-300/15 to-transparent"
+                              style={{
+                                animation: "card-scan 8s linear infinite",
+                                animationDelay: `${index * 2}s`,
+                              }}
+                            />
+                          </div>
+
+                          <div className="relative z-10">
+                            <h3 className="font-sans font-medium text-xl text-white mb-2 group-hover:text-cyan-300 transition-colors tracking-wide">
+                              {card.title}
+                            </h3>
+                            <p className="font-sans text-cyan-400/80 text-sm mb-4 tracking-wide font-light">
+                              {card.subtitle}
+                            </p>
+                            <p className="font-sans text-gray-300/90 text-sm leading-relaxed font-light">
+                              {card.description}
+                            </p>
+                          </div>
+
+                          {selectedCard === card.id && (
+                            <div
+                              className="absolute top-6 right-6 w-5 h-5 bg-cyan-400/60 shadow-sm shadow-cyan-400/20"
+                              style={{
+                                clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+                                animation: "geo-pulse 4s ease-in-out infinite",
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {selectedCard && (
+                    <div className="flex items-center justify-center space-x-6 mt-8">
+                      <button
+                        onClick={handleNavigate}
+                        className="px-6 py-3 bg-black/80 border border-cyan-400/60 text-cyan-400/90 font-sans font-medium tracking-wide hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 shadow-sm shadow-cyan-400/10"
+                        style={{ clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
+                      >
+                        ▶ INITIATE JUMP
+                      </button>
+
+                      <button
+                        onClick={handleGoBack}
+                        className="px-6 py-3 bg-black/80 border border-red-400/60 text-red-400/90 font-sans font-medium tracking-wide hover:bg-red-400/10 hover:border-red-400 transition-all duration-300 shadow-sm shadow-red-400/10"
+                        style={{ clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
+                      >
+                        ◀ ABORT SEQUENCE
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </AdvancedScrollSection>
+            )}
+          </div>
         </div>
       </section>
 
