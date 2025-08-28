@@ -4,10 +4,71 @@ emoji: 🪽
 colorFrom: gray
 colorTo: gray
 sdk: docker
-app_file: app/page.tsx
+app_file: Dockerfile
 pinned: true
 license: cc-by-nc-sa-4.0
 short_description: 'My DeepSite web hosting, coding, design for Chris-Star.com'
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+# 🪽 Chris-Star.com
+
+This is my personal site, built with **Next.js** and deployed on **Hugging Face Spaces** using the **Docker runtime**.  
+Originally generated with **Vercel v0.dev** and improved with **DeepSite**.
+
+---
+
+## 🔧 Tech Stack
+- React + Next.js  
+- Docker deployment on Hugging Face  
+- GitHub Actions for CI/CD
+- Designed and bootstrapped with AI tools  
+
+---
+
+## 🚀 Running Locally
+
+Clone the repo:
+
+```bash
+git clone https://github.com/ChrisStarOfficial/Chris-Star.com.git
+cd Chris-Star.com
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Build and run:
+
+```bash
+npm run build
+npm start
+```
+
+Or with Docker:
+
+```bash
+docker build -t chris-star .
+docker run -p 3000:7860 chris-star
+```
+
+---
+
+## 📦 Deployment Notes
+
+- Uses Docker since Next.js requires SSR (not static-only).
+- Hugging Face Spaces pulls directly from this repo via GitHub Actions.
+- Root domain is handled by Vercel; subdomains can point here if needed.
+
+---
+
+## 📜 License
+
+- This project is released under the CC BY-NC-SA 4.0 license.
+- You may remix and share with attribution, but no commercial use.
+
+---
+
+✨ Built with AI.
