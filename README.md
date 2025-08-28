@@ -1,6 +1,6 @@
 ---
 title: Chris-Star.com
-emoji: 𓃓
+emoji: 🪽
 colorFrom: gray
 colorTo: gray
 sdk: docker
