@@ -39,12 +39,13 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-          # New step: Set up Git LFS before pushing
-          # This tells Git to use LFS, tracks all .png files,
-          # and makes sure the tracking file is part of the repo.
+          git checkout --orphan hf-deployment
+          git add -A
+          git commit -m "Deploy to Hugging Face"
+          
           git lfs install
           git lfs track "*.png"
           git add .gitattributes
-
+          
           git remote add space https://user:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE_ID}
-          git push space HEAD:main --force
+          git push --force space hf-deployment:main
