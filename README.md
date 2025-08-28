@@ -4,8 +4,9 @@ emoji: 🪽
 colorFrom: gray
 colorTo: gray
 sdk: docker
-pinned: false
-license: other
+app_file: app/page.tsx
+pinned: true
+license: cc-by-nc-sa-4.0
 short_description: 'My DeepSite web hosting, coding, design for Chris-Star.com'
 ---
 
