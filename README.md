@@ -1,8 +1,8 @@
 ---
 title: Chris-Star.com
 emoji: 𓃓
-colorFrom: black
-colorTo: grey
+colorFrom: gray
+colorTo: gray
 sdk: docker
 pinned: false
 license: other
