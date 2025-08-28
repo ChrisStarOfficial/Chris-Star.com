@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 7860
 
 # Start Next.js in production
-CMD ["npm", "start", "-p", "7860"]
+CMD ["npm", "run", "start", "--", "-p=7860"]
