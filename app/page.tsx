@@ -1,12 +1,14 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
 import { ScrollTriggeredCounter } from "@/components/scroll-triggered-counter"
 
 export default function HomePage() {
+  const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [showNavigation, setShowNavigation] = useState(false)
@@ -70,13 +72,20 @@ export default function HomePage() {
 
   const handleCardSelect = (cardId: string) => {
     setSelectedCard(cardId)
+    // Auto-navigate after a short delay for better UX
+    setTimeout(() => {
+      const card = navigationCards.find((c) => c.id === cardId)
+      if (card) {
+        router.push(card.href)
+      }
+    }, 500)
   }
 
   const handleNavigate = () => {
     if (selectedCard) {
       const card = navigationCards.find((c) => c.id === selectedCard)
       if (card) {
-        window.location.href = card.href
+        router.push(card.href)
       }
     }
   }
@@ -552,7 +561,7 @@ export default function HomePage() {
                     <span className="text-slate-300/60" style={{ animation: "pulse 20s ease-in-out infinite" }}>
                       ▶
                     </span>{" "}
-                    Please select a destination.{" "}
+                    {showNavigation ? "Click on a destination below to navigate" : "Click the navigation button above to reveal destinations"}{" "}
                     <span
                       className="text-slate-300/60"
                       style={{ animationDelay: "10s", animation: "pulse 20s ease-in-out infinite" }}
@@ -602,10 +611,11 @@ export default function HomePage() {
 
                     <button
                       onClick={() => setShowNavigation(!showNavigation)}
-                      className="relative w-24 h-24 border border-slate-300/20 rounded-full bg-gradient-to-br from-slate-400/5 via-slate-400/8 to-slate-400/5 backdrop-blur-sm shadow-lg shadow-slate-400/8 hover:border-slate-200/30 hover:shadow-slate-300/12 transition-all duration-700 group"
+                      className="relative w-24 h-24 border border-slate-300/20 rounded-full bg-gradient-to-br from-slate-400/5 via-slate-400/8 to-slate-400/5 backdrop-blur-sm shadow-lg shadow-slate-400/8 hover:border-slate-200/30 hover:shadow-slate-300/12 transition-all duration-700 group cursor-pointer"
                       style={{
                         boxShadow: "0 0 30px rgba(148, 163, 184, 0.06), inset 0 0 20px rgba(148, 163, 184, 0.02)",
                       }}
+                      data-magnetic
                     >
                       <div
                         className={`absolute top-1/2 left-1/2 w-8 h-px bg-slate-300/70 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${showNavigation ? "rotate-45" : ""}`}
@@ -634,6 +644,7 @@ export default function HomePage() {
                               ? "scale-95 opacity-50"
                               : "hover:scale-105"
                         }`}
+                        data-magnetic
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
                         <div
