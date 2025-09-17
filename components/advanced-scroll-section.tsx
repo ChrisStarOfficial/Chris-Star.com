@@ -67,7 +67,7 @@ export function AdvancedScrollSection({
   }, [delay, threshold, hasAnimated, parallax, intensity])
 
   const getAnimationClass = () => {
-    const baseClass = "transition-all duration-1200 ease-out"
+    const baseClass = "transition-all duration-[1200ms] ease-out"
 
     if (!isVisible) {
       switch (direction) {

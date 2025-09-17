@@ -1002,6 +1002,15 @@
   }
 }
 
+/* Stagger children animation */
+.stagger-children > * {
+  animation-delay: calc(var(--stagger-delay, 0) * 100ms);
+}
+
+.stagger-children.animate > * {
+  animation-fill-mode: both;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
