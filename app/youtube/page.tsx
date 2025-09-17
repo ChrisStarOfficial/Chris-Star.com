@@ -1,10 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
-import { ScrollTriggeredCounter } from "@/components/scroll-triggered-counter"
 import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
 
 const videoCategories = [
@@ -13,28 +12,28 @@ const videoCategories = [
     title: "Spiritual Journey",
     description: "Documenting the path of consciousness expansion and awakening",
     count: 24,
-    color: "from-amber-500 to-amber-600",
+    color: "from-red-500/20 to-red-600/30",
   },
   {
     id: "health",
     title: "Health Optimization",
     description: "Carnivore diet, muscle building, and holistic wellness approaches",
     count: 18,
-    color: "from-amber-600 to-amber-700",
+    color: "from-red-600/20 to-red-700/30",
   },
   {
     id: "shadow",
     title: "Shadow Work",
     description: "Deep integration practices and inner transformation techniques",
     count: 15,
-    color: "from-amber-500 to-amber-700",
+    color: "from-red-500/20 to-red-700/30",
   },
   {
     id: "starseed",
     title: "Starseed Awakening",
     description: "Content for lightworkers and starseeds on their mission",
     count: 12,
-    color: "from-amber-600 to-amber-800",
+    color: "from-red-600/20 to-red-800/30",
   },
 ]
 
@@ -42,8 +41,7 @@ const featuredVideos = [
   {
     id: "1",
     title: "My Carnivore Journey: 6 Months of Transformation",
-    description:
-      "Documenting my complete transformation through the carnivore diet - physical changes, mental clarity, and spiritual insights gained along the way.",
+    description: "Documenting my complete transformation through the carnivore diet - physical changes, mental clarity, and spiritual insights gained along the way.",
     duration: "18:45",
     views: "15.2K",
     category: "Health Optimization",
@@ -54,8 +52,7 @@ const featuredVideos = [
   {
     id: "2",
     title: "Shadow Work: Integrating Your Dark Side for Spiritual Growth",
-    description:
-      "A deep dive into shadow work practices that have transformed my spiritual journey. Real techniques for facing and integrating your shadow aspects.",
+    description: "A deep dive into shadow work practices that have transformed my spiritual journey. Real techniques for facing and integrating your shadow aspects.",
     duration: "25:32",
     views: "22.8K",
     category: "Shadow Work",
@@ -66,8 +63,7 @@ const featuredVideos = [
   {
     id: "3",
     title: "Starseed Awakening: Remembering Your Cosmic Mission",
-    description:
-      "For starseeds and lightworkers feeling the call to remember their purpose. Signs, symptoms, and steps to embrace your galactic heritage.",
+    description: "For starseeds and lightworkers feeling the call to remember their purpose. Signs, symptoms, and steps to embrace your galactic heritage.",
     duration: "22:18",
     views: "9.7K",
     category: "Starseed Awakening",
@@ -78,8 +74,7 @@ const featuredVideos = [
   {
     id: "4",
     title: "Building Muscle on Carnivore: My Training Protocol",
-    description:
-      "How I've built and maintained muscle mass while eating only animal products. Training routines, recovery, and results.",
+    description: "How I've built and maintained muscle mass while eating only animal products. Training routines, recovery, and results.",
     duration: "16:24",
     views: "18.5K",
     category: "Health Optimization",
@@ -90,8 +85,7 @@ const featuredVideos = [
   {
     id: "5",
     title: "Consciousness Expansion: What I've Learned This Year",
-    description:
-      "Sharing the biggest insights and breakthroughs from my spiritual journey this year. Raw, honest reflections on growth and awakening.",
+    description: "Sharing the biggest insights and breakthroughs from my spiritual journey this year. Raw, honest reflections on growth and awakening.",
     duration: "21:56",
     views: "13.4K",
     category: "Spiritual Journey",
@@ -102,8 +96,7 @@ const featuredVideos = [
   {
     id: "6",
     title: "The Dark Night of the Soul: My Experience and Guidance",
-    description:
-      "Navigating the most challenging phase of spiritual awakening. What to expect, how to cope, and why it's necessary for growth.",
+    description: "Navigating the most challenging phase of spiritual awakening. What to expect, how to cope, and why it's necessary for growth.",
     duration: "28:15",
     views: "25.1K",
     category: "Spiritual Journey",
@@ -116,10 +109,39 @@ const featuredVideos = [
 export default function YouTubePage() {
   const [activeCategory, setActiveCategory] = useState("all")
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   const filteredVideos = featuredVideos.filter((video) => {
     return activeCategory === "all" || video.category.toLowerCase().includes(activeCategory)
   })
+
+  // Handle mouse movement for parallax
+  const handleMouseMove = (e: MouseEvent) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2
+    const y = (e.clientY / window.innerHeight - 0.5) * 2
+    setMousePosition({ x, y })
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 500)
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
 
   return (
     <main className="min-h-screen bg-gray-900">
@@ -128,16 +150,41 @@ export default function YouTubePage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-red-900 via-gray-900 to-amber-900 text-white overflow-hidden">
+        {/* Layered Background Effects */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-40 h-40 bg-red-600 rounded-full blur-3xl animate-parallax-float"></div>
+          <div 
+            className="absolute top-20 left-10 w-40 h-40 bg-red-600 rounded-full blur-3xl animate-parallax-float"
+            style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+          />
           <div
             className="absolute bottom-20 right-10 w-60 h-60 bg-amber-600 rounded-full blur-3xl"
-            style={{ animationDelay: "2s" }}
-          ></div>
+            style={{ 
+              animationDelay: "2s",
+              transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
+            }}
+          />
           <div
             className="absolute top-1/3 right-1/4 w-32 h-32 bg-red-500 rounded-full blur-2xl"
-            style={{ animationDelay: "4s" }}
-          ></div>
+            style={{ 
+              animationDelay: "4s",
+              transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`
+            }}
+          />
+        </div>
+
+        {/* Geometric Background Patterns */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "50px 50px",
+              transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px)`,
+            }}
+          />
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
@@ -145,7 +192,7 @@ export default function YouTubePage() {
             <div className="mb-12">
               <div className="w-24 h-24 mx-auto bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-2xl animate-luxury-glow mb-8">
                 <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
               </div>
             </div>
@@ -164,23 +211,17 @@ export default function YouTubePage() {
           <AdvancedScrollSection direction="scale" delay={600}>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 mb-16">
               <div className="text-center">
-                <div className="text-4xl font-serif font-bold text-red-400 mb-2">
-                  <ScrollTriggeredCounter end={85} suffix="+" />
-                </div>
+                <div className="text-4xl font-serif font-bold text-red-400 mb-2">85+</div>
                 <p className="font-sans text-sm text-gray-300 uppercase tracking-wider">Spiritual Videos</p>
               </div>
               <div className="w-px h-16 bg-red-400 opacity-30 hidden md:block"></div>
               <div className="text-center">
-                <div className="text-4xl font-serif font-bold text-red-400 mb-2">
-                  <ScrollTriggeredCounter end={250} suffix="K+" />
-                </div>
+                <div className="text-4xl font-serif font-bold text-red-400 mb-2">250K+</div>
                 <p className="font-sans text-sm text-gray-300 uppercase tracking-wider">Total Views</p>
               </div>
               <div className="w-px h-16 bg-red-400 opacity-30 hidden md:block"></div>
               <div className="text-center">
-                <div className="text-4xl font-serif font-bold text-red-400 mb-2">
-                  <ScrollTriggeredCounter end={12} suffix="K+" />
-                </div>
+                <div className="text-4xl font-serif font-bold text-red-400 mb-2">12K+</div>
                 <p className="font-sans text-sm text-gray-300 uppercase tracking-wider">Subscribers</p>
               </div>
             </div>
@@ -192,7 +233,7 @@ export default function YouTubePage() {
               data-magnetic
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
               </svg>
               <span>Subscribe to Channel</span>
             </button>
@@ -355,7 +396,7 @@ export default function YouTubePage() {
                   >
                     <div className={`h-32 bg-gradient-to-br ${category.color} flex items-center justify-center`}>
                       <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                       </svg>
                     </div>
                     <div className="p-8">
@@ -403,7 +444,7 @@ export default function YouTubePage() {
                 data-magnetic
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
                 <span>Subscribe Now</span>
               </button>

@@ -1011,6 +1011,54 @@
   animation-fill-mode: both;
 }
 
+/* Navigation Section Animations */
+@keyframes earth-rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit {
+  from { transform: translate(-50%, -50%) rotateY(0deg) translateZ(50px); }
+  to { transform: translate(-50%, -50%) rotateY(360deg) translateZ(50px); }
+}
+
+@keyframes hyperspace-tunnel {
+  from { transform: translateY(100%) rotate(0deg); }
+  to { transform: translateY(-100%) rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(-20px) translateX(0px); }
+  75% { transform: translateY(-10px) translateX(-5px); }
+}
+
+@keyframes city-lights {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Gradient utilities */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

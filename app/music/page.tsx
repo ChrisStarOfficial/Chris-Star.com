@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
@@ -13,7 +13,7 @@ const spiritualSongs = [
     description: "Songs exploring the journey of consciousness expansion and spiritual growth.",
     duration: "12 songs",
     mood: "Awakening",
-    color: "from-amber-500 to-amber-600",
+    color: "from-amber-500/20 to-amber-600/30",
     topics: ["Consciousness", "Awakening", "Light"],
   },
   {
@@ -22,7 +22,7 @@ const spiritualSongs = [
     description: "Deep tracks about facing and integrating our shadow aspects for wholeness.",
     duration: "8 songs",
     mood: "Transformative",
-    color: "from-amber-600 to-amber-700",
+    color: "from-amber-600/20 to-amber-700/30",
     topics: ["Shadow Work", "Integration", "Healing"],
   },
   {
@@ -31,7 +31,7 @@ const spiritualSongs = [
     description: "Music for starseeds and lightworkers on their mission of service and remembrance.",
     duration: "15 songs",
     mood: "Cosmic",
-    color: "from-amber-500 to-amber-700",
+    color: "from-amber-500/20 to-amber-700/30",
     topics: ["Starseed", "Mission", "Service"],
   },
   {
@@ -40,7 +40,7 @@ const spiritualSongs = [
     description: "Uplifting songs about the ascension process and raising our vibration.",
     duration: "10 songs",
     mood: "Elevating",
-    color: "from-amber-600 to-amber-800",
+    color: "from-amber-600/20 to-amber-800/30",
     topics: ["Ascension", "Vibration", "Evolution"],
   },
 ]
@@ -80,7 +80,36 @@ export default function MusicPage() {
   const [currentPlaylist, setCurrentPlaylist] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTrack, setCurrentTrack] = useState<number | null>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const audioRef = useRef<HTMLAudioElement>(null)
+
+  // Handle mouse movement for parallax
+  const handleMouseMove = (e: MouseEvent) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2
+    const y = (e.clientY / window.innerHeight - 0.5) * 2
+    setMousePosition({ x, y })
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 500)
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying)
@@ -97,17 +126,27 @@ export default function MusicPage() {
       <MagneticCursor />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-gray-900 via-amber-900 to-gray-800 text-white overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-amber-900 via-gray-900 to-amber-800 text-white overflow-hidden">
+        {/* Layered Background Effects */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"></div>
+          <div 
+            className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"
+            style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+          />
           <div
             className="absolute bottom-20 right-10 w-60 h-60 bg-amber-500 rounded-full blur-3xl"
-            style={{ animationDelay: "2s" }}
-          ></div>
+            style={{ 
+              animationDelay: "2s",
+              transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
+            }}
+          />
           <div
             className="absolute top-1/3 right-1/4 w-32 h-32 bg-amber-400 rounded-full blur-2xl"
-            style={{ animationDelay: "4s" }}
-          ></div>
+            style={{ 
+              animationDelay: "4s",
+              transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`
+            }}
+          />
         </div>
 
         {/* Animated Sound Waves */}
@@ -122,9 +161,24 @@ export default function MusicPage() {
                   animationDelay: `${i * 0.1}s`,
                   animationDuration: `${Math.random() * 2 + 1}s`,
                 }}
-              ></div>
+              />
             ))}
           </div>
+        </div>
+
+        {/* Geometric Background Patterns */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "50px 50px",
+              transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px)`,
+            }}
+          />
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
@@ -326,7 +380,7 @@ export default function MusicPage() {
                                 height: `${Math.random() * 20 + 8}px`,
                                 animationDelay: `${i * 0.05}s`,
                               }}
-                            ></div>
+                            />
                           ))}
                         </div>
                       </div>
@@ -388,7 +442,7 @@ export default function MusicPage() {
                   <div
                     className="h-full bg-gradient-to-r from-amber-600 to-amber-500 rounded-full transition-all duration-300"
                     style={{ width: isPlaying ? "45%" : "0%" }}
-                  ></div>
+                  />
                 </div>
                 <div className="flex justify-between text-sm text-gray-400 mt-2">
                   <span>1:23</span>
@@ -403,7 +457,7 @@ export default function MusicPage() {
                     <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
                   </svg>
                   <div className="w-24 h-1 bg-gray-700 rounded-full">
-                    <div className="w-16 h-full bg-amber-600 rounded-full"></div>
+                    <div className="w-16 h-full bg-amber-600 rounded-full" />
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -438,9 +492,9 @@ export default function MusicPage() {
             Copyright © 2025 Chris Star Enterprises LLC. All Rights Reserved.
           </p>
           <div className="flex items-center justify-center">
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4"></div>
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
+            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4" />
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
           </div>
         </div>
       </footer>

@@ -1,24 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
-import { ScrollTriggeredCounter } from "@/components/scroll-triggered-counter"
 import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
 
 const communityFeatures = [
   {
     title: "Weekly Live Calls",
-    description:
-      "Join me every week for deep-dive sessions on spiritual growth, health optimization, and shadow work integration.",
+    description: "Join me every week for deep-dive sessions on spiritual growth, health optimization, and shadow work integration.",
     icon: "🎥",
     frequency: "Every Tuesday",
   },
   {
     title: "Exclusive Courses",
-    description:
-      "Access comprehensive courses on carnivore nutrition, muscle building, consciousness expansion, and starseed awakening.",
+    description: "Access comprehensive courses on carnivore nutrition, muscle building, consciousness expansion, and starseed awakening.",
     icon: "📚",
     frequency: "Monthly Releases",
   },
@@ -33,8 +30,7 @@ const communityFeatures = [
 const communityBenefits = [
   {
     title: "Transformational Community",
-    description:
-      "Connect with like-minded lightworkers, starseeds, and spiritual seekers on the path of authentic growth.",
+    description: "Connect with like-minded lightworkers, starseeds, and spiritual seekers on the path of authentic growth.",
     value: "Priceless Network",
   },
   {
@@ -49,8 +45,7 @@ const communityBenefits = [
   },
   {
     title: "Accountability Partners",
-    description:
-      "Find your tribe and create lasting accountability partnerships for your health and spiritual journey.",
+    description: "Find your tribe and create lasting accountability partnerships for your health and spiritual journey.",
     value: "Lifelong Bonds",
   },
 ]
@@ -59,28 +54,54 @@ const testimonials = [
   {
     name: "Sarah M.",
     role: "Lightworker & Health Coach",
-    quote:
-      "Chris's community transformed my relationship with food and my spiritual practice. The carnivore approach combined with shadow work has been life-changing.",
+    quote: "Chris's community transformed my relationship with food and my spiritual practice. The carnivore approach combined with shadow work has been life-changing.",
     transformation: "Lost 30lbs, Gained Clarity",
   },
   {
     name: "Michael R.",
     role: "Starseed Entrepreneur",
-    quote:
-      "Finally found a community that understands both the spiritual journey and practical health optimization. The weekly calls are pure gold.",
+    quote: "Finally found a community that understands both the spiritual journey and practical health optimization. The weekly calls are pure gold.",
     transformation: "Built Muscle, Found Purpose",
   },
   {
     name: "Luna K.",
     role: "Spiritual Teacher",
-    quote:
-      "The shadow work guidance here goes deeper than anything I've experienced. Chris creates a safe space for real transformation.",
+    quote: "The shadow work guidance here goes deeper than anything I've experienced. Chris creates a safe space for real transformation.",
     transformation: "Integrated Shadows, Expanded Consciousness",
   },
 ]
 
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState("features")
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  // Handle mouse movement for parallax
+  const handleMouseMove = (e: MouseEvent) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2
+    const y = (e.clientY / window.innerHeight - 0.5) * 2
+    setMousePosition({ x, y })
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 500)
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
 
   return (
     <main className="min-h-screen bg-gray-900">
@@ -88,13 +109,42 @@ export default function CommunityPage() {
       <MagneticCursor />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"></div>
+      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-amber-900 via-gray-900 to-amber-800 overflow-hidden">
+        {/* Layered Background Effects */}
+        <div className="absolute inset-0 opacity-20">
+          <div 
+            className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"
+            style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+          />
           <div
             className="absolute bottom-20 right-10 w-60 h-60 bg-amber-500 rounded-full blur-3xl"
-            style={{ animationDelay: "2s" }}
-          ></div>
+            style={{ 
+              animationDelay: "2s",
+              transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
+            }}
+          />
+          <div
+            className="absolute top-1/3 right-1/4 w-32 h-32 bg-amber-400 rounded-full blur-2xl"
+            style={{ 
+              animationDelay: "4s",
+              transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`
+            }}
+          />
+        </div>
+
+        {/* Geometric Background Patterns */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "50px 50px",
+              transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px)`,
+            }}
+          />
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
@@ -120,16 +170,12 @@ export default function CommunityPage() {
           <AdvancedScrollSection direction="scale" delay={600}>
             <div className="flex items-center justify-center space-x-8">
               <div className="text-center">
-                <div className="text-4xl font-sans font-bold text-amber-400 mb-2">
-                  <ScrollTriggeredCounter end={500} suffix="+" />
-                </div>
+                <div className="text-4xl font-sans font-bold text-amber-400 mb-2">500+</div>
                 <p className="font-sans text-sm text-gray-400 uppercase tracking-wider">Active Members</p>
               </div>
               <div className="w-px h-16 bg-amber-600 opacity-30"></div>
               <div className="text-center">
-                <div className="text-4xl font-sans font-bold text-amber-400 mb-2">
-                  <ScrollTriggeredCounter end={95} suffix="%" />
-                </div>
+                <div className="text-4xl font-sans font-bold text-amber-400 mb-2">95%</div>
                 <p className="font-sans text-sm text-gray-400 uppercase tracking-wider">Transformation Rate</p>
               </div>
             </div>

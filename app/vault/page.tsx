@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
@@ -13,7 +13,7 @@ const vaultFeatures = [
     description: "Full collection of Taygetan Disclosure transcripts organized and searchable",
     count: "500+",
     icon: "📜",
-    color: "from-amber-500 to-amber-600",
+    color: "from-amber-500/20 to-amber-600/30",
   },
   {
     id: "obsidian",
@@ -21,7 +21,7 @@ const vaultFeatures = [
     description: "Structured knowledge base with interconnected notes and cross-references",
     count: "Linked",
     icon: "🔗",
-    color: "from-amber-600 to-amber-700",
+    color: "from-amber-600/20 to-amber-700/30",
   },
   {
     id: "updates",
@@ -29,7 +29,7 @@ const vaultFeatures = [
     description: "Continuously updated with new transcripts and improved organization",
     count: "Weekly",
     icon: "🔄",
-    color: "from-amber-500 to-amber-700",
+    color: "from-amber-500/20 to-amber-700/30",
   },
   {
     id: "backup",
@@ -37,7 +37,7 @@ const vaultFeatures = [
     description: "Secure preservation of stellar information for future generations",
     count: "Permanent",
     icon: "💾",
-    color: "from-amber-600 to-amber-800",
+    color: "from-amber-600/20 to-amber-800/30",
   },
 ]
 
@@ -78,6 +78,35 @@ const vaultSections = [
 
 export default function VaultPage() {
   const [activeSection, setActiveSection] = useState("all")
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  // Handle mouse movement for parallax
+  const handleMouseMove = (e: MouseEvent) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2
+    const y = (e.clientY / window.innerHeight - 0.5) * 2
+    setMousePosition({ x, y })
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 500)
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
 
   const filteredSections = vaultSections.filter((section) => {
     return activeSection === "all" || section.category.toLowerCase().includes(activeSection)
@@ -90,16 +119,41 @@ export default function VaultPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-amber-900 text-white overflow-hidden">
+        {/* Layered Background Effects */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"></div>
+          <div 
+            className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"
+            style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+          />
           <div
             className="absolute bottom-20 right-10 w-60 h-60 bg-amber-500 rounded-full blur-3xl"
-            style={{ animationDelay: "3s" }}
-          ></div>
+            style={{ 
+              animationDelay: "3s",
+              transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
+            }}
+          />
           <div
             className="absolute top-1/2 left-1/3 w-32 h-32 bg-amber-400 rounded-full blur-2xl"
-            style={{ animationDelay: "1.5s" }}
-          ></div>
+            style={{ 
+              animationDelay: "1.5s",
+              transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`
+            }}
+          />
+        </div>
+
+        {/* Geometric Background Patterns */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "50px 50px",
+              transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px)`,
+            }}
+          />
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
@@ -291,9 +345,9 @@ export default function VaultPage() {
             Copyright © 2025 Chris Star Enterprises LLC. All Rights Reserved.
           </p>
           <div className="flex items-center justify-center">
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4"></div>
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
+            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4" />
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
           </div>
         </div>
       </footer>
