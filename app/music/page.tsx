@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
 import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
 
@@ -122,7 +121,6 @@ export default function MusicPage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
-      <ScrollProgressIndicator />
       <MagneticCursor />
 
       {/* Hero Section */}

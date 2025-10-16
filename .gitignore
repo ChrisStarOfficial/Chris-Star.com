@@ -19,8 +19,11 @@ yarn-error.log*
 # env files
 .env*
 
-# vercel
+# Vercel
 .vercel
+
+# Continue extension for VSCodium
+.continue
 
 # typescript
 *.tsbuildinfo

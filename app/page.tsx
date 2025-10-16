@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
 
 export default function HomePage() {
@@ -179,21 +178,19 @@ export default function HomePage() {
   const handleScroll = () => {
     const scrollY = window.scrollY
     setScrollY(scrollY)
-    
-    // Calculate camera angle based on scroll position
-    const navigationTop = navigationRef.current?.offsetTop || 0
-    const navigationHeight = navigationRef.current?.offsetHeight || 0
-    const scrollProgress = Math.max(0, Math.min(1, (scrollY - navigationTop + window.innerHeight) / navigationHeight))
-    
-    if (scrollProgress > 0 && scrollProgress < 1) {
-      setCameraAngle(scrollProgress * 360)
+
+    const heroHeight = heroRef.current?.offsetHeight || window.innerHeight
+    const triggerPoint = heroHeight * 0.8 // adjust when it should appear (0.8 = near end)
+
+    if (scrollY >= triggerPoint) {
       setShowNavigation(true)
-    } else if (scrollProgress >= 1) {
-      setShowNavigation(true)
+      const progress = (scrollY - triggerPoint) / window.innerHeight
+      setCameraAngle(progress * 360)
     } else {
       setShowNavigation(false)
     }
   }
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -271,7 +268,6 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
-      <ScrollProgressIndicator />
       <MagneticCursor />
 
       {/* Hero Section */}
@@ -340,16 +336,10 @@ export default function HomePage() {
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
           </div>
         </div>
-
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-          <div className="animate-bounce">
-            <div className="w-8 h-12 border-2 border-amber-600 rounded-full flex justify-center" data-magnetic>
-              <div className="w-1.5 h-4 bg-amber-600 rounded-full mt-2 animate-pulse" />
-            </div>
-          </div>
-          <p className="text-sm text-gray-400 mt-3 font-sans text-center">Scroll to explore</p>
-        </div>
       </section>
+
+      {/* 👈 Spacer goes here */}
+      <section style={{ height: '100vh' }} />  {}
 
       {/* Navigation Section - Full Screen Scrolljacking */}
       <section

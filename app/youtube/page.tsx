@@ -2,120 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator"
 import { MagneticCursor } from "@/components/magnetic-cursor"
 import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
 
-const videoCategories = [
-  {
-    id: "journey",
-    title: "Spiritual Journey",
-    description: "Documenting the path of consciousness expansion and awakening",
-    count: 24,
-    color: "from-red-500/20 to-red-600/30",
-  },
-  {
-    id: "health",
-    title: "Health Optimization",
-    description: "Carnivore diet, muscle building, and holistic wellness approaches",
-    count: 18,
-    color: "from-red-600/20 to-red-700/30",
-  },
-  {
-    id: "shadow",
-    title: "Shadow Work",
-    description: "Deep integration practices and inner transformation techniques",
-    count: 15,
-    color: "from-red-500/20 to-red-700/30",
-  },
-  {
-    id: "starseed",
-    title: "Starseed Awakening",
-    description: "Content for lightworkers and starseeds on their mission",
-    count: 12,
-    color: "from-red-600/20 to-red-800/30",
-  },
-]
-
-const featuredVideos = [
-  {
-    id: "1",
-    title: "My Carnivore Journey: 6 Months of Transformation",
-    description: "Documenting my complete transformation through the carnivore diet - physical changes, mental clarity, and spiritual insights gained along the way.",
-    duration: "18:45",
-    views: "15.2K",
-    category: "Health Optimization",
-    thumbnail: "/youtube-thumbnail-1.png",
-    publishDate: "2 weeks ago",
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "Shadow Work: Integrating Your Dark Side for Spiritual Growth",
-    description: "A deep dive into shadow work practices that have transformed my spiritual journey. Real techniques for facing and integrating your shadow aspects.",
-    duration: "25:32",
-    views: "22.8K",
-    category: "Shadow Work",
-    thumbnail: "/youtube-thumbnail-2.png",
-    publishDate: "1 month ago",
-    featured: true,
-  },
-  {
-    id: "3",
-    title: "Starseed Awakening: Remembering Your Cosmic Mission",
-    description: "For starseeds and lightworkers feeling the call to remember their purpose. Signs, symptoms, and steps to embrace your galactic heritage.",
-    duration: "22:18",
-    views: "9.7K",
-    category: "Starseed Awakening",
-    thumbnail: "/youtube-thumbnail-3.png",
-    publishDate: "3 weeks ago",
-    featured: false,
-  },
-  {
-    id: "4",
-    title: "Building Muscle on Carnivore: My Training Protocol",
-    description: "How I've built and maintained muscle mass while eating only animal products. Training routines, recovery, and results.",
-    duration: "16:24",
-    views: "18.5K",
-    category: "Health Optimization",
-    thumbnail: "/youtube-thumbnail-4.png",
-    publishDate: "1 week ago",
-    featured: false,
-  },
-  {
-    id: "5",
-    title: "Consciousness Expansion: What I've Learned This Year",
-    description: "Sharing the biggest insights and breakthroughs from my spiritual journey this year. Raw, honest reflections on growth and awakening.",
-    duration: "21:56",
-    views: "13.4K",
-    category: "Spiritual Journey",
-    thumbnail: "/youtube-thumbnail-5.png",
-    publishDate: "2 months ago",
-    featured: false,
-  },
-  {
-    id: "6",
-    title: "The Dark Night of the Soul: My Experience and Guidance",
-    description: "Navigating the most challenging phase of spiritual awakening. What to expect, how to cope, and why it's necessary for growth.",
-    duration: "28:15",
-    views: "25.1K",
-    category: "Spiritual Journey",
-    thumbnail: "/youtube-thumbnail-6.png",
-    publishDate: "6 weeks ago",
-    featured: false,
-  },
-]
-
 export default function YouTubePage() {
-  const [activeCategory, setActiveCategory] = useState("all")
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  const filteredVideos = featuredVideos.filter((video) => {
-    return activeCategory === "all" || video.category.toLowerCase().includes(activeCategory)
-  })
 
   // Handle mouse movement for parallax
   const handleMouseMove = (e: MouseEvent) => {
@@ -145,7 +39,6 @@ export default function YouTubePage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
-      <ScrollProgressIndicator />
       <MagneticCursor />
 
       {/* Hero Section */}
@@ -241,41 +134,6 @@ export default function YouTubePage() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <AdvancedScrollSection direction="up">
-        <section className="py-20 px-6 bg-gray-800">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => setActiveCategory("all")}
-                className={`px-6 py-3 rounded-lg font-sans font-semibold transition-all duration-300 ${
-                  activeCategory === "all"
-                    ? "bg-red-600 text-white shadow-lg"
-                    : "bg-gray-700 text-gray-300 hover:text-red-400 hover:bg-gray-600"
-                }`}
-                data-magnetic
-              >
-                All Videos
-              </button>
-              {videoCategories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  className={`px-6 py-3 rounded-lg font-sans font-semibold transition-all duration-300 ${
-                    activeCategory === category.id
-                      ? "bg-red-600 text-white shadow-lg"
-                      : "bg-gray-700 text-gray-300 hover:text-red-400 hover:bg-gray-600"
-                  }`}
-                  data-magnetic
-                >
-                  {category.title}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      </AdvancedScrollSection>
-
       {/* Featured Videos */}
       <AdvancedScrollSection direction="stagger">
         <section className="py-32 px-6 bg-gray-900">
@@ -286,137 +144,6 @@ export default function YouTubePage() {
                 Raw, authentic content documenting my spiritual journey and transformation. No fluff, just real
                 experiences and practical insights for fellow seekers on the path.
               </p>
-            </div>
-
-            {/* Hero Video */}
-            <AdvancedScrollSection direction="scale" delay={200}>
-              <div className="mb-16">
-                <div
-                  className="group relative aspect-video rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
-                  onClick={() => setSelectedVideo(featuredVideos[0].id)}
-                  data-magnetic
-                >
-                  <img
-                    src={featuredVideos[0].thumbnail || "/placeholder.svg"}
-                    alt={featuredVideos[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <button className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300 shadow-2xl">
-                      <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="font-sans font-bold text-3xl text-white mb-2">{featuredVideos[0].title}</h3>
-                    <p className="font-sans text-gray-200 leading-relaxed mb-4">{featuredVideos[0].description}</p>
-                    <div className="flex items-center space-x-4 text-sm text-gray-300">
-                      <span>{featuredVideos[0].views} views</span>
-                      <span>•</span>
-                      <span>{featuredVideos[0].publishDate}</span>
-                      <span>•</span>
-                      <span>{featuredVideos[0].duration}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AdvancedScrollSection>
-
-            {/* Video Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredVideos.slice(1).map((video, index) => (
-                <AdvancedScrollSection key={video.id} direction="up" delay={index * 150}>
-                  <div
-                    className="group bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:shadow-2xl hover:border-red-600 transition-all duration-500 overflow-hidden cursor-pointer"
-                    onClick={() => setSelectedVideo(video.id)}
-                    data-magnetic
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <img
-                        src={video.thumbnail || "/placeholder.svg"}
-                        alt={video.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300">
-                          <svg className="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </button>
-                      </div>
-                      <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
-                        {video.duration}
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <div className="mb-3">
-                        <span className="inline-block px-3 py-1 bg-red-100 text-red-800 text-sm font-sans font-semibold rounded-full">
-                          {video.category}
-                        </span>
-                      </div>
-                      <h3 className="font-sans font-bold text-xl text-white mb-3 group-hover:text-red-400 transition-colors line-clamp-2">
-                        {video.title}
-                      </h3>
-                      <p className="font-sans text-gray-300 leading-relaxed mb-4 line-clamp-3">{video.description}</p>
-                      <div className="flex items-center justify-between text-sm text-gray-400">
-                        <span>{video.views} views</span>
-                        <span>{video.publishDate}</span>
-                      </div>
-                    </div>
-                  </div>
-                </AdvancedScrollSection>
-              ))}
-            </div>
-          </div>
-        </section>
-      </AdvancedScrollSection>
-
-      {/* Video Categories Overview */}
-      <AdvancedScrollSection direction="left">
-        <section className="py-32 px-6 bg-gray-800">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20">
-              <h2 className="font-sans font-bold text-5xl text-white mb-6 tracking-tight">Content Categories</h2>
-              <p className="font-sans text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Organized collections covering different aspects of the spiritual journey—from physical optimization to
-                consciousness expansion. Each category represents a core pillar of holistic transformation.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {videoCategories.map((category, index) => (
-                <AdvancedScrollSection key={category.id} direction="up" delay={index * 150}>
-                  <div
-                    className="group bg-gray-900 border border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-red-600 transition-all duration-500 overflow-hidden cursor-pointer"
-                    onClick={() => setActiveCategory(category.id)}
-                    data-magnetic
-                  >
-                    <div className={`h-32 bg-gradient-to-br ${category.color} flex items-center justify-center`}>
-                      <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122-2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                      </svg>
-                    </div>
-                    <div className="p-8">
-                      <h3 className="font-sans font-bold text-2xl text-white mb-3">{category.title}</h3>
-                      <p className="font-sans text-gray-300 leading-relaxed mb-4">{category.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="font-sans text-sm text-red-400 font-semibold">{category.count} Videos</span>
-                        <svg
-                          className="w-5 h-5 text-red-400 group-hover:translate-x-1 transition-transform duration-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </AdvancedScrollSection>
-              ))}
             </div>
           </div>
         </section>
