@@ -600,7 +600,7 @@ export default function NotFound() {
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-900/90 rounded-2xl backdrop-blur-sm">
                     <div className="text-center">
                       <div className="text-6xl mb-4">🌟</div>
-                      <h3 className="font-sans font-bold text-2xl text-white mb-4 tracking-wide">CHRIS STAR RUNNER</h3>
+                      <h3 className="font-sans font-bold text-2xl text-white mb-4 tracking-wide">Bull Run</h3>
                       <p className="font-sans text-gray-300 mb-6">Press SPACE or click to jump over obstacles!</p>
                       <button
                         onClick={startGame}

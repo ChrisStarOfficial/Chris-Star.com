@@ -32,7 +32,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "Chris Star Enterprises LLC - Where optimization meets transformation",
+  title: "Chris Star Enterprises - Where optimization meets transformation",
   description:
     "Modern, luxurious business solutions crafted by Chris Star for discerning clients who demand excellence.",
   generator: "v0.app",
