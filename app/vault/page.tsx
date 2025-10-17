@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { MagneticCursor } from "@/components/magnetic-cursor"
 import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
 
 const vaultFeatures = [
@@ -113,7 +112,6 @@ export default function VaultPage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
-      <MagneticCursor />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-amber-900 text-white overflow-hidden">

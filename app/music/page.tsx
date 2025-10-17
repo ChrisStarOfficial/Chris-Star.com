@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { MagneticCursor } from "@/components/magnetic-cursor"
 import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
 
 const spiritualSongs = [
@@ -121,7 +120,6 @@ export default function MusicPage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
-      <MagneticCursor />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-amber-900 via-gray-900 to-amber-800 text-white overflow-hidden">

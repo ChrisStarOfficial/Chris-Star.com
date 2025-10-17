@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { MagneticCursor } from "@/components/magnetic-cursor"
 import { Footer } from "@/components/footer"
 import ThreeCanvas from "@/components/three-canvas"
 import Image from 'next/image'
@@ -273,7 +272,6 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
-      <MagneticCursor />
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center px-6 overflow-hidden">
