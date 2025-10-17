@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { MagneticCursor } from "@/components/magnetic-cursor"
+import { Footer } from "@/components/footer"
+import ThreeCanvas from "@/components/three-canvas"
+import Image from 'next/image'
 
 export default function HomePage() {
   const router = useRouter()
@@ -178,19 +181,21 @@ export default function HomePage() {
   const handleScroll = () => {
     const scrollY = window.scrollY
     setScrollY(scrollY)
-
-    const heroHeight = heroRef.current?.offsetHeight || window.innerHeight
-    const triggerPoint = heroHeight * 0.8 // adjust when it should appear (0.8 = near end)
-
-    if (scrollY >= triggerPoint) {
+    
+    // Calculate camera angle based on scroll position
+    const navigationTop = navigationRef.current?.offsetTop || 0
+    const navigationHeight = navigationRef.current?.offsetHeight || 0
+    const scrollProgress = Math.max(0, Math.min(1, (scrollY - navigationTop + window.innerHeight) / navigationHeight))
+    
+    if (scrollProgress > 0 && scrollProgress < 1) {
+      setCameraAngle(scrollProgress * 360)
       setShowNavigation(true)
-      const progress = (scrollY - triggerPoint) / window.innerHeight
-      setCameraAngle(progress * 360)
+    } else if (scrollProgress >= 1) {
+      setShowNavigation(true)
     } else {
       setShowNavigation(false)
     }
   }
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -294,20 +299,25 @@ export default function HomePage() {
           }`}
         >
           <div
-            className={`mb-12 transition-all duration-1000 delay-300 ${
+            className={`mb-8 transition-all duration-1000 delay-300 ${
               isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-90"
             }`}
           >
             <div
-              className="h-20 mx-auto bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center shadow-2xl animate-luxury-glow w-[235px]"
+              className="h-20 mx-auto bg-gradient-to-br from-white-600 to-white-700 rounded-xl flex items-center justify-center shadow-2xl animate-luxury-glow w-[120px]"
               data-magnetic
             >
-              <span className="text-white font-sans font-bold text-2xl">Introducing...</span>
+              <Image
+                  src="/Icon.png"
+                  alt="CSE"
+                  width={100}
+                  height={100}
+              />
             </div>
           </div>
 
           <h1
-            className={`font-sans font-bold text-4xl md:text-6xl lg:text-7xl text-white mb-8 tracking-tight transition-all duration-1500 delay-600 ${
+            className={`font-serif font-bold text-9xl text-white mb-0 tracking-h1 transition-all duration-1500 delay-600 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
             }`}
             style={{
@@ -315,8 +325,20 @@ export default function HomePage() {
               lineHeight: "1.1",
             }}
           >
-            Chris Star Enterprises LLC
+            Chris Star
           </h1>
+
+          <h2
+            className={`font-sans font-bold text-5xl text-white mb-24 tracking-h2 transition-all duration-1500 delay-600 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+            }`}
+            style={{
+              textShadow: "0 4px 8px rgba(0,0,0,0.3)",
+              lineHeight: "1.1",
+            }}
+          >
+            ENTERPRISES
+          </h2>
 
           <p
             className={`font-sans font-light text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 transition-all duration-1500 delay-900 ${
@@ -325,30 +347,18 @@ export default function HomePage() {
           >
             Where optimization meets transformation.
           </p>
-
-          <div
-            className={`flex items-center justify-center mt-16 transition-all duration-1500 delay-1200 ${
-              isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-0"
-            }`}
-          >
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
-            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4 animate-pulse" />
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
-          </div>
         </div>
       </section>
 
-      {/* 👈 Spacer goes here */}
-      <section style={{ height: '100vh' }} />  {}
-
-      {/* Navigation Section - Full Screen Scrolljacking */}
+      {/* Navigation Section */}
       <section
         ref={navigationRef}
-        className={`fixed inset-0 z-40 transition-all duration-1000 ${
-          showNavigation ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className="relative w-full h-screen"
         style={{
+          height: "100vh",
           background: "linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)",
+          perspective: "1000px",
+          overflow: "hidden",
         }}
       >
         {/* Layered Geometric Background */}
@@ -395,78 +405,16 @@ export default function HomePage() {
           ))}
           </div>
 
-        {/* Central Earth Hub */}
+        {/* Central Earth Hub (Three.js Canvas) */}
         <div className="absolute inset-0 flex items-center justify-center">
-            <div
-            ref={earthRef}
-            className="relative w-96 h-96"
-              style={{
-              transform: `rotateY(${cameraAngle}deg) rotateX(${mousePosition.y * 10}deg)`,
-              transformStyle: "preserve-3d",
-            }}
-            onMouseEnter={() => setSatellitesVisible(true)}
-          >
-            {/* Earth with non-spherical shape */}
-            <div className="relative w-full h-full">
-              {/* Atmospheric glow */}
-              <div className="absolute inset-0 bg-gradient-radial from-blue-400/20 via-blue-600/10 to-transparent rounded-full blur-3xl" />
-              
-              {/* Earth body with polar holes */}
-              <div 
-                className="relative w-full h-full bg-gradient-to-br from-blue-500 via-green-600 to-blue-700 rounded-full overflow-hidden"
-                          style={{
-                  clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-                  animation: "earth-rotation 60s linear infinite",
-                }}
-              >
-                {/* Continents */}
-                <div className="absolute inset-0 bg-gradient-to-br from-green-600 via-yellow-600 to-green-700 opacity-60" />
-                
-                {/* Polar holes */}
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-black rounded-full" />
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-black rounded-full" />
-                
-                {/* City lights */}
-                <div className="absolute inset-0">
-                  {[...Array(50)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute w-1 h-1 bg-yellow-300 rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animation: "city-lights 3s ease-in-out infinite",
-                        animationDelay: `${Math.random() * 3}s`,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-              
-              {/* Clouds and atmosphere */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/10 rounded-full blur-sm" />
-                          </div>
-
-            {/* Satellites/Destinations */}
-            {satellitesVisible && destinations.map((destination, index) => (
-              <div
-                key={destination.id}
-                id={`destination-${destination.id}`}
-                className="absolute w-8 h-8 bg-gradient-to-br from-white/20 to-white/10 rounded-full border border-white/30 cursor-pointer hover:scale-110 transition-all duration-300"
-                              style={{
-                  left: `calc(50% + ${destination.position.x}px)`,
-                  top: `calc(50% + ${destination.position.y}px)`,
-                  transform: `translate(-50%, -50%) rotateY(${cameraAngle + index * 72}deg) translateZ(${destination.position.z}px)`,
-                  animation: `orbit ${10 + index * 2}s linear infinite`,
-                }}
-                onClick={() => handleDestinationSelect(destination.id)}
-                onMouseEnter={() => playSound('ambient')}
-              >
-                <div className="w-full h-full bg-gradient-to-br from-cyan-400/60 to-blue-500/60 rounded-full animate-pulse" />
-                      </div>
-                    ))}
-                  </div>
-                    </div>
+          <ThreeCanvas
+            cameraAngle={cameraAngle}
+            mousePosition={mousePosition}
+            satellitesVisible={satellitesVisible}
+            destinations={destinations}
+            onSelectDestination={handleDestinationSelect}
+          />
+        </div>
 
         {/* Navigation UI */}
         <div className="absolute top-8 left-8 text-white">
@@ -570,25 +518,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 px-6 bg-gray-800 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div
-            className="w-16 h-16 mx-auto bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl flex items-center justify-center mb-10 shadow-lg"
-            data-magnetic
-          >
-            <span className="text-white font-sans font-bold text-xl">Chris Star Enterprises</span>
-          </div>
-          <p className="font-sans text-gray-300 mb-6 text-lg">
-            Copyright © 2025 Chris Star Enterprises LLC. All Rights Reserved.
-          </p>
-          <div className="flex items-center justify-center">
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
-            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4" />
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
-          </div>
-        </div>
-      </footer>
+      {/* FOOTER COMPONENT INJECTION */}
+      <Footer />
     </main>
   )
 }

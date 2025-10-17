@@ -14,17 +14,15 @@ Built with AI.
 - Google Gemini
 
 ## Package Manager
-- **NPM (Node Package Manager)** – evidenced by `package-lock.json` file  
-- **Not PNPM** – no `pnpm-lock.yaml` file present  
-- **Not Yarn** – no `yarn.lock` file present  
+Node Package Manager (**NPM**). Not **PNPM** nor **Yarn**.
 
 ---
 
 ## Core Framework Stack
-- **Next.js 15.5.2** – React framework with App Router  
-- **React 18.3.1** – frontend library  
-- **TypeScript 5** – type safety  
-- **Tailwind CSS 4.1.9** – styling framework  
+- **Next.js 15.5.2** – React framework with App Router
+- **React 18.3.1** – Frontend library
+- **TypeScript 5** – Type safety
+- **Tailwind CSS 4.1.9** – Styling framework
 
 ---
 

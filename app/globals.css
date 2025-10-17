@@ -42,8 +42,8 @@
   --soft-white: #f8fafc;
   --near-black: #1f2937;
   /* Updated font variables to use premium sans serif fonts */
-  --font-inter: "Inter", sans-serif;
-  --font-dm-sans: "DM Sans", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-cinzel: "Cinzel", serif;
 }
 
 .dark {
@@ -119,8 +119,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   /* Updated font mappings to use Inter and DM Sans */
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-dm-sans);
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-cinzel);
 }
 
 @layer base {

@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, DM_Sans } from "next/font/google"
+import { Inter, DM_Sans, Cinzel, Montserrat } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({
@@ -17,6 +17,20 @@ const dmSans = DM_Sans({
   weight: ["300", "400", "500", "600", "700"],
 })
 
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-cinzel',
+  weight: ["400", "700", "900"],
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+  weight: ["300", "400", "500", "600"],
+})
+
 export const metadata: Metadata = {
   title: "Chris Star Enterprises LLC - Where optimization meets transformation",
   description:
@@ -30,7 +44,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${dmSans.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${dmSans.variable} ${cinzel.variable} ${montserrat.variable} antialiased`}
+    >
       <body className="font-sans">{children}</body>
     </html>
   )
