@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
 import { Footer } from "@/components/footer"
-import ThreeCanvas from "@/components/three-canvas"
 import Image from 'next/image'
 
 export default function HomePage() {
@@ -405,13 +404,6 @@ export default function HomePage() {
 
         {/* Central Earth Hub (Three.js Canvas) */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <ThreeCanvas
-            cameraAngle={cameraAngle}
-            mousePosition={mousePosition}
-            satellitesVisible={satellitesVisible}
-            destinations={destinations}
-            onSelectDestination={handleDestinationSelect}
-          />
         </div>
 
         {/* Navigation UI */}
