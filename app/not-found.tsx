@@ -6,11 +6,11 @@ import { Footer } from "@/components/layout/Footer"
 import { useEasterEggs } from '@/hooks/useEasterEggs'
 import BullRun3D from '@/components/games/BullRun3D' // New 3D game
 import BullRun2D from '@/components/games/BullRun2D' // Your existing 2D game
-import SacredGeometryBackground from '@/components/archive/Old Navigation/SacredGeometryBackground'
-import ErrorHeader from '@/components/archive/Old Navigation/ErrorHeader'
-import GeometricMandala from '@/components/archive/Old Navigation/GeometricMandala'
-import NavigationButtons from '@/components/archive/Old Navigation/NavigationButtons'
-import AnimatedTransition from '@/components/archive/Old Navigation/AnimatedTransition'
+import SacredGeometryBackground from '@/components/archive/not-found/SacredGeometryBackground'
+import ErrorHeader from '@/components/archive/not-found/ErrorHeader'
+import GeometricMandala from '@/components/archive/not-found/GeometricMandala'
+import NavigationButtons from '@/components/archive/not-found/NavigationButtons'
+import AnimatedTransition from '@/components/archive/not-found/AnimatedTransition'
 
 export default function NotFound() {
   const [showMinigame, setShowMinigame] = useState(false)
@@ -96,15 +96,13 @@ export default function NotFound() {
 
               {/* Game Container */}
               {use3DGame ? (
-                <BullRun3D 
-                  onScoreUpdate={setMinigameScore}
-                  onGameOver={(score) => {
-                    console.log(`🎯 Game Over! Final score: ${score}`);
-                    if (score > minigameHighScore) {
-                      setMinigameHighScore(score);
-                    }
-                  }}
-                />
+                <div className="bg-gray-800/50 backdrop-blur-sm rounded-3xl p-8 mb-8 border border-gray-700/50">
+                  <div className="mb-6 text-center">
+                    <h3 className="text-amber-300 font-sans text-lg mb-2">Three.js Test</h3>
+                    <p className="text-gray-400 text-sm">Testing React Three Fiber setup</p>
+                  </div>
+                  <BullRun3D />
+                </div>
               ) : (
                 <BullRun2D
                   onScoreUpdate={setMinigameScore}

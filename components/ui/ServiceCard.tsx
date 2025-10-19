@@ -1,6 +1,6 @@
 "use client"
 
-import { AdvancedScrollSection } from "@/components/archive/Old Unknown/advanced-scroll-section"
+import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
 
 interface ServiceCardProps {
   service: {
