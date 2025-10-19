@@ -12,8 +12,8 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
   const meshRef = useRef<THREE.Mesh>(null)
   const groupRef = useRef<THREE.Group>(null)
 
-  const [targetRotation, setTargetRotation] = useState({ x: 0, y: Math.PI })
-  const [currentRotation, setCurrentRotation] = useState({ x: 0, y: Math.PI })
+  const [targetRotation, setTargetRotation] = useState({ x: 0, y: Math.PI * 0.8 })
+  const [currentRotation, setCurrentRotation] = useState({ x: 0, y: Math.PI * 0.8 })
   const isDragging = useRef(false)
   const isFreeDragging = useRef(false)
   const autoRotation = useRef(true)
@@ -37,10 +37,11 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
     
     // Set texture parameters for 8K quality
     ;[earthDay, normalMap, specularMap, cloudTexture, nightMap].forEach(texture => {
-        texture.wrapS = texture.wrapT = THREE.RepeatWrapping
+        texture.wrapS = THREE.RepeatWrapping
+        texture.wrapT = THREE.ClampToEdgeWrapping
         texture.anisotropy = 16
-        texture.minFilter = THREE.LinearMipmapLinearFilter
-        texture.magFilter = THREE.LinearFilter
+        texture.minFilter = THREE.NearestFilter
+        texture.magFilter = THREE.NearestFilter
     })
     
     setTexturesLoaded(true)
@@ -52,6 +53,7 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
   const toroidalGeometry = useMemo(() => {
     const geometry = new THREE.SphereGeometry(1, 96, 96)
     const positions = geometry.attributes.position
+    const uvs = geometry.attributes.uv
 
     // Apply toroidal deformation
     for (let i = 0; i < positions.count; i++) {
@@ -61,6 +63,7 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
       
       const radius: number = Math.sqrt(x*x + y*y + z*z)
       const theta: number = Math.acos(z / radius)
+      const phi: number = Math.atan2(y, x)
       
       const equatorFlattening: number = 1.0 - 0.08 * Math.pow(Math.sin(theta), 2)
       const polarEffect: number = 1.0 - 0.15 * Math.exp(-8 * Math.pow(Math.sin(theta), 2))
@@ -71,8 +74,28 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
       positions.setX(i, x * finalScale)
       positions.setY(i, y * finalScale)
       positions.setZ(i, z * finalScale)
+    
+      // Correct UV calculation with proper wrapping
+      const u = ((phi + Math.PI) / (2 * Math.PI))
+      const v = 1.0 - (theta / Math.PI)
+
+      // Apply offset to move seam to Pacific Ocean
+      let finalU = u + 0.73
+      if (finalU >= 1.0) finalU = finalU - 1.0
+      if (finalU < 0.0) finalU = finalU + 1.0
+
+      const seamBuffer = 0.0005
+      if (finalU < seamBuffer) {
+        finalU = seamBuffer
+      } else if (finalU > 1.0 - seamBuffer) {
+        finalU = 1.0 - seamBuffer
+      }
+
+      uvs.setX(i, finalU)
+      uvs.setY(i, v)
     }
     
+    uvs.needsUpdate = true
     geometry.computeVertexNormals()
 
     // Apply pole correction

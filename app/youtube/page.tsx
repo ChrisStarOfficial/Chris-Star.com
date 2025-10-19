@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { CSLogoEasterEgg } from "@/components/cs-logo-easter-egg"
+import { CSLogoEasterEgg } from "@/components/InteractiveLogo"
 
 export default function YouTubePage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)

@@ -6,6 +6,7 @@ import { EarthBriefingOverlay } from '@/components/EarthBriefingOverlay'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Footer } from "@/components/Footer"
 
 export default function NavigationPage() {
   const [isBriefingOpen, setIsBriefingOpen] = useState(false)
@@ -122,6 +123,9 @@ export default function NavigationPage() {
           <div className="opacity-80">Personal Quarters</div>
         </div>
       </div>
+
+      {/* FOOTER COMPONENT INJECTION */}
+      <Footer />
     </div>
   )
 }
