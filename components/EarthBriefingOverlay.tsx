@@ -46,37 +46,37 @@ export function EarthBriefingOverlay({ isOpen, onClose, isEarthZoomed }: EarthBr
           <div className="w-32 h-[2px] bg-white/40" />
         </div>
         
-        {/* Glass Panel Content */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 w-80 border border-white/20 shadow-2xl">
-          {/* Header */}
-          <div className="mb-6">
-            <h2 className="text-xl text-white font-light tracking-wider">EARTH</h2>
-          </div>
+      {/* Glass Panel Content */}
+      <div className="bg-black/20 backdrop-blur-xl rounded-lg p-6 w-80 border border-white/10 shadow-2xl">
+        {/* Header */}
+        <div className="mb-6">
+          <h2 className="text-xl text-white font-light tracking-wider">EARTH</h2>
+        </div>
 
-          {/* Planetary Data - Free Flowing */}
-          <div className="space-y-3 text-white/90">
-            <div>
-              <div className="text-white/70 text-sm tracking-wide">SURFACE POPULATION</div>
-              <div className="text-white font-light text-lg">1.62 Billion</div>
-            </div>
-            <div>
-              <div className="text-white/70 text-sm tracking-wide">DIAMETER</div>
-              <div className="text-white font-light">12,742 km</div>
-            </div>
-            <div>
-              <div className="text-white/70 text-sm tracking-wide">GRAVITY</div>
-              <div className="text-white font-light">1g</div>
-            </div>
-            <div>
-              <div className="text-white/70 text-sm tracking-wide">OXYGEN</div>
-              <div className="text-white font-light">20.95%</div>
-            </div>
-            <div>
-              <div className="text-white/70 text-sm tracking-wide">CLIMATE</div>
-              <div className="text-white font-light">Harsh</div>
-            </div>
+        {/* Planetary Data - Free Flowing */}
+        <div className="space-y-3 text-white/90">
+          <div>
+            <div className="text-white/70 text-sm tracking-wide">SURFACE POPULATION</div>
+            <div className="text-white font-light text-lg">1.62 Billion</div>
+          </div>
+          <div>
+            <div className="text-white/70 text-sm tracking-wide">DIAMETER</div>
+            <div className="text-white font-light">12,742 km</div>
+          </div>
+          <div>
+            <div className="text-white/70 text-sm tracking-wide">GRAVITY</div>
+            <div className="text-white font-light">1g</div>
+          </div>
+          <div>
+            <div className="text-white/70 text-sm tracking-wide">OXYGEN</div>
+            <div className="text-white font-light">20.95%</div>
+          </div>
+          <div>
+            <div className="text-white/70 text-sm tracking-wide">CLIMATE</div>
+            <div className="text-white font-light">Harsh</div>
           </div>
         </div>
+      </div>
       </div>
     </>
   )

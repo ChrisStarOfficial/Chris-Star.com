@@ -91,7 +91,14 @@ export default function NavigationPage() {
         {/* Center - Full Screen Earth */}
         <div className="col-span-8 relative -m-8 flex items-center justify-center">
           <div className="w-full h-full">
-            <Canvas camera={{ position: [0, 0, isEarthZoomed ? 1.5 : 3.1], fov: 60 }}>
+            <Canvas
+              camera={{
+                position: [0, 0, isEarthZoomed ? 1.5 : 3.1],
+                fov: 60,
+                near: 0.1,
+                far: 1000
+              }}
+            >
               <ambientLight intensity={0.6} />
               <pointLight position={[10, 10, 10]} intensity={1.2} />
               <TexturedEarth isZoomed={isEarthZoomed} />
