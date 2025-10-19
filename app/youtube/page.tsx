@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/advanced-scroll-section"
-import { CSLogoEasterEgg } from "@/components/InteractiveLogo"
+import { AdvancedScrollSection } from "@/components/Old Homepage/advanced-scroll-section"
+import { CSLogoEasterEgg } from "@/components/ui/InteractiveLogo"
 
 export default function YouTubePage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)

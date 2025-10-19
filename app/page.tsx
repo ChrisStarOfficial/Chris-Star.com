@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Footer } from "@/components/Footer"
-import { AudioManager } from "@/components/AudioManager"
-import { HyperspaceEffect } from "@/components/HyperspaceEffect"
-import { LoadingScreen } from "@/components/LoadingScreen"
-import { HeroSection } from "@/components/HeroSection"
-import { NavigationSection } from "@/components/NavigationSection"
-import { TransformationalLeadership } from "@/components/TransformationalLeadership"
+import { Footer } from "@/components/layout/Footer"
+import { AudioManager } from "@/components/archive/Old Navigation/AudioManager"
+import { HyperspaceEffect } from "@/components/archive/Old Navigation/HyperspaceEffect"
+import { LoadingScreen } from "@/components/archive/Old Navigation/LoadingScreen"
+import { HeroSection } from "@/components/sections/Hero"
+import { NavigationSection } from "@/components/archive/Old Navigation/NavigationSection"
+import { TransformationalLeadership } from "@/components/sections/Services"
 import { useMousePosition } from "@/hooks/useMousePosition"
 
 export default function HomePage() {

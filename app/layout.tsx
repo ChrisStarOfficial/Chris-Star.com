@@ -46,9 +46,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSans.variable} ${cinzel.variable} ${montserrat.variable} antialiased`}
+      className={`${inter.variable} ${dmSans.variable} ${cinzel.variable} ${montserrat.variable} antialiased dark`}
     >
-      <body className="font-sans">{children}</body>
+      <head>
+        {/* Explicitly tell Dark Reader to not modify this site */}
+        <meta name="darkreader" content="none" />
+        <meta name="darkreader-lock" />
+        
+        {/* Tell browsers we support both dark and light mode, but we control it */}
+        <meta name="color-scheme" content="dark light" />
+        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+      </head>
+      <body className="font-sans dark:bg-gray-900 dark:text-white">
+        {children}
+      </body>
     </html>
   )
 }
