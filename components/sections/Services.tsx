@@ -1,5 +1,5 @@
 "use client"
-import { AdvancedScrollSection } from "@/components/Old Homepage/advanced-scroll-section"
+import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
 
 export const TransformationalLeadership = () => {
   const services = [
