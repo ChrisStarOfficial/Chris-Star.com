@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
 import { useEasterEggs } from '@/hooks/useEasterEggs'
@@ -8,8 +8,9 @@ import BullRun3D from '@/components/games/BullRun3D'
 import BullRun2D from '@/components/games/BullRun2D'
 import SacredGeometryBackground from '@/components/archive/not-found/SacredGeometryBackground'
 import ErrorHeader from '@/components/archive/not-found/ErrorHeader'
-import GeometricMandala from '@/components/archive/not-found/GeometricMandala'
 import AnimatedTransition from '@/components/archive/not-found/AnimatedTransition'
+import { PrimeRadiant } from '@/components/three/PrimeRadiant'
+import { Canvas } from '@react-three/fiber'
 
 export default function NotFound() {
   const [showMinigame, setShowMinigame] = useState(false)
@@ -56,9 +57,22 @@ export default function NotFound() {
             </div>
           </div>
 
-          {/* Mandala */}
-          <div className="flex items-center justify-center">
-            <GeometricMandala active={true} onClick={handleGeometryClick} />
+          {/* Prime Radiant */}
+          <div className="flex items-center justify-center w-96 h-96">
+            <Canvas
+              camera={{ position: [0, 0, 5], fov: 50 }}
+              className="w-full h-full"
+              gl={{ antialias: true }}
+            >
+              <Suspense fallback={null}>
+                <ambientLight intensity={0.4} />
+                <directionalLight position={[5, 5, 5]} intensity={0.8} color="#4f8cff" />
+                <PrimeRadiant
+                  active={true}
+                  onClick={handleGeometryClick}
+                />
+              </Suspense>
+            </Canvas>
           </div>
 
           {/* Right Buttons */}
