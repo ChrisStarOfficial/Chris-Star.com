@@ -76,7 +76,8 @@ npm run dev
 
 ## 📜 License
 - This project (everything except minigame) is released under the **CC BY-NC-SA 4.0** license. You may remix and share with attribution, but no commercial use.
-- Minigame: This component is separately licensed from the main application. It is released under the **GPL-3.0** license, as per the original [Dino3D](https://github.com/Priler/dino3d/) code it's based on.
+- 3D Minigame: This component is separately licensed from the main application. It is released under the **GPL-3.0** license, as per the original [Dino3D](https://github.com/Priler/dino3d/) code it's based on.
+- 2D Minigame: This component is separately licensed from the main application. It is released under the **BSD-3-Clause** license, as per the original [t-rex-runner](https://github.com/wayou/t-rex-runner) code it's based on.
 
 ---
 

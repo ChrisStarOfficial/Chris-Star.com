@@ -2,8 +2,8 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
 interface GeometricMandalaProps {
-  active: boolean;
-  onClick: () => void;
+  active: boolean
+  onClick: () => void
 }
 
 export default function GeometricMandala({ active, onClick }: GeometricMandalaProps) {
@@ -11,61 +11,79 @@ export default function GeometricMandala({ active, onClick }: GeometricMandalaPr
   const mandalaRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  // Sacred geometry constants
-  const GOLDEN_RATIO = 1.618;
-  const CIRCLE_DIVISIONS = 12; // Zodiac/12-fold symmetry
-  const LAYERS = 7; // Sacred number
-
   useEffect(() => {
     if (!mandalaRef.current) return;
 
-    // Create GSAP timeline for mandala animations
+    // Create master timeline for all animations
     timelineRef.current = gsap.timeline({ 
       paused: true,
-      repeat: -1,
-      defaults: { ease: "sine.inOut" }
+      repeat: -1
     });
 
-    // Layer 1: Outer ring - 12-fold division (Zodiac)
-    timelineRef.current.to(".mandala-ring-1", {
+    // Outer ring rotations with different speeds
+    timelineRef.current.to(".ring-1", {
+      rotation: 360,
+      duration: 80,
+      ease: "none"
+    }, 0);
+
+    timelineRef.current.to(".ring-2", {
+      rotation: -360,
+      duration: 60,
+      ease: "none"
+    }, 0);
+
+    timelineRef.current.to(".ring-3", {
+      rotation: 180,
+      duration: 100,
+      ease: "none"
+    }, 0);
+
+    timelineRef.current.to(".ring-4", {
+      rotation: -180,
+      duration: 40,
+      ease: "none"
+    }, 0);
+
+    // Radial lines animation
+    timelineRef.current.to(".radial-line", {
+      rotation: 360,
+      duration: 120,
+      ease: "none",
+      transformOrigin: "0% 50%"
+    }, 0);
+
+    // Hexagon rotation
+    timelineRef.current.to(".hexagon", {
       rotation: 360,
       duration: 120,
       ease: "none"
     }, 0);
 
-    // Layer 2: Inner rings - counter-rotation
-    timelineRef.current.to(".mandala-ring-2", {
-      rotation: -360,
-      duration: 80,
+    // Triangle rotations
+    timelineRef.current.to(".triangle-1", {
+      rotation: 360,
+      duration: 200,
       ease: "none"
     }, 0);
 
-    // Layer 3: Flower of Life pattern
-    timelineRef.current.to(".flower-life", {
-      rotation: 180,
-      duration: 60,
-      ease: "power2.inOut"
+    timelineRef.current.to(".triangle-2", {
+      rotation: -360,
+      duration: 200,
+      ease: "none"
     }, 0);
 
-    // Layer 4: Metatron's Cube elements
-    timelineRef.current.to(".metatron-element", {
-      rotation: 90,
-      duration: 40,
-      stagger: 0.1,
-      ease: "back.out(1.7)"
-    }, 0);
-
-    // Layer 5: Orbiting points - planetary motion
-    timelineRef.current.to(".orbiting-point", {
+    // Orbital elements with staggered animation
+    timelineRef.current.to(".orbital-element", {
       rotation: 720,
       duration: 30,
-      stagger: 0.2,
+      stagger: 0.5,
       ease: "sine.inOut"
     }, 0);
 
-    // Pulsing glow effects
-    timelineRef.current.to(".sacred-center", {
-      scale: 1.2,
+    // Central core pulsing
+    timelineRef.current.to(".central-core", {
+      scale: 1.3,
       opacity: 0.8,
       duration: 4,
       yoyo: true,
@@ -73,12 +91,10 @@ export default function GeometricMandala({ active, onClick }: GeometricMandalaPr
       ease: "sine.inOut"
     }, 0);
 
-    // Element breathing animation
-    timelineRef.current.to(".breathing-element", {
-      scale: 1.1,
+    // Hover indicator fade in/out
+    timelineRef.current.to(".hover-indicator", {
       opacity: 0.7,
-      duration: 3,
-      stagger: 0.5,
+      duration: 2,
       yoyo: true,
       repeat: -1,
       ease: "sine.inOut"
@@ -94,202 +110,121 @@ export default function GeometricMandala({ active, onClick }: GeometricMandalaPr
       timelineRef.current?.play();
       // Entrance animation
       gsap.fromTo(mandalaRef.current, 
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 2, ease: "back.out(1.7)" }
+        { scale: 0.5, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.5, ease: "back.out(1.7)" }
       );
     } else {
       timelineRef.current?.pause();
       gsap.to(mandalaRef.current, {
         scale: 0.8,
-        opacity: 0.5,
-        duration: 1,
+        opacity: 0.3,
+        duration: 0.8,
         ease: "power2.in"
       });
     }
   }, [active]);
 
-  const renderSacredGeometry = () => {
-    const elements = [];
+  return (
+    // REMOVED the external containers - just return the mandala directly
+    <div
+      ref={mandalaRef}
+      className={`relative cursor-pointer transition-all duration-1000 ${active ? "opacity-100 scale-100" : "opacity-0 scale-75"}`}
+      onClick={onClick}
+    >
+      <div className="relative w-80 h-80 group">
+        {/* Outer rings */}
+        <div
+          className="ring-1 absolute inset-0 border-2 border-slate-300/20 rounded-full group-hover:border-slate-300/35 transition-all duration-700"
+          style={{
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 25%, 75% 25%, 75% 75%, 100% 75%, 100% 100%, 0% 100%)",
+            boxShadow: "0 0 20px rgba(148, 163, 184, 0.05)",
+          }}
+        />
+        <div
+          className="ring-2 absolute inset-4 border-2 border-slate-300/25 rounded-full group-hover:border-slate-300/40 transition-all duration-700"
+          style={{
+            clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%, 25% 75%)",
+            boxShadow: "0 0 15px rgba(148, 163, 184, 0.08)",
+          }}
+        />
+        <div
+          className="ring-3 absolute inset-8 border border-slate-300/15 rounded-full group-hover:border-slate-300/30 transition-all duration-700"
+          style={{
+            clipPath: "polygon(0% 0%, 75% 0%, 75% 25%, 25% 25%, 25% 75%, 75% 75%, 75% 100%, 0% 100%)",
+          }}
+        />
+        <div
+          className="ring-4 absolute inset-12 border border-slate-300/20 rounded-full group-hover:border-slate-300/35 transition-all duration-700"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%, 50% 100%, 0% 100%, 0% 50%, 50% 50%)",
+          }}
+        />
 
-    // Layer 1: Outer Protection Ring (12-fold)
-    elements.push(
-      <div
-        key="ring-1"
-        className="mandala-ring-1 absolute inset-0 border-2 border-amber-400/20 rounded-full"
-        style={{
-          clipPath: `polygon(${Array.from({ length: CIRCLE_DIVISIONS }, (_, i) => {
-            const angle = (i * 360) / CIRCLE_DIVISIONS;
-            const x = 50 + 45 * Math.cos((angle * Math.PI) / 180);
-            const y = 50 + 45 * Math.sin((angle * Math.PI) / 180);
-            return `${x}% ${y}%`;
-          }).join(', ')})`
-        }}
-      />
-    );
-
-    // Layer 2: Flower of Life Pattern
-    for (let ring = 1; ring <= 3; ring++) {
-      const radius = 30 + ring * 10;
-      for (let i = 0; i < CIRCLE_DIVISIONS; i++) {
-        const angle = (i * 360) / CIRCLE_DIVISIONS;
-        const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
-        const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
-        
-        elements.push(
+        {/* Radial lines */}
+        {[...Array(16)].map((_, i) => (
           <div
-            key={`flower-${ring}-${i}`}
-            className="flower-life absolute border border-emerald-400/30 rounded-full breathing-element"
+            key={i}
+            className="radial-line absolute top-1/2 left-1/2 w-40 h-0.5 bg-slate-300/12 group-hover:bg-slate-300/20 transition-all duration-700"
             style={{
-              width: `${15 - ring * 2}%`,
-              height: `${15 - ring * 2}%`,
-              left: `${x - (15 - ring * 2) / 2}%`,
-              top: `${y - (15 - ring * 2) / 2}%`,
+              transform: `rotate(${i * 22.5}deg)`,
+              boxShadow: "0 0 2px rgba(148, 163, 184, 0.1)",
+              transformOrigin: 'center center',
             }}
           />
-        );
-      }
-    }
+        ))}
 
-    // Layer 3: Metatron's Cube Elements
-    const metatronPoints: [number, number][] = [];
-    for (let i = 0; i < CIRCLE_DIVISIONS; i++) {
-      const angle = (i * 360) / CIRCLE_DIVISIONS;
-      const x = 50 + 25 * Math.cos((angle * Math.PI) / 180);
-      const y = 50 + 25 * Math.sin((angle * Math.PI) / 180);
-      metatronPoints.push([x, y]);
-    }
-
-    // Connect points to form sacred geometric patterns
-    metatronPoints.forEach(([x1, y1], i) => {
-      metatronPoints.forEach(([x2, y2], j) => {
-        if (i < j) {
-          const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-          if (distance > 20 && distance < 40) { // Only draw meaningful connections
-            elements.push(
-              <div
-                key={`metatron-${i}-${j}`}
-                className="metatron-element absolute bg-purple-500/10"
-                style={{
-                  width: `${distance}%`,
-                  height: '1px',
-                  left: `${x1}%`,
-                  top: `${y1}%`,
-                  transform: `rotate(${Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI}deg)`,
-                  transformOrigin: '0 0',
-                }}
-              />
-            );
-          }
-        }
-      });
-    });
-
-    // Layer 4: Orbiting Wisdom Points
-    for (let i = 0; i < 24; i++) {
-      const angle = (i * 360) / 24;
-      const radius = 15 + (i % 3) * 5;
-      elements.push(
+        {/* Hexagon */}
         <div
-          key={`orbit-${i}`}
-          className="orbiting-point absolute w-2 h-2 bg-cyan-400/60 rounded-full"
+          className="hexagon absolute top-1/2 left-1/2 w-32 h-32 border-2 border-slate-300/30 group-hover:border-slate-300/50 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700"
           style={{
-            left: `${50 + radius * Math.cos((angle * Math.PI) / 180) - 1}%`,
-            top: `${50 + radius * Math.sin((angle * Math.PI) / 180) - 1}%`,
-            transformOrigin: '50% 50%',
+            clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
+            boxShadow: "0 0 10px rgba(148, 163, 184, 0.1)",
           }}
         />
-      );
-    }
 
-    // Layer 5: Golden Ratio Spirals (simplified)
-    for (let i = 0; i < 8; i++) {
-      const angle = (i * 360) / 8;
-      elements.push(
+        {/* Triangular elements */}
         <div
-          key={`spiral-${i}`}
-          className="absolute w-4 h-4 border-r-2 border-b-2 border-amber-300/40"
+          className="triangle-1 absolute top-1/2 left-1/2 w-16 h-16 border-2 border-slate-300/35 group-hover:border-slate-300/55 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700"
           style={{
-            left: '50%',
-            top: '50%',
-            transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-            transformOrigin: '0% 0%',
+            clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
           }}
         />
-      );
-    }
-
-    // Central Sacred Point - The Bindu
-    elements.push(
-      <div
-        key="center"
-        className="sacred-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-br from-amber-400 to-rose-500 rounded-full shadow-lg shadow-amber-400/25"
-      />
-    );
-
-    // Esoteric Symbols
-    const symbols = ['☉', '☽', '★', '⚡', '🜂', '🜁', '🜃', '🜄'];
-    symbols.forEach((symbol, i) => {
-      const angle = (i * 360) / symbols.length;
-      const radius = 38;
-      elements.push(
         <div
-          key={`symbol-${i}`}
-          className="absolute text-amber-200/60 text-xl font-light pointer-events-none"
+          className="triangle-2 absolute top-1/2 left-1/2 w-16 h-16 border-2 border-slate-300/35 group-hover:border-slate-300/55 transform -translate-x-1/2 -translate-y-1/2 rotate-180 transition-all duration-700"
           style={{
-            left: `${50 + radius * Math.cos((angle * Math.PI) / 180) - 4}%`,
-            top: `${50 + radius * Math.sin((angle * Math.PI) / 180) - 4}%`,
-            transform: `rotate(${-angle}deg)`,
+            clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
           }}
-        >
-          {symbol}
-        </div>
-      );
-    });
+        />
 
-    return elements;
-  };
+        {/* Orbital elements */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="orbital-element absolute w-4 h-4 bg-slate-300/25 group-hover:bg-slate-300/45 rounded-full transition-all duration-700"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: `translate(-50%, -50%) rotate(${i * 45}deg) translateY(-140px)`,
+              boxShadow: "0 0 8px rgba(148, 163, 184, 0.2)",
+            }}
+          />
+        ))}
 
-  return (
-    <div className="flex items-center justify-center p-8" ref={containerRef}>
-      <div
-        ref={mandalaRef}
-        className="relative w-96 h-96 cursor-pointer transition-all duration-1000"
-        onClick={onClick}
-        style={{ opacity: active ? 1 : 0.5 }}
-      >
-        {/* Main Mandala Container */}
-        <div className="relative w-full h-full">
-          {renderSacredGeometry()}
-        </div>
+        {/* Central core */}
+        <div
+          className="central-core absolute top-1/2 left-1/2 w-8 h-8 bg-slate-300/40 group-hover:bg-slate-300/60 rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700"
+          style={{
+            boxShadow: "0 0 12px rgba(148, 163, 184, 0.3)",
+          }}
+        />
 
-        {/* Interactive Hover State */}
-        <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${active ? 'opacity-0' : 'opacity-100'}`}>
-          <div className="text-amber-200/80 font-sans text-sm tracking-wider bg-gray-900/80 px-6 py-3 rounded-lg backdrop-blur-sm border border-amber-400/30 transform hover:scale-105 transition-transform duration-300">
-            ⟡ ACTIVATE SACRED GEOMETRY ⟡
-          </div>
-        </div>
-
-        {/* Status Indicators */}
-        <div className={`absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-1000 ${active ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex items-center space-x-3">
-            <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="text-emerald-300/90 text-sm font-sans tracking-wider">
-              SACRED PATTERNS ACTIVE
-            </span>
+        {/* Hover indicator */}
+        <div className="hover-indicator absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <div className="text-slate-300/90 font-sans text-sm tracking-wider bg-gray-900/80 px-4 py-2 rounded-lg backdrop-blur-sm border border-slate-300/20">
+            ◊ ACTIVATE PROTOCOLS ◊
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes mandala-glow {
-          0%, 100% { filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.3)); }
-          50% { filter: drop-shadow(0 0 40px rgba(245, 158, 11, 0.6)); }
-        }
-        
-        .sacred-center {
-          animation: mandala-glow 8s ease-in-out infinite;
-        }
-      `}</style>
     </div>
-  );
+  )
 }

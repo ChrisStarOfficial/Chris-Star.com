@@ -1,0 +1,155 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #e6e6e6;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 8px;
+  box-sizing: border-box;
+}
+
+.scoreBox,
+.highScoreBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.scoreLabel {
+  font-size: 10px;
+  color: #ffd88c;
+  letter-spacing: 1px;
+}
+
+.scoreValue {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.canvasWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 6px;
+  position: relative;
+}
+
+.runnerCanvas {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fff 0%, #f3f3f3 100%);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  image-rendering: pixelated;
+}
+
+/* overlay before start */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.overlayText {
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: rgba(0,0,0,0.55);
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.overlayHint {
+  margin-top: 8px;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+}
+
+/* restart overlay */
+.restartOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.35));
+}
+.restartPanel {
+  background: rgba(10,10,10,0.85);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  min-width: 260px;
+}
+.restartTitle {
+  color: #ffb24d;
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.restartScore {
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.restartButtons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* controls */
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn {
+  background: #ffb24d;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.hint {
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+}
+
+/* mobile touch target improvements */
+@media (max-width: 640px) {
+  .controls { flex-wrap: wrap; }
+  .overlayText { font-size: 14px; padding: 10px 14px; }
+  .runnerCanvas { border-radius: 6px; }
+}

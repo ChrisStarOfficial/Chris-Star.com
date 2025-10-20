@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/Old Homepage/advanced-scroll-section"
-import { CSLogoEasterEgg } from "@/components/ui/InteractiveLogo"
+import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
 
 const wikiProjects = [
   {
@@ -338,7 +338,7 @@ export default function WikiPage() {
       {/* Footer */}
       <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
-          <CSLogoEasterEgg className="mx-auto mb-10" />
+          <InteractiveLogo className="mx-auto mb-10" />
           <p className="font-sans text-gray-400 mb-6 text-lg">
             Copyright © 2025 Chris Star Enterprises LLC. All Rights Reserved.
           </p>

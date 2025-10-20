@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, DM_Sans, Cinzel, Montserrat } from "next/font/google"
+import { ThemeProvider } from "@/components/ThemeProvider" // Import your ThemeProvider
 import "./globals.css"
 
 const inter = Inter({
@@ -46,20 +47,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSans.variable} ${cinzel.variable} ${montserrat.variable} antialiased dark`}
+      className={`${inter.variable} ${dmSans.variable} ${cinzel.variable} ${montserrat.variable} antialiased`}
+      suppressHydrationWarning // Add this to prevent hydration errors
     >
       <head>
-        {/* Explicitly tell Dark Reader to not modify this site */}
         <meta name="darkreader" content="none" />
         <meta name="darkreader-lock" />
-        
-        {/* Tell browsers we support both dark and light mode, but we control it */}
         <meta name="color-scheme" content="dark light" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
       </head>
-      <body className="font-sans dark:bg-gray-900 dark:text-white">
-        {children}
+      <body className="font-sans">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
