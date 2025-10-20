@@ -1,221 +1,115 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
+"use client"
 
-interface GeometricMandalaProps {
-  active: boolean
-  onClick: () => void
-}
+import { useState, Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, Environment } from '@react-three/drei'
+import { PrimeRadiant } from '@/components/three/PrimeRadiant'
 
-export default function GeometricMandala({ active, onClick }: GeometricMandalaProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mandalaRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+export default function FoundationPage() {
+  const [isRadiantActive, setIsRadiantActive] = useState(false)
 
-  useEffect(() => {
-    if (!mandalaRef.current) return;
-
-    // Create master timeline for all animations
-    timelineRef.current = gsap.timeline({ 
-      paused: true,
-      repeat: -1
-    });
-
-    // Outer ring rotations with different speeds
-    timelineRef.current.to(".ring-1", {
-      rotation: 360,
-      duration: 80,
-      ease: "none"
-    }, 0);
-
-    timelineRef.current.to(".ring-2", {
-      rotation: -360,
-      duration: 60,
-      ease: "none"
-    }, 0);
-
-    timelineRef.current.to(".ring-3", {
-      rotation: 180,
-      duration: 100,
-      ease: "none"
-    }, 0);
-
-    timelineRef.current.to(".ring-4", {
-      rotation: -180,
-      duration: 40,
-      ease: "none"
-    }, 0);
-
-    // Radial lines animation
-    timelineRef.current.to(".radial-line", {
-      rotation: 360,
-      duration: 120,
-      ease: "none",
-      transformOrigin: "0% 50%"
-    }, 0);
-
-    // Hexagon rotation
-    timelineRef.current.to(".hexagon", {
-      rotation: 360,
-      duration: 120,
-      ease: "none"
-    }, 0);
-
-    // Triangle rotations
-    timelineRef.current.to(".triangle-1", {
-      rotation: 360,
-      duration: 200,
-      ease: "none"
-    }, 0);
-
-    timelineRef.current.to(".triangle-2", {
-      rotation: -360,
-      duration: 200,
-      ease: "none"
-    }, 0);
-
-    // Orbital elements with staggered animation
-    timelineRef.current.to(".orbital-element", {
-      rotation: 720,
-      duration: 30,
-      stagger: 0.5,
-      ease: "sine.inOut"
-    }, 0);
-
-    // Central core pulsing
-    timelineRef.current.to(".central-core", {
-      scale: 1.3,
-      opacity: 0.8,
-      duration: 4,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut"
-    }, 0);
-
-    return () => {
-      timelineRef.current?.kill();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (active) {
-      timelineRef.current?.play();
-      // Entrance animation
-      gsap.fromTo(mandalaRef.current, 
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.5, ease: "back.out(1.7)" }
-      );
-    } else {
-      timelineRef.current?.pause();
-      gsap.to(mandalaRef.current, {
-        scale: 0.8,
-        opacity: 0.3,
-        duration: 0.8,
-        ease: "power2.in"
-      });
-    }
-  }, [active]);
+  const handleRadiantActivate = () => {
+    setIsRadiantActive(true)
+  }
 
   return (
-    // REMOVED the external containers - just return the mandala directly
-    <div
-      ref={mandalaRef}
-      className={`relative cursor-pointer transition-all duration-1000 ${active ? "opacity-100 scale-100" : "opacity-0 scale-75"}`}
-      onClick={onClick}
-    >
-      <div className="relative w-96 h-96 group">
-        {/* Outer rings */}
-        <div
-          className="ring-1 absolute inset-0 border-2 border-slate-300/20 rounded-full group-hover:border-slate-300/35 transition-all duration-700"
-          style={{
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 25%, 75% 25%, 75% 75%, 100% 75%, 100% 100%, 0% 100%)",
-            boxShadow: "0 0 20px rgba(148, 163, 184, 0.05)",
-          }}
-        />
-        <div
-          className="ring-2 absolute inset-4 border-2 border-slate-300/25 rounded-full group-hover:border-slate-300/40 transition-all duration-700"
-          style={{
-            clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 75%, 25% 75%)",
-            boxShadow: "0 0 15px rgba(148, 163, 184, 0.08)",
-          }}
-        />
-        <div
-          className="ring-3 absolute inset-8 border border-slate-300/15 rounded-full group-hover:border-slate-300/30 transition-all duration-700"
-          style={{
-            clipPath: "polygon(0% 0%, 75% 0%, 75% 25%, 25% 25%, 25% 75%, 75% 75%, 75% 100%, 0% 100%)",
-          }}
-        />
-        <div
-          className="ring-4 absolute inset-12 border border-slate-300/20 rounded-full group-hover:border-slate-300/35 transition-all duration-700"
-          style={{
-            clipPath: "polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%, 50% 100%, 0% 100%, 0% 50%, 50% 50%)",
-          }}
-        />
-
-        {/* Radial lines */}
-        {[...Array(16)].map((_, i) => (
+    <div className="relative w-full h-screen bg-black overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" />
+      
+      {/* Stars */}
+      <div className="absolute inset-0 opacity-30">
+        {[...Array(100)].map((_, i) => (
           <div
             key={i}
-            className="radial-line absolute top-1/2 left-1/2 w-40 h-0.5 bg-slate-300/12 group-hover:bg-slate-300/20 transition-all duration-700"
+            className="absolute w-1 h-1 bg-white rounded-full"
             style={{
-              transform: `rotate(${i * 22.5}deg)`,
-              boxShadow: "0 0 2px rgba(148, 163, 184, 0.1)",
-              transformOrigin: 'center center',
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `twinkle ${2 + Math.random() * 3}s infinite alternate`
             }}
           />
         ))}
+      </div>
 
-        {/* Hexagon */}
-        <div
-          className="hexagon absolute top-1/2 left-1/2 w-32 h-32 border-2 border-slate-300/30 group-hover:border-slate-300/50 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700"
-          style={{
-            clipPath: "polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%)",
-            boxShadow: "0 0 10px rgba(148, 163, 184, 0.1)",
-          }}
-        />
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+        
+        {/* Title Section - KEEPING YOUR EXISTING TEXT */}
+        <div className="mb-2">
+          <h1 className="text-6xl font-bold text-white mb-2 font-serif tracking-wider">
+            FOUNDATION
+          </h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent mx-auto mb-4"></div>
+          <p className="text-slate-300 text-lg max-w-md mx-auto leading-relaxed">
+            The Prime Radiant contains the entirety of Psychohistory&apos;s future predictions. 
+            Handle with extreme caution.
+          </p>
+        </div>
 
-        {/* Triangular elements */}
-        <div
-          className="triangle-1 absolute top-1/2 left-1/2 w-16 h-16 border-2 border-slate-300/35 group-hover:border-slate-300/55 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700"
-          style={{
-            clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
-          }}
-        />
-        <div
-          className="triangle-2 absolute top-1/2 left-1/2 w-16 h-16 border-2 border-slate-300/35 group-hover:border-slate-300/55 transform -translate-x-1/2 -translate-y-1/2 rotate-180 transition-all duration-700"
-          style={{
-            clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
-          }}
-        />
+        {/* 3D Prime Radiant - REPLACING THE MANDALA */}
+        <div 
+          className="w-96 h-96 mx-auto cursor-pointer my-4"
+          onClick={handleRadiantActivate}
+        >
+          <Canvas
+            camera={{ position: [0, 0, 6], fov: 50 }}
+            className="rounded-lg"
+          >
+            <Suspense fallback={null}>
+              <ambientLight intensity={0.3} />
+              <directionalLight position={[5, 5, 5]} intensity={1} color="#4f8cff" />
+              <pointLight position={[-5, -5, -5]} intensity={0.5} color="#0066ff" />
+              
+              <PrimeRadiant
+                active={isRadiantActive}
+                onClick={handleRadiantActivate}
+              />
+              
+              <OrbitControls 
+                enableZoom={true}
+                enablePan={false}
+                minDistance={3}
+                maxDistance={10}
+                autoRotate={!isRadiantActive}
+                autoRotateSpeed={0.5}
+              />
+              
+              <Environment preset="night" />
+            </Suspense>
+          </Canvas>
+        </div>
 
-        {/* Orbital elements */}
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="orbital-element absolute w-4 h-4 bg-slate-300/25 group-hover:bg-slate-300/45 rounded-full transition-all duration-700"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: `translate(-50%, -50%) rotate(${i * 45}deg) translateY(-140px)`,
-              boxShadow: "0 0 8px rgba(148, 163, 184, 0.2)",
-            }}
-          />
-        ))}
-
-        {/* Central core */}
-        <div
-          className="central-core absolute top-1/2 left-1/2 w-8 h-8 bg-slate-300/40 group-hover:bg-slate-300/60 rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700"
-          style={{
-            boxShadow: "0 0 12px rgba(148, 163, 184, 0.3)",
-          }}
-        />
-
-        {/* Hover indicator */}
-        <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-100 whitespace-nowrap">
-          <div className="text-slate-300/90 font-sans text-xl font-bold tracking-widest bg-gray-900/80 px-6 py-3 rounded-xl backdrop-blur-sm border-2 border-slate-300/20">
+        {/* KEEPING YOUR EXISTING ACTIVATE PROTOCOL BUTTON */}
+        <div className="mt-6">
+          <div 
+            className="text-slate-300/90 font-sans text-xl font-bold tracking-widest bg-gray-900/80 px-6 py-3 rounded-xl backdrop-blur-sm border-2 border-slate-300/20 cursor-pointer hover:border-slate-300/40 hover:bg-gray-900/90 transition-all duration-300"
+            onClick={handleRadiantActivate}
+          >
             ACTIVATE PROTOCOL
           </div>
         </div>
+
+        {/* Status Display */}
+        <div className="mt-6 text-center">
+          <div className={`text-sm font-mono px-4 py-2 rounded-lg border backdrop-blur-sm transition-all duration-500 ${
+            isRadiantActive 
+              ? 'text-cyan-400 border-cyan-500/50 bg-cyan-500/10' 
+              : 'text-slate-400 border-slate-500/50 bg-slate-500/10'
+          }`}>
+            {isRadiantActive ? 'PSYCHOHISTORY EQUATIONS ENGAGED' : 'PRIME RADIANT READY'}
+          </div>
+        </div>
+
       </div>
+
+      {/* CSS for star twinkling */}
+      <style jsx>{`
+        @keyframes twinkle {
+          0% { opacity: 0.2; }
+          100% { opacity: 1; }
+        }
+      `}</style>
     </div>
   )
 }

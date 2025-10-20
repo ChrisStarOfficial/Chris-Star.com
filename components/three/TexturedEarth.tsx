@@ -241,13 +241,13 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
     if (groupRef.current) {
       // Smooth zoom animation
       const targetZ = isZoomed ? 1.5 : 3.1
-      const zoomSpeed = 4.0
+      const zoomSpeed = 64.0
       if (Math.abs(camera.position.z - targetZ) > 0.01) {
         camera.position.z += (targetZ - camera.position.z) * delta * zoomSpeed
         camera.updateProjectionMatrix()
       }
 
-      const rotationSpeed = 4.0
+      const rotationSpeed = 64.0
       // Adjust rotation speed based on zoom - slower when zoomed in
       const baseRotationSpeed = isZoomed ? 0.05 : 0.1
       
