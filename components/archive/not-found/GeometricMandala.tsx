@@ -91,15 +91,6 @@ export default function GeometricMandala({ active, onClick }: GeometricMandalaPr
       ease: "sine.inOut"
     }, 0);
 
-    // Hover indicator fade in/out
-    timelineRef.current.to(".hover-indicator", {
-      opacity: 0.7,
-      duration: 2,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut"
-    }, 0);
-
     return () => {
       timelineRef.current?.kill();
     };
@@ -131,7 +122,7 @@ export default function GeometricMandala({ active, onClick }: GeometricMandalaPr
       className={`relative cursor-pointer transition-all duration-1000 ${active ? "opacity-100 scale-100" : "opacity-0 scale-75"}`}
       onClick={onClick}
     >
-      <div className="relative w-80 h-80 group">
+      <div className="relative w-96 h-96 group">
         {/* Outer rings */}
         <div
           className="ring-1 absolute inset-0 border-2 border-slate-300/20 rounded-full group-hover:border-slate-300/35 transition-all duration-700"
@@ -219,9 +210,9 @@ export default function GeometricMandala({ active, onClick }: GeometricMandalaPr
         />
 
         {/* Hover indicator */}
-        <div className="hover-indicator absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="text-slate-300/90 font-sans text-sm tracking-wider bg-gray-900/80 px-4 py-2 rounded-lg backdrop-blur-sm border border-slate-300/20">
-            ◊ ACTIVATE PROTOCOLS ◊
+        <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-100 whitespace-nowrap">
+          <div className="text-slate-300/90 font-sans text-xl font-bold tracking-widest bg-gray-900/80 px-6 py-3 rounded-xl backdrop-blur-sm border-2 border-slate-300/20">
+            ACTIVATE PROTOCOL
           </div>
         </div>
       </div>

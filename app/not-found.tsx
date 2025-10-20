@@ -37,17 +37,17 @@ export default function NotFound() {
     <main className="min-h-screen bg-gray-900 relative overflow-hidden">
       <SacredGeometryBackground />
 
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Top Section - Error Header */}
-        <div className="pt-8">
+      <div className="relative z-10 min-h-screen">
+        {/* Header - Absolutely positioned at top */}
+        <div className="absolute top-1/8 left-0 right-0 h-48 flex items-center justify-center">
           <ErrorHeader />
         </div>
 
-        {/* Center Section - Simple centered layout */}
-        <div className="flex-1 flex items-center justify-center relative">
+        {/* Center Section - Full screen centering */}
+        <div className="absolute top-1/2 left-0 right-0 flex items-center justify-center -translate-y-1/2"> {/* min-h-screen forces full viewport height */}
           
           {/* Left Text */}
-          <div className="absolute left-4 xl:left-8 top-1/2 transform -translate-y-1/2">
+          <div className="absolute left-1/4 top-1/2 transform -translate-y-1/2 -translate-x-1/2">
             <div className="flex items-center space-x-2 whitespace-nowrap">
               <div className="w-2 h-2 bg-cyan-400/80 rounded-full" />
               <span className="text-cyan-300/90 text-xs font-sans tracking-wider font-light">
@@ -56,13 +56,13 @@ export default function NotFound() {
             </div>
           </div>
 
-          {/* Mandala - True Center */}
+          {/* Mandala */}
           <div className="flex items-center justify-center">
             <GeometricMandala active={true} onClick={handleGeometryClick} />
           </div>
 
           {/* Right Buttons */}
-          <div className="absolute right-4 xl:right-8 top-1/2 transform -translate-y-1/2">
+          <div className="absolute right-1/4 top-1/2 transform -translate-y-1/2 translate-x-1/2">
             <div className="flex flex-col space-y-4">
               <Link
                 href="/"
@@ -83,7 +83,7 @@ export default function NotFound() {
         </div>
 
         {/* Minigame Area */}
-        <div className="pb-8">
+        <div className="absolute bottom-1/6 left-0 right-0">
           {showMinigame && (
             <div className="flex justify-center mb-6">
               <button
