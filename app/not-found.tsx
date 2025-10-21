@@ -9,6 +9,7 @@ import { PrimeRadiant } from '@/components/three/PrimeRadiant'
 import { Canvas } from '@react-three/fiber'
 import { ActivateProtocol } from '@/components/ui/ActivateProtocol'
 import { ProtocolOverlay } from '@/components/ui/ProtocolOverlay'
+import * as THREE from 'three'
 
 export default function NotFound() {
   const [showOverlay, setShowOverlay] = useState(false)
@@ -66,13 +67,55 @@ export default function NotFound() {
 
           {/* Prime Radiant Container */}
           <div className="relative transition-all duration-1000">
-            <div className="relative w-96 h-96 group">
-              {/* 3D Prime Radiant - simplified */}
-              <Canvas className="w-full h-full style={{ background: 'transparent' }}">
-                <PrimeRadiant 
-                  active={true}
-                  onClick={() => {}} // Empty handler since button handles the click
-                />
+            <div className="relative w-96 h-96 group flex items-center justify-center"> {/* Centered */}
+              <Canvas 
+                className="w-full h-full"
+                camera={{ 
+                  position: [0, 0, 5], // Better distance for viewing
+                  fov: 50,
+                  near: 0.1,
+                  far: 100
+                }}
+                gl={{
+                  antialias: true,
+                  alpha: true,
+                  powerPreference: "high-performance"
+                }}
+                onCreated={({ gl, scene }) => {
+                  gl.setClearColor(0x000011, 0)
+                  scene.background = null
+                }}
+              >
+                <Suspense fallback={null}>
+                  {/* Balanced lighting setup */}
+                  <ambientLight intensity={0.4} color={0x001144} />
+                  <directionalLight 
+                    position={[2, 3, 2]} 
+                    intensity={1.2} 
+                    color={0x335588}
+                  />
+                  <directionalLight 
+                    position={[-1, -2, 1]} 
+                    intensity={0.6} 
+                    color={0x223366}
+                  />
+                  <hemisphereLight 
+                    args={[0x001133, 0x000011, 0.3]}
+                  />
+                  
+                  {/* Light aura effect */}
+                  <pointLight
+                    position={[0, 0, 0]}
+                    color={0x001144}
+                    intensity={0.3}
+                    distance={8}
+                  />
+                  
+                  <PrimeRadiant 
+                    active={true}
+                    onClick={handleProtocolClick}
+                  />
+                </Suspense>
               </Canvas>
 
               {/* Activate Protocol Button */}
