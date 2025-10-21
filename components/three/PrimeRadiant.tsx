@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect, useState, useMemo } from 'react'
+import { useRef, useMemo, useState, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
@@ -11,193 +11,201 @@ interface PrimeRadiantProps {
 
 export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   const groupRef = useRef<THREE.Group>(null)
-  const { scene } = useThree()
+  const { size, gl } = useThree()
+  
+  // Drag state - using the same system as TexturedEarth
+  const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 })
+  const [currentRotation, setCurrentRotation] = useState({ x: 0, y: 0 })
+  const isDragging = useRef(false)
+  const lastMousePos = useRef({ x: 0, y: 0 })
+  const hasMovedDuringDrag = useRef(false)
 
-  // Create cuboctahedron geometry (8 triangles + 6 squares)
+  // Create proper cuboctahedron geometry
   const cuboctahedronGeometry = useMemo(() => {
-    // Create custom cuboctahedron geometry
-    const geometry = new THREE.BufferGeometry()
+    const geometry = new THREE.BoxGeometry(2, 2, 2)
     
-    // Cuboctahedron vertices (all permutations of (±1, ±1, 0) etc.)
-    const vertices = new Float32Array([
-      // Square faces (midpoints of cube edges)
-      1, 1, 0,   1, -1, 0,   -1, -1, 0,   -1, 1, 0,  // XY plane
-      1, 0, 1,   1, 0, -1,   -1, 0, -1,   -1, 0, 1,  // XZ plane  
-      0, 1, 1,   0, 1, -1,   0, -1, -1,   0, -1, 1,  // YZ plane
-    ])
-    
-    // Cuboctahedron faces - 8 triangles and 6 squares
-    const indices = new Uint32Array([
-      // 8 Triangular faces
-      0, 8, 4,    // Top-front-right triangle
-      0, 5, 9,    // Top-back-right triangle  
-      1, 10, 5,   // Bottom-back-right triangle
-      1, 6, 11,   // Bottom-front-right triangle
-      2, 11, 7,   // Bottom-front-left triangle
-      2, 7, 8,    // Bottom-back-left triangle
-      3, 9, 6,    // Top-back-left triangle
-      3, 4, 10,   // Top-front-left triangle
-      
-      // 6 Square faces
-      0, 4, 7, 3,   // Top square
-      1, 5, 6, 2,   // Bottom square
-      0, 3, 2, 1,   // Front square
-      4, 8, 11, 7,  // Right square  
-      5, 9, 10, 6,  // Back square
-      8, 9, 10, 11  // Left square
-    ])
-    
-    geometry.setIndex(new THREE.BufferAttribute(indices, 1))
-    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3))
-    
-    // Add some asymmetry to make it more organic
+    // Convert to cuboctahedron by moving vertices
     const positions = geometry.attributes.position
-    for (let i = 0; i < positions.count; i++) {
-      const x = positions.getX(i)
-      const y = positions.getY(i) 
-      const z = positions.getZ(i)
-      
-      // Subtle distortion to break perfect symmetry
-      const distortion = 0.15 * (
-        Math.sin(x * 6) * Math.cos(y * 4) +
-        Math.sin(y * 5) * Math.cos(z * 3) +
-        Math.sin(z * 4) * Math.cos(x * 5)
-      )
-      
-      positions.setX(i, x * (1 + distortion))
-      positions.setY(i, y * (1 + distortion * 0.8))
-      positions.setZ(i, z * (1 + distortion * 1.2))
-    }
-    
-    geometry.computeVertexNormals()
-    
-    // Add UV coordinates for proper texturing
-    const uvs = new Float32Array(positions.count * 2)
     for (let i = 0; i < positions.count; i++) {
       const x = positions.getX(i)
       const y = positions.getY(i)
       const z = positions.getZ(i)
       
-      // Spherical mapping
-      uvs[i * 2] = (Math.atan2(z, x) / (2 * Math.PI)) + 0.5
-      uvs[i * 2 + 1] = (Math.asin(y / Math.sqrt(x*x + y*y + z*z)) / Math.PI) + 0.5
+      // Move vertices toward center to create truncated corners
+      const length = Math.sqrt(x*x + y*y + z*z)
+      if (length > 0.1) {
+        const scale = 0.7
+        positions.setX(i, x * scale)
+        positions.setY(i, y * scale)
+        positions.setZ(i, z * scale)
+      }
     }
-    geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
     
+    geometry.computeVertexNormals()
     return geometry
   }, [])
 
-  // Create internal crystal structure texture
+  // Create solid crystal material
   const crystalMaterial = useMemo(() => {
-    // Create a canvas texture for mathematical patterns
-    const canvas = document.createElement('canvas')
-    canvas.width = 512
-    canvas.height = 512
-    const context = canvas.getContext('2d')!
-    
-    // Psychohistory-inspired background
-    const gradient = context.createRadialGradient(256, 256, 0, 256, 256, 256)
-    gradient.addColorStop(0, '#001133')
-    gradient.addColorStop(0.7, '#002255')
-    gradient.addColorStop(1, '#003377')
-    
-    context.fillStyle = gradient
-    context.fillRect(0, 0, 512, 512)
-    
-    // Mathematical equation patterns
-    context.strokeStyle = '#00aaff'
-    context.lineWidth = 1.5
-    context.globalAlpha = 0.6
-    
-    // Draw mathematical grid patterns
-    for (let i = 0; i < 20; i++) {
-      context.beginPath()
-      for (let j = 0; j < 512; j += 4) {
-        const x = j
-        const y = 256 + Math.sin(j * 0.05 + i * 0.5) * 100 + Math.cos(j * 0.03) * 50
-        if (j === 0) context.moveTo(x, y)
-        else context.lineTo(x, y)
-      }
-      context.stroke()
-    }
-    
-    const texture = new THREE.CanvasTexture(canvas)
-    texture.wrapS = THREE.RepeatWrapping
-    texture.wrapT = THREE.RepeatWrapping
-    
     return new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0.08, 0.15, 0.4),
-      transmission: 0.85,
-      opacity: 1,
+      color: new THREE.Color(0.15, 0.25, 0.8),
+      transmission: 0.3,
+      opacity: 0.9,
       transparent: true,
-      thickness: 1.8,
-      roughness: 0.15,
-      metalness: 0.1,
+      roughness: 0.1,
+      metalness: 0.3,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      ior: 1.6, // Higher IOR for crystal-like refraction
+      clearcoatRoughness: 0.1,
+      ior: 1.5,
       specularIntensity: 1.2,
-      specularColor: new THREE.Color(0.2, 0.4, 0.8),
-      envMapIntensity: 1.5,
-      map: texture
+      specularColor: new THREE.Color(0.3, 0.5, 1.0),
+      envMapIntensity: 1.5
     })
   }, [])
 
+  // Drag interaction system - same as TexturedEarth
+  useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      if (e.button !== 0) return;
+      
+      isDragging.current = true
+      hasMovedDuringDrag.current = false
+      lastMousePos.current = { x: e.clientX, y: e.clientY }
+      gl.domElement.style.cursor = 'grabbing'
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging.current) {
+        const deltaX = e.clientX - lastMousePos.current.x
+        const deltaY = e.clientY - lastMousePos.current.y
+        
+        // Check if movement exceeds threshold
+        if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) {
+          hasMovedDuringDrag.current = true
+        }
+        
+        // Apply rotation if we've exceeded the threshold
+        if (hasMovedDuringDrag.current) {
+          // UNLIMITED 360-degree rotation - same sensitivity for X and Y
+          setTargetRotation(prev => ({
+            x: prev.x + deltaY * 0.01, // Full Y-axis rotation
+            y: prev.y + deltaX * 0.01  // Full X-axis rotation
+          }))
+        }
+        
+        lastMousePos.current = { x: e.clientX, y: e.clientY }
+      }
+    }
+
+    const handleMouseUp = (e: MouseEvent) => {
+      if (e.button !== 0) return;
+      
+      isDragging.current = false
+      gl.domElement.style.cursor = 'default'
+
+      // Reset the flag for the next interaction
+      hasMovedDuringDrag.current = false
+    }
+
+    const canvas = gl.domElement
+    if (canvas) {
+      canvas.addEventListener('mousedown', handleMouseDown)
+      window.addEventListener('mousemove', handleMouseMove)
+      window.addEventListener('mouseup', handleMouseUp)
+    }
+
+    return () => {
+      if (canvas) canvas.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [gl])
+
+  // Smooth animations - same as TexturedEarth
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Slow, majestic rotation
-      groupRef.current.rotation.y += delta * 0.2
-      groupRef.current.rotation.x += delta * 0.05
+      const rotationSpeed = 4.0
       
-      // Subtle floating animation
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1
-      
-      // Pulsing effect when active
-      if (active) {
-        const pulse = Math.sin(state.clock.elapsedTime * 2) * 0.08 + 1
-        groupRef.current.scale.setScalar(pulse)
+      if (isDragging.current) {
+        // During drag, interpolate smoothly but quickly
+        const diffX = targetRotation.x - currentRotation.x
+        const diffY = targetRotation.y - currentRotation.y
+
+        setCurrentRotation({
+          x: currentRotation.x + diffX * rotationSpeed * 2 * delta,
+          y: currentRotation.y + diffY * rotationSpeed * 2 * delta
+        })
+
+        groupRef.current.rotation.x = currentRotation.x
+        groupRef.current.rotation.y = currentRotation.y
       } else {
-        groupRef.current.scale.setScalar(1)
+        // No auto-rotation when not dragging
+        groupRef.current.rotation.x = currentRotation.x
+        groupRef.current.rotation.y = currentRotation.y
       }
     }
   })
 
   const handleClick = (e: any) => {
     e.stopPropagation()
-    onClick()
+
+    // Use a timeout to ensure all mouse events have been processed
+    setTimeout(() => {
+      // Only trigger if we're definitely not dragging and haven't moved
+      if (!isDragging.current && !hasMovedDuringDrag.current) {
+        onClick()
+      }
+    }, 50)
+
+    // Reset for next interaction
+    hasMovedDuringDrag.current = false
   }
 
   return (
-    <group ref={groupRef} onClick={handleClick}>
-      {/* Main Cuboctahedron Crystal */}
-      <mesh geometry={cuboctahedronGeometry} material={crystalMaterial} />
+    <>
+      {/* Camera setup */}
+      <perspectiveCamera
+        position={[0, 0, 5]}
+        fov={60}
+        aspect={size.width / size.height}
+        near={0.1}
+        far={1000}
+      />
       
-      {/* Inner mathematical core */}
-      <mesh geometry={cuboctahedronGeometry} scale={0.4}>
-        <meshBasicMaterial
-          color={new THREE.Color(0.4, 0.8, 1.0)}
-          transparent
-          opacity={0.7}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
+      {/* Lights */}
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[5, 5, 5]} intensity={1} color="#4f8cff" />
+      <pointLight position={[-3, -3, -3]} intensity={0.5} color="#0066ff" />
 
-      {/* Active State Effects */}
-      {active && (
-        <>
+      {/* Prime Radiant Group */}
+      <group 
+        ref={groupRef}
+        onClick={handleClick}
+        onPointerEnter={() => {
+          if (!isDragging.current) gl.domElement.style.cursor = 'grab'
+        }}
+        onPointerLeave={() => {
+          if (!isDragging.current) gl.domElement.style.cursor = 'default'
+        }}
+      >
+        {/* Main Cuboctahedron - scaled up */}
+        <mesh geometry={cuboctahedronGeometry} material={crystalMaterial} scale={1.8} />
+        
+        {/* Edge highlights */}
+        <lineSegments>
+          <edgesGeometry args={[cuboctahedronGeometry]} />
+          <lineBasicMaterial color={0x4488ff} linewidth={2} />
+        </lineSegments>
+
+        {/* Active State Glow */}
+        {active && (
           <pointLight
-            color={new THREE.Color(0.1, 0.3, 0.8)}
-            intensity={2.5}
-            distance={8}
+            color={new THREE.Color(0.2, 0.5, 1.0)}
+            intensity={3}
+            distance={6}
           />
-          <pointLight
-            color={new THREE.Color(0.3, 0.6, 1.0)}
-            intensity={1.2}
-            distance={5}
-            position={[2, 1, 0]}
-          />
-        </>
-      )}
-    </group>
+        )}
+      </group>
+    </>
   )
 }
