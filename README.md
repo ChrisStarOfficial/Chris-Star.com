@@ -1,10 +1,11 @@
 # 🪽 Chris-Star.com
-A business website project to serve as a company portal. Undertook this task despite not being a developer with the help of AI for free.
+A company portal website project. Undertook this task despite not being a developer with the help of AI for free.
 
 ## Credits
+- v0 Agent (initial generation)
 - ChatGPT (at first)
 - Google Gemini (at first)
-- **DeepSeek Chat** (thereafter)
+- DeepSeek Chat (thereafter)
 
 ---
 
@@ -75,9 +76,10 @@ npm run dev
 ---
 
 ## 📜 License
-- This project (everything except minigame) is released under the **CC BY-NC-SA 4.0** license. You may remix and share with attribution, but no commercial use.
+- This project (excluding the items listed below) is released under the **CC BY-NC-SA 4.0** license. You may remix and share with attribution, but no commercial use.
 - 3D Minigame: This component is separately licensed from the main application. It is released under the **GPL-3.0** license, as per the original [Dino3D](https://github.com/Priler/dino3d/) code it's based on.
 - 2D Minigame: This component is separately licensed from the main application. It is released under the **BSD-3-Clause** license, as per the original [t-rex-runner](https://github.com/wayou/t-rex-runner) code it's based on.
+- Prime Radiant Model: This component is separately licensed from the main application. It is released under the **CC BY-SA 3.0** license, as per the original [Prime Radiant by SC1](https://www.thingiverse.com/thing:6340485/files) half-model it's based on.
 
 ---
 

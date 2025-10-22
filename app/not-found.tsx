@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from "react"
 import Link from "next/link"
 import { Footer } from "@/components/layout/Footer"
 import SacredGeometryBackground from '@/components/archive/not-found/SacredGeometryBackground'
-import ErrorHeader from '@/components/archive/not-found/NavigationErrorHeader'
+import ErrorHeader from '@/components/ui/NavigationErrorHeader'
 import { PrimeRadiant } from '@/components/three/PrimeRadiant'
 import { Canvas } from '@react-three/fiber'
 import { ActivateProtocol } from '@/components/ui/ActivateProtocol'
@@ -46,94 +46,65 @@ export default function NotFound() {
         onToggleGameVersion={toggleGameVersion}
       />
 
-      <div className="relative z-10 min-h-screen">
-        {/* Header - Absolutely positioned at top */}
-        <div className="absolute top-1/8 left-0 right-0 h-48 flex items-center justify-center">
-          <ErrorHeader />
+      {/* Header - Absolutely positioned at top */}
+      <div className="absolute top-1/8 left-0 right-0 h-48 flex items-center justify-center z-50">
+        <ErrorHeader />
+      </div>
+
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-12 h-screen gap-8 pt-32"> {/* Added pt-32 to account for header */}
+        
+        {/* Left Column */}
+        <div className="col-span-2 flex flex-col justify-center items-start pl-8">
+          <div className="flex items-center space-x-2 whitespace-nowrap">
+            <div className="w-2 h-2 bg-cyan-400/80 rounded-full" />
+            <span className="text-cyan-300/90 text-xs font-sans tracking-wider font-light">
+              ENTERTAINMENT PROTOCOLS AVAILABLE
+            </span>
+          </div>
         </div>
 
-        {/* Center Section - Full screen centering */}
-        <div className="absolute top-1/2 left-0 right-0 flex items-center justify-center -translate-y-1/2">
-          
-          {/* Left Text */}
-          <div className="absolute left-1/4 top-1/2 transform -translate-y-1/2 -translate-x-1/2">
-            <div className="flex items-center space-x-2 whitespace-nowrap">
-              <div className="w-2 h-2 bg-cyan-400/80 rounded-full" />
-              <span className="text-cyan-300/90 text-xs font-sans tracking-wider font-light">
-                ENTERTAINMENT PROTOCOLS AVAILABLE
-              </span>
-            </div>
-          </div>
-
-          {/* Prime Radiant Container */}
-          <div className="relative transition-all duration-1000">
-            <div className="relative w-96 h-96 group flex items-center justify-center"> {/* Centered */}
-              <Canvas 
-                className="w-full h-full"
-                camera={{ 
-                  position: [0, 0, 5], // Better distance for viewing
-                  fov: 50,
-                  near: 0.1,
-                  far: 100
-                }}
-                gl={{
-                  antialias: true,
-                  alpha: true,
-                  powerPreference: "high-performance"
-                }}
-                onCreated={({ gl, scene }) => {
-                  gl.setClearColor(0x000011, 0)
-                  scene.background = null
-                }}
-              >
-                <Suspense fallback={null}>
-                  {/* Balanced lighting setup */}
-                  <ambientLight intensity={0.4} color={0x001144} />
-                  <directionalLight 
-                    position={[2, 3, 2]} 
-                    intensity={1.2} 
-                    color={0x335588}
-                  />
-                  <directionalLight 
-                    position={[-1, -2, 1]} 
-                    intensity={0.6} 
-                    color={0x223366}
-                  />
-                  <hemisphereLight 
-                    args={[0x001133, 0x000011, 0.3]}
-                  />
-                  
-                  {/* Light aura effect */}
-                  <pointLight
-                    position={[0, 0, 0]}
-                    color={0x001144}
-                    intensity={0.3}
-                    distance={8}
-                  />
-                  
-                  <PrimeRadiant 
-                    active={true}
-                    onClick={handleProtocolClick}
-                  />
-                </Suspense>
-              </Canvas>
-
-              {/* Activate Protocol Button */}
+        {/* Center Column - Prime Radiant */}
+        <div className="col-span-8 relative flex items-center justify-center">
+          <div className="w-3/4 h-3/4 relative">
+            <Canvas
+              camera={{ 
+                position: [0, 0, 8],
+                fov: 45,
+                near: 0.1,
+                far: 100
+              }}
+              gl={{
+                antialias: true,
+                alpha: true,
+              }}
+            >
+              <Suspense fallback={null}>
+                <ambientLight intensity={0.6} />
+                <directionalLight position={[5, 5, 5]} intensity={1.5} color="#4f8cff" />
+                <PrimeRadiant 
+                  active={true}
+                  onClick={handleProtocolClick}
+                />
+              </Suspense>
+            </Canvas>
+            {/* Position ActivateProtocol relative to the canvas */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-8">
               <ActivateProtocol onClick={handleProtocolClick} />
             </div>
           </div>
+        </div>
 
-          {/* Right Buttons */}
-          <div className="absolute right-1/4 top-1/2 transform -translate-y-1/2 translate-x-1/2">
-            <div className="flex flex-col space-y-4">
-              <Link
-                href="/navigation"
-                className="bg-amber-600/90 text-white px-8 py-3 rounded-xl font-sans font-bold text-lg hover:bg-amber-700 transition-all duration-300 shadow-lg backdrop-blur-sm border border-amber-500/30 text-center min-w-[180px]"
-                style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
-              >
-                ▶ RETURN TO NAVIGATION
-              </Link>
-            </div>
+        {/* Right Column */}
+        <div className="col-span-2 flex flex-col justify-center items-end pr-8">
+          <div className="flex flex-col space-y-4">
+            <Link
+              href="/navigation"
+              className="bg-amber-600/90 text-white px-8 py-3 rounded-xl font-sans font-bold text-lg hover:bg-amber-700 transition-all duration-300 shadow-lg backdrop-blur-sm border border-amber-500/30 text-center min-w-[180px]"
+              style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
+            >
+              ▶ RETURN TO NAVIGATION
+            </Link>
           </div>
         </div>
       </div>
