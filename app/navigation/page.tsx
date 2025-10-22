@@ -3,6 +3,8 @@
 import { Canvas } from '@react-three/fiber'
 import { TexturedEarth } from '@/components/three/TexturedEarth'
 import { EarthBriefingOverlay } from '@/components/ui/EarthBriefingOverlay'
+import { ShipSystems } from '@/components/ui/ShipSystems'
+import { ShipDecks } from '@/components/ui/ShipDecks'
 import { useState, useEffect } from 'react'
 import { Footer } from "@/components/layout/Footer"
 
@@ -65,13 +67,7 @@ export default function NavigationPage() {
           <div className="grid grid-cols-12 h-[calc(100%-80px)] gap-8">
             
             {/* Left - Ship Systems */}
-            <div className="col-span-2 z-10 flex flex-col justify-center">
-              <div className="text-lg font-sans mb-4 opacity-90">SHIP SYSTEMS</div>
-              <div className='opacity-80'>Star Chart: 91048j27351a6088b39</div>
-              <div className='opacity-80'>Coordinates: LOCKED</div>
-              <div className='opacity-80'>Jump Status: IMMINENT</div>
-              <div className='opacity-80'>Alert Level: RED</div>
-            </div>
+            <ShipSystems />
 
             {/* Center - Full Screen Earth */}
             <div className="col-span-8 relative flex items-center justify-center">
@@ -99,13 +95,7 @@ export default function NavigationPage() {
             </div>
 
             {/* Right - Ship Decks */}
-            <div className="col-span-2 z-10 flex flex-col justify-center">
-              <div className="text-lg font-sans mb-4 opacity-90">SHIP DECKS</div>
-              <div className="opacity-80">Bridge</div>
-              <div className="text-blue-300 opacity-90">▶ Navigation</div>
-              <div className="opacity-80">The Archives</div>
-              <div className="opacity-80">Personal Quarters</div>
-            </div>
+            <ShipDecks />
           </div>
           
         </div>
