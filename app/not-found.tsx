@@ -9,6 +9,7 @@ import { PrimeRadiant } from '@/components/three/PrimeRadiant'
 import { Canvas } from '@react-three/fiber'
 import { ActivateProtocol } from '@/components/ui/ActivateProtocol'
 import { ProtocolOverlay } from '@/components/ui/ProtocolOverlay'
+import { ShipDecks } from '@/components/ui/ShipDecks'
 import * as THREE from 'three'
 
 export default function NotFound() {
@@ -98,13 +99,7 @@ export default function NotFound() {
         {/* Right Column */}
         <div className="col-span-2 flex flex-col justify-center items-end pr-8">
           <div className="flex flex-col space-y-4">
-            <Link
-              href="/navigation"
-              className="bg-amber-600/90 text-white px-8 py-3 rounded-xl font-sans font-bold text-lg hover:bg-amber-700 transition-all duration-300 shadow-lg backdrop-blur-sm border border-amber-500/30 text-center min-w-[180px]"
-              style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
-            >
-              ▶ RETURN TO NAVIGATION
-            </Link>
+            <ShipDecks />
           </div>
         </div>
       </div>

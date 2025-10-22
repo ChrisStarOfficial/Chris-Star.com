@@ -1,4 +1,3 @@
-// components/navigation/ShipDecks.tsx
 "use client"
 
 import { usePathname, useRouter } from 'next/navigation'
@@ -14,7 +13,7 @@ const decks: DeckItem[] = [
   { name: 'Navigation', path: '/navigation' },
   { name: 'The Archives', path: '/archives' },
   { name: 'Personal Quarters', path: '/quarters' },
-  { name: 'Lounge', path: '/lounge' },
+  { name: 'Lounge', path: '/not-found' },
 ]
 
 export function ShipDecks() {
@@ -49,19 +48,23 @@ export function ShipDecks() {
   return (
     <div className="col-span-2 z-10 flex flex-col justify-center">
       <div className="text-lg font-sans mb-4 opacity-90">SHIP DECKS</div>
-      {decks.map((deck) => (
-        <button
-          key={deck.path}
-          onClick={() => handleDeckClick(deck.path)}
-          className={`text-left transition-colors hover:text-white ${
-            deck.name === currentDeck
-              ? 'text-blue-300 opacity-90'
-              : 'opacity-80'
-          }`}
-        >
-          {deck.name === currentDeck ? '▶ ' : ''}{deck.name}
-        </button>
-      ))}
+      {decks.map((deck) => {
+        const isCurrentDeck = deck.name === currentDeck
+        
+        return (
+          <button
+            key={deck.path}
+            onClick={() => handleDeckClick(deck.path)}
+            className={`text-left transition-colors cursor-pointer ${
+              isCurrentDeck
+                ? 'text-blue-300 opacity-90' // Current deck - static blue, no hover effect
+                : 'opacity-80 hover:text-blue-300 hover:opacity-100' // Other decks - get blue on hover
+            }`}
+          >
+            {isCurrentDeck ? '▶ ' : ''}{deck.name}
+          </button>
+        )
+      })}
     </div>
   )
 }
