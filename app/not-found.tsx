@@ -48,7 +48,7 @@ export default function NotFound() {
       />
 
       {/* Header - Absolutely positioned */}
-      <div className="absolute top-4 left-0 right-0 z-50">
+      <div className="absolute top-4 left-0 right-0 z-40">
         <div className="flex justify-center">
           <ErrorHeader />
         </div>
@@ -86,17 +86,17 @@ export default function NotFound() {
               <Suspense fallback={null}>
                 <ambientLight intensity={0.6} />
                 <directionalLight position={[5, 5, 5]} intensity={1.5} color="#4f8cff" />
-                <PrimeRadiant 
+                <PrimeRadiant
                   active={true}
-                  onClick={handleProtocolClick}
+                  onClick={() => {}}
                 />
               </Suspense>
             </Canvas>
-          </div>
-          
+
           {/* ActivateProtocol on top */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-28">
-            <ActivateProtocol onClick={handleProtocolClick} />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-36 pointer-events-auto">
+              <ActivateProtocol onClick={handleProtocolClick} />
+            </div>
           </div>
         </div>
         

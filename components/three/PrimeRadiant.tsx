@@ -144,10 +144,6 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   const handleClick = (e: any) => {
     e.stopPropagation()
 
-    setTimeout(() => {
-      if (!isDragging.current && !hasMovedDuringDrag.current) onClick()
-    }, 50)
-
     hasMovedDuringDrag.current = false
   }
 

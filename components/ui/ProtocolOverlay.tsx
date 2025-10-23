@@ -50,7 +50,7 @@ export function ProtocolOverlay({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3"
       onClick={onClose} // Close when clicking outside
     >
       {/* Glassmorphism Background - same as Navigation */}
@@ -61,7 +61,7 @@ export function ProtocolOverlay({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-50 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm border border-white/20 transition-all duration-300"
+          className="absolute top-6 right-6 z-[110] w-10 h-10 flex items-center justify-center text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-sm border border-white/20 transition-all duration-300 pointer-events-auto"
           aria-label="Close overlay"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,12 +127,6 @@ export function ProtocolOverlay({
                     />
                   </div>
                 )}
-              </div>
-
-              {/* Game Instructions */}
-              <div className="mt-6 text-sm text-gray-400 font-sans text-center tracking-wide space-y-1">
-                <p>{use3DGame ? 'Click to jump over obstacles' : 'Use SPACEBAR or CLICK to jump'}</p>
-                <p>Avoid obstacles • Beat your high score!</p>
               </div>
             </div>
           </AnimatedTransition>
