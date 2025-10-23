@@ -34,17 +34,14 @@ export const HeroSection = ({ isLoaded, scrollY }: HeroSectionProps) => {
             isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
         >
-          <div
-            className="h-20 mx-auto bg-gradient-to-br from-white-600 to-white-700 rounded-xl flex items-center justify-center shadow-2xl animate-luxury-glow w-[120px]"
+          <Image
+            src="/Icon.png"
+            alt="CSE"
+            width={500}
+            height={500}
+            className="h-20 w-auto mx-auto"
             data-magnetic
-          >
-            <Image
-              src="/Icon.png"
-              alt="CSE"
-              width={100}
-              height={100}
-            />
-          </div>
+          />
         </div>
 
         <h1
