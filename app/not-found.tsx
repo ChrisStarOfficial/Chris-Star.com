@@ -47,16 +47,18 @@ export default function NotFound() {
         onToggleGameVersion={toggleGameVersion}
       />
 
-      {/* Header - Absolutely positioned at top */}
-      <div className="absolute top-1/8 left-0 right-0 h-48 flex items-center justify-center z-50">
-        <ErrorHeader />
+      {/* Header - Absolutely positioned */}
+      <div className="absolute top-4 left-0 right-0 z-50">
+        <div className="flex justify-center">
+          <ErrorHeader />
+        </div>
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-12 h-screen gap-8 pt-32"> {/* Added pt-32 to account for header */}
+      <div className="grid grid-cols-12 h-screen gap-8">
         
         {/* Left Column */}
-        <div className="col-span-2 flex flex-col justify-center items-start pl-8">
+        <div className="col-start-1 col-span-4 flex items-center justify-center h-full">
           <div className="flex items-center space-x-2 whitespace-nowrap">
             <div className="w-2 h-2 bg-cyan-400/80 rounded-full" />
             <span className="text-cyan-300/90 text-xs font-sans tracking-wider font-light">
@@ -64,10 +66,11 @@ export default function NotFound() {
             </span>
           </div>
         </div>
-
-        {/* Center Column - Prime Radiant */}
-        <div className="col-span-8 relative flex items-center justify-center">
-          <div className="w-3/4 h-3/4 relative">
+        
+        {/* Center Column - Canvas as interactive background */}
+        <div className="col-start-5 col-span-4 flex items-center justify-center h-full">
+          {/* Canvas takes full space but behind content */}
+          <div className="aspect-square w-full max-w-2xl relative">
             <Canvas
               camera={{ 
                 position: [0, 0, 8],
@@ -89,21 +92,20 @@ export default function NotFound() {
                 />
               </Suspense>
             </Canvas>
-            {/* Position ActivateProtocol relative to the canvas */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-8">
-              <ActivateProtocol onClick={handleProtocolClick} />
-            </div>
+          </div>
+          
+          {/* ActivateProtocol on top */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-28">
+            <ActivateProtocol onClick={handleProtocolClick} />
           </div>
         </div>
-
+        
         {/* Right Column */}
-        <div className="col-span-2 flex flex-col justify-center items-end pr-8">
-          <div className="flex flex-col space-y-4">
-            <ShipDecks />
-          </div>
+        <div className="col-start-9 col-span-4 flex items-center justify-center h-full">
+          <ShipDecks />
         </div>
       </div>
-      
+          
       <Footer />
     </main>
   )
