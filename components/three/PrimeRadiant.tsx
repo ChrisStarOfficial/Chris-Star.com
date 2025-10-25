@@ -15,7 +15,7 @@ interface PrimeRadiantProps {
 
 // Define your points array here (you'll need to import or define the actual vertices)
 const points = [
-  new THREE.Vector3(19.874378204345703, 19.5539493560791, -28.284255981445312),
+  new THREE.Vector3(19.874378204345703, 19.5539493560791, -28.284255981445312), // Right intersection of 2 triangles and 2 squares
   new THREE.Vector3(-0.12562158703804016, 39.553951263427734, 0.0),
   new THREE.Vector3(-20.125621795654297, 19.5539493560791, -28.284255981445312),
   new THREE.Vector3(-20.125621795654297, -20.4460506439209, -28.284255981445312),
@@ -93,7 +93,7 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
     const geometry = new ConvexGeometry(samplePoints);
     
     // Apply the SAME scale as your GLB model
-    geometry.scale(0.2, 0.2, 0.2)
+    geometry.scale(0.21, 0.21, 0.21)
 
     return geometry
   }, []) // Add points dependency if points is defined outside component
@@ -215,7 +215,11 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
     <group ref={groupRef} onClick={handleClick} scale={0.3}>
       {/* Glass outer shell - perfectly matches model shape */}
       {glassShellGeometry && (
-        <mesh geometry={glassShellGeometry} material={debugMaterial} />
+        <mesh
+          geometry={glassShellGeometry}
+          material={debugMaterial}
+          rotation={[Math.PI / 2, 0, 0]}
+        />
       )}
       
       {/* Gold inner model */}
