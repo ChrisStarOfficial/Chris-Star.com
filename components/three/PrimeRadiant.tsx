@@ -6,28 +6,44 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { GLTF } from 'three/addons/loaders/GLTFLoader.js'
+import { ConvexGeometry } from 'three/addons/geometries/ConvexGeometry.js'
 
 interface PrimeRadiantProps {
   active: boolean
   onClick: () => void
 }
 
+// Define your points array here (you'll need to import or define the actual vertices)
+const points = [
+  new THREE.Vector3(19.874378204345703, 19.5539493560791, -28.284255981445312),
+  new THREE.Vector3(-0.12562158703804016, 39.553951263427734, 0.0),
+  new THREE.Vector3(-20.125621795654297, 19.5539493560791, -28.284255981445312),
+  new THREE.Vector3(-20.125621795654297, -20.4460506439209, -28.284255981445312),
+  new THREE.Vector3(-40.12562561035156, -0.44604921340942383, 0.0),
+  new THREE.Vector3(19.874378204345703, -20.4460506439209, -28.284255981445312),
+  new THREE.Vector3(39.87437438964844, -0.44604921340942383, 0.0),
+  new THREE.Vector3(-0.12562158703804016, -40.446048736572266, 0.0),
+  new THREE.Vector3(19.874378204345703, 19.5539493560791, 28.284255981445312),
+  new THREE.Vector3(-20.125621795654297, 19.5539493560791, 28.284255981445312),
+  new THREE.Vector3(-20.125621795654297, -20.4460506439209, 28.284255981445312),
+  new THREE.Vector3(19.874378204345703, -20.4460506439209, 28.284255981445312),
+];
+
 export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   const groupRef = useRef<THREE.Group>(null)
-  const { gl, scene } = useThree()
+  const { gl } = useThree()
 
-  const [cageModel, setCageModel] = useState<THREE.Group | null>(null)
-  const [shellModel, setShellModel] = useState<THREE.Group | null>(null)
+  const [radiantModel, setRadiantModel] = useState<THREE.Group | null>(null)
   
   const isDragging = useRef(false)
   const lastMousePos = useRef({ x: 0, y: 0 })
   const hasMovedDuringDrag = useRef(false)
 
-  // Metallic gold material for the cage (inner core)
-  const cageMaterial = useMemo(() => {
+  // Gold material for inner model
+  const goldMaterial = useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0.831, 0.686, 0.216), // #d4af37 in RGB
-      metalness: 0.95,
+      color: new THREE.Color(0.831, 0.686, 0.216),
+      metalness: 0.9,
       roughness: 0.15,
       clearcoat: 1.0,
       clearcoatRoughness: 0.05,
@@ -35,137 +51,96 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
       envMapIntensity: 3.0,
       specularColor: new THREE.Color(0.9, 0.8, 0.5),
       specularIntensity: 2.0,
-      emissive: new THREE.Color(0.3, 0.2, 0.1),
-      emissiveIntensity: 0.2,
     })
   }, [])
 
-  // Glass material for the shell (outer glass)
-  const shellMaterial = useMemo(() => {
+  // Glass material for outer shell
+  const glassMaterial = useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(1.0, 1.0, 1.0),
-      transmission: 0.95,
-      opacity: 1,
+      color: new THREE.Color(1, 1, 1),
+      transmission: 0.7,
+      opacity: 0.9,
       transparent: true,
-      thickness: 1.5,
-      roughness: 0.02,
-      metalness: 0.0,
-      clearcoat: 1.0,
+      roughness: 0.1,
+      metalness: 0.1,
+      clearcoat: 1,
       clearcoatRoughness: 0.01,
       ior: 1.52,
-      specularIntensity: 1.0,
-      specularColor: new THREE.Color(1.0, 1.0, 1.0),
-      envMapIntensity: 2.0,
-      attenuationColor: new THREE.Color(1.0, 1.0, 1.0),
-      attenuationDistance: 2.0,
+      thickness: 1.0,
+      specularIntensity: 2,
+      envMapIntensity: 3,
+      attenuationColor: new THREE.Color(1, 1, 1),
+      attenuationDistance: 1.5
     })
   }, [])
 
-  // Load both GLB models
+  const debugMaterial = useMemo(() => {
+    return new THREE.MeshBasicMaterial({
+      color: new THREE.Color(1, 0, 0),
+      wireframe: true,
+      transparent: true,
+      opacity: 0.8
+    })
+  }, [])
+
+  // **UPDATED: ConvexGeometry for the outer hull shell glass**
+  const glassShellGeometry = useMemo(() => {
+    // For performance, sample a subset of points if you have too many
+    const samplePoints = points.length > 1000 
+      ? points.filter((_, index) => index % Math.ceil(points.length / 1000) === 0)
+      : points;
+    
+    const geometry = new ConvexGeometry(samplePoints);
+    
+    // Apply the SAME scale as your GLB model
+    geometry.scale(0.2, 0.2, 0.2)
+
+    return geometry
+  }, []) // Add points dependency if points is defined outside component
+
+  // Load model and generate convex hull
   useEffect(() => {
     const loader = new GLTFLoader()
     
-    // Set up Draco decompression
     const dracoLoader = new DRACOLoader()
     dracoLoader.setDecoderPath('https://unpkg.com/three@0.180.0/examples/jsm/libs/draco/')
     loader.setDRACOLoader(dracoLoader)
 
-    let modelsLoaded = 0
-    const totalModels = 2
-
-    const checkAllModelsLoaded = () => {
-      modelsLoaded++
-      if (modelsLoaded === totalModels) {
-        console.log('All Prime Radiant models loaded successfully!')
-      }
-    }
-
-    // Load Cage model
     loader.load(
-      '/models/prime_radiant/PrimeRadiantHalfToFull_Cage.glb', 
+      '/models/prime_radiant/PrimeRadiantHalfToFull.glb', 
       (gltf: GLTF) => {
+        console.log('GLB model loaded successfully!')
+        
         const model = gltf.scene
-        
-        // DEBUG: Check root model transforms
-        console.log('=== CAGE MODEL DEBUG ===')
-        console.log('Model rotation:', model.rotation)
-        console.log('Model position:', model.position) 
-        console.log('Model scale:', model.scale)
-        
-        // DEBUG: Check children rotations
-        model.traverse((child) => {
-          if (child.rotation.x !== 0 || child.rotation.y !== 0 || child.rotation.z !== 0) {
-            console.log('Child with rotation:', child.name, child.rotation)
-          }
-        })
 
-        // Apply cage material to all meshes
+        // DEBUG: Check the actual size of the loaded model
+        const box = new THREE.Box3().setFromObject(model)
+        const size = box.getSize(new THREE.Vector3())
+        console.log('GLB model original size:', size)
+        console.log('GLB model bounds:', box.min, box.max)
+        
+        // Apply gold material
         model.traverse((child: THREE.Object3D) => {
           if (child instanceof THREE.Mesh) {
-            child.material = cageMaterial
+            child.material = goldMaterial
             child.castShadow = true
             child.receiveShadow = true
           }
         })
         
-        // Scale and position
-        model.rotation.set(0, 0, 0)
         model.scale.set(0.2, 0.2, 0.2)
         model.position.set(0, 0, 0)
         
-        setCageModel(model)
-        checkAllModelsLoaded()
+        setRadiantModel(model)
       }, 
       undefined,
       (error: unknown) => {
-        console.error('Error loading Cage GLB model:', error)
+        console.error('Error loading GLB model:', error)
       }
     )
+  }, [goldMaterial])
 
-    // Load Shell model
-    loader.load(
-      '/models/prime_radiant/PrimeRadiantHalfToFull_Shell.glb', 
-      (gltf: GLTF) => {
-        const model = gltf.scene
-        
-        // DEBUG: Check root model transforms
-        console.log('=== SHELL MODEL DEBUG ===')
-        console.log('Model rotation:', model.rotation)
-        console.log('Model position:', model.position)
-        console.log('Model scale:', model.scale)
-        
-        // DEBUG: Check children rotations
-        model.traverse((child) => {
-          if (child.rotation.x !== 0 || child.rotation.y !== 0 || child.rotation.z !== 0) {
-            console.log('Child with rotation:', child.name, child.rotation)
-          }
-        })
-
-        // Apply shell material to all meshes
-        model.traverse((child: THREE.Object3D) => {
-          if (child instanceof THREE.Mesh) {
-            child.material = shellMaterial
-            child.castShadow = true
-            child.receiveShadow = true
-          }
-        })
-        
-        // Scale and position (same as cage)
-        model.rotation.set(0, 0, 0)
-        model.scale.set(0.2, 0.2, 0.2)
-        model.position.set(0, 0, 0)
-        
-        setShellModel(model)
-        checkAllModelsLoaded()
-      }, 
-      undefined,
-      (error: unknown) => {
-        console.error('Error loading Shell GLB model:', error)
-      }
-    )
-  }, [cageMaterial, shellMaterial])
-
-  // Drag interaction system
+  // Drag interaction system (keep your existing code)
   useEffect(() => {
     const canvas = gl.domElement as HTMLCanvasElement;
 
@@ -231,42 +206,26 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
     };
   }, [gl]);
 
-  useEffect(() => {
-    if (cageModel && shellModel) {
-      console.log('=== FINAL MODEL COMPARISON ===')
-      console.log('Cage Model:', cageModel)
-      console.log('Shell Model:', shellModel)
-      
-      console.log('Cage hierarchy:')
-      cageModel.traverse((child) => console.log(child.name, child.rotation, child.position))
-      
-      console.log('Shell hierarchy:')  
-      shellModel.traverse((child) => console.log(child.name, child.rotation, child.position))
-    }
-  }, [cageModel, shellModel])
-
   const handleClick = (e: any) => {
     e.stopPropagation()
-
     hasMovedDuringDrag.current = false
   }
 
-  // Scene structure
   return (
     <group ref={groupRef} onClick={handleClick} scale={0.3}>
-      {/* Cage model (inner core) */}
-      {cageModel && <primitive object={cageModel} />}
+      {/* Glass outer shell - perfectly matches model shape */}
+      {glassShellGeometry && (
+        <mesh geometry={glassShellGeometry} material={debugMaterial} />
+      )}
       
-      {/* Shell model (outer glass) */}
-      {shellModel && <primitive object={shellModel} />}
+      {/* Gold inner model */}
+      {radiantModel && <primitive object={radiantModel} />}
       
-      {/* Enhanced lighting for both models */}
+      {/* Lighting */}
       <pointLight color={new THREE.Color(0.9, 0.8, 0.5)} intensity={3} distance={6} />
-      <pointLight color={new THREE.Color(0.3, 0.5, 1.0)} intensity={2} distance={4} position={[2, 1, 0]} />
-      <pointLight color={new THREE.Color(0.1, 0.3, 0.8)} intensity={1.5} distance={5} position={[-1, -1, 1]} />
-
-      {/* Ambient light for overall illumination */}
-      <ambientLight intensity={0.5} />
+      <pointLight color={new THREE.Color(1.0, 0.9, 0.6)} intensity={2} distance={4} position={[2, 1, 0]} />
+      <pointLight color={new THREE.Color(0.3, 0.5, 1.0)} intensity={1.5} distance={5} position={[-1, -1, 1]} />
+      <ambientLight intensity={0.6} />
     </group>
   );
 }
