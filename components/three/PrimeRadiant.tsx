@@ -86,6 +86,19 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
       (gltf: GLTF) => {
         const model = gltf.scene
         
+        // DEBUG: Check root model transforms
+        console.log('=== CAGE MODEL DEBUG ===')
+        console.log('Model rotation:', model.rotation)
+        console.log('Model position:', model.position) 
+        console.log('Model scale:', model.scale)
+        
+        // DEBUG: Check children rotations
+        model.traverse((child) => {
+          if (child.rotation.x !== 0 || child.rotation.y !== 0 || child.rotation.z !== 0) {
+            console.log('Child with rotation:', child.name, child.rotation)
+          }
+        })
+
         // Apply cage material to all meshes
         model.traverse((child: THREE.Object3D) => {
           if (child instanceof THREE.Mesh) {
@@ -115,6 +128,19 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
       (gltf: GLTF) => {
         const model = gltf.scene
         
+        // DEBUG: Check root model transforms
+        console.log('=== SHELL MODEL DEBUG ===')
+        console.log('Model rotation:', model.rotation)
+        console.log('Model position:', model.position)
+        console.log('Model scale:', model.scale)
+        
+        // DEBUG: Check children rotations
+        model.traverse((child) => {
+          if (child.rotation.x !== 0 || child.rotation.y !== 0 || child.rotation.z !== 0) {
+            console.log('Child with rotation:', child.name, child.rotation)
+          }
+        })
+
         // Apply shell material to all meshes
         model.traverse((child: THREE.Object3D) => {
           if (child instanceof THREE.Mesh) {
@@ -204,6 +230,20 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
       window.removeEventListener('mouseup', handleMouseUp)
     };
   }, [gl]);
+
+  useEffect(() => {
+    if (cageModel && shellModel) {
+      console.log('=== FINAL MODEL COMPARISON ===')
+      console.log('Cage Model:', cageModel)
+      console.log('Shell Model:', shellModel)
+      
+      console.log('Cage hierarchy:')
+      cageModel.traverse((child) => console.log(child.name, child.rotation, child.position))
+      
+      console.log('Shell hierarchy:')  
+      shellModel.traverse((child) => console.log(child.name, child.rotation, child.position))
+    }
+  }, [cageModel, shellModel])
 
   const handleClick = (e: any) => {
     e.stopPropagation()
