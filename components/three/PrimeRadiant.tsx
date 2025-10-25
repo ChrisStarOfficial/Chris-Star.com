@@ -16,28 +16,52 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   const groupRef = useRef<THREE.Group>(null)
   const { gl, scene } = useThree()
 
-  const [radiantModel, setRadiantModel] = useState<THREE.Group | null>(null)
+  const [cageModel, setCageModel] = useState<THREE.Group | null>(null)
+  const [shellModel, setShellModel] = useState<THREE.Group | null>(null)
   
   const isDragging = useRef(false)
   const lastMousePos = useRef({ x: 0, y: 0 })
   const hasMovedDuringDrag = useRef(false)
 
-  // Metallic gold material - replaces the STL material
-  const goldMaterial = useMemo(() => {
+  // Metallic gold material for the cage (inner core)
+  const cageMaterial = useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
       color: new THREE.Color(0.831, 0.686, 0.216), // #d4af37 in RGB
-      metalness: 0.9,
-      roughness: 0.2,
+      metalness: 0.95,
+      roughness: 0.15,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
+      clearcoatRoughness: 0.05,
       reflectivity: 1.0,
-      envMapIntensity: 2.5,
+      envMapIntensity: 3.0,
       specularColor: new THREE.Color(0.9, 0.8, 0.5),
-      specularIntensity: 1.5,
+      specularIntensity: 2.0,
+      emissive: new THREE.Color(0.3, 0.2, 0.1),
+      emissiveIntensity: 0.2,
     })
   }, [])
 
-  // Load GLB model
+  // Glass material for the shell (outer glass)
+  const shellMaterial = useMemo(() => {
+    return new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(1.0, 1.0, 1.0),
+      transmission: 0.95,
+      opacity: 1,
+      transparent: true,
+      thickness: 1.5,
+      roughness: 0.02,
+      metalness: 0.0,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.01,
+      ior: 1.52,
+      specularIntensity: 1.0,
+      specularColor: new THREE.Color(1.0, 1.0, 1.0),
+      envMapIntensity: 2.0,
+      attenuationColor: new THREE.Color(1.0, 1.0, 1.0),
+      attenuationDistance: 2.0,
+    })
+  }, [])
+
+  // Load both GLB models
   useEffect(() => {
     const loader = new GLTFLoader()
     
@@ -46,34 +70,74 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
     dracoLoader.setDecoderPath('https://unpkg.com/three@0.180.0/examples/jsm/libs/draco/')
     loader.setDRACOLoader(dracoLoader)
 
+    let modelsLoaded = 0
+    const totalModels = 2
+
+    const checkAllModelsLoaded = () => {
+      modelsLoaded++
+      if (modelsLoaded === totalModels) {
+        console.log('All Prime Radiant models loaded successfully!')
+      }
+    }
+
+    // Load Cage model
     loader.load(
-      '/models/prime_radiant/PrimeRadiantHalfToFull.glb', 
+      '/models/prime_radiant/PrimeRadiantHalfToFull_Cage.glb', 
       (gltf: GLTF) => {
-        console.log('GLB model loaded successfully!')
-        
         const model = gltf.scene
         
-        // Apply gold material to all meshes in the model
+        // Apply cage material to all meshes
         model.traverse((child: THREE.Object3D) => {
           if (child instanceof THREE.Mesh) {
-            child.material = goldMaterial
+            child.material = cageMaterial
             child.castShadow = true
             child.receiveShadow = true
           }
         })
         
-        // Scale and position the model
+        // Scale and position
+        model.rotation.set(0, 0, 0)
         model.scale.set(0.2, 0.2, 0.2)
         model.position.set(0, 0, 0)
         
-        setRadiantModel(model)
+        setCageModel(model)
+        checkAllModelsLoaded()
       }, 
       undefined,
       (error: unknown) => {
-        console.error('Error loading GLB model:', error)
+        console.error('Error loading Cage GLB model:', error)
       }
     )
-  }, [goldMaterial])
+
+    // Load Shell model
+    loader.load(
+      '/models/prime_radiant/PrimeRadiantHalfToFull_Shell.glb', 
+      (gltf: GLTF) => {
+        const model = gltf.scene
+        
+        // Apply shell material to all meshes
+        model.traverse((child: THREE.Object3D) => {
+          if (child instanceof THREE.Mesh) {
+            child.material = shellMaterial
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+        
+        // Scale and position (same as cage)
+        model.rotation.set(0, 0, 0)
+        model.scale.set(0.2, 0.2, 0.2)
+        model.position.set(0, 0, 0)
+        
+        setShellModel(model)
+        checkAllModelsLoaded()
+      }, 
+      undefined,
+      (error: unknown) => {
+        console.error('Error loading Shell GLB model:', error)
+      }
+    )
+  }, [cageMaterial, shellMaterial])
 
   // Drag interaction system
   useEffect(() => {
@@ -150,15 +214,19 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   // Scene structure
   return (
     <group ref={groupRef} onClick={handleClick} scale={0.3}>
-      {/* GLB-based Prime Radiant */}
-      {radiantModel && <primitive object={radiantModel} />}
+      {/* Cage model (inner core) */}
+      {cageModel && <primitive object={cageModel} />}
       
-      {/* Enhanced golden lighting INSIDE the component */}
+      {/* Shell model (outer glass) */}
+      {shellModel && <primitive object={shellModel} />}
+      
+      {/* Enhanced lighting for both models */}
       <pointLight color={new THREE.Color(0.9, 0.8, 0.5)} intensity={3} distance={6} />
-      <pointLight color={new THREE.Color(1.0, 0.9, 0.6)} intensity={2} distance={4} position={[2, 1, 0]} />
+      <pointLight color={new THREE.Color(0.3, 0.5, 1.0)} intensity={2} distance={4} position={[2, 1, 0]} />
+      <pointLight color={new THREE.Color(0.1, 0.3, 0.8)} intensity={1.5} distance={5} position={[-1, -1, 1]} />
 
-      {/* Always include ambient light as fallback */}
-      <ambientLight intensity={0.4} />
+      {/* Ambient light for overall illumination */}
+      <ambientLight intensity={0.5} />
     </group>
   );
 }
