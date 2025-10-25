@@ -15,7 +15,7 @@ interface PrimeRadiantProps {
 
 // Define your points array here (you'll need to import or define the actual vertices)
 const points = [
-  new THREE.Vector3(19.874378204345703, 19.5539493560791, -28.284255981445312), // Right intersection of 2 triangles and 2 squares
+  new THREE.Vector3(19.874378204345703, 19.5539493560791, -28.284255981445312),
   new THREE.Vector3(-0.12562158703804016, 39.553951263427734, 0.0),
   new THREE.Vector3(-20.125621795654297, 19.5539493560791, -28.284255981445312),
   new THREE.Vector3(-20.125621795654297, -20.4460506439209, -28.284255981445312),
@@ -74,15 +74,6 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
     })
   }, [])
 
-  const debugMaterial = useMemo(() => {
-    return new THREE.MeshBasicMaterial({
-      color: new THREE.Color(1, 0, 0),
-      wireframe: true,
-      transparent: true,
-      opacity: 0.8
-    })
-  }, [])
-
   // **UPDATED: ConvexGeometry for the outer hull shell glass**
   const glassShellGeometry = useMemo(() => {
     // For performance, sample a subset of points if you have too many
@@ -93,7 +84,7 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
     const geometry = new ConvexGeometry(samplePoints);
     
     // Apply the SAME scale as your GLB model
-    geometry.scale(0.21, 0.21, 0.21)
+    geometry.scale(0.205, 0.205, 0.205)
 
     return geometry
   }, []) // Add points dependency if points is defined outside component
@@ -112,12 +103,6 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
         console.log('GLB model loaded successfully!')
         
         const model = gltf.scene
-
-        // DEBUG: Check the actual size of the loaded model
-        const box = new THREE.Box3().setFromObject(model)
-        const size = box.getSize(new THREE.Vector3())
-        console.log('GLB model original size:', size)
-        console.log('GLB model bounds:', box.min, box.max)
         
         // Apply gold material
         model.traverse((child: THREE.Object3D) => {
@@ -217,7 +202,7 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
       {glassShellGeometry && (
         <mesh
           geometry={glassShellGeometry}
-          material={debugMaterial}
+          material={glassMaterial}
           rotation={[Math.PI / 2, 0, 0]}
         />
       )}
