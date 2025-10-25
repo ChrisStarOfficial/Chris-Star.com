@@ -57,20 +57,20 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   // Glass material for outer shell
   const glassMaterial = useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(1, 1, 1),
-      transmission: 0.7,
-      opacity: 0.9,
+      color: new THREE.Color(0.98, 0.95, 0.85),
+      transmission: 0.9,
+      opacity: 0.2,
       transparent: true,
-      roughness: 0.1,
-      metalness: 0.1,
-      clearcoat: 1,
+      roughness: 0.02,
+      metalness: 0,
+      clearcoat: 1.0,
       clearcoatRoughness: 0.01,
       ior: 1.52,
-      thickness: 1.0,
-      specularIntensity: 2,
+      thickness: 0.1,
+      specularIntensity: 1,
       envMapIntensity: 3,
-      attenuationColor: new THREE.Color(1, 1, 1),
-      attenuationDistance: 1.5
+      attenuationColor: new THREE.Color(0.95, 0.9, 0.7),
+      attenuationDistance: 1.0
     })
   }, [])
 
