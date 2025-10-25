@@ -42,7 +42,7 @@ export function PrimeRadiant({ active, onClick }: PrimeRadiantProps) {
   // Gold material for inner model
   const goldMaterial = useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0.831, 0.686, 0.216),
+      color: new THREE.Color(0.835, 0.714, 0.325),
       metalness: 0.9,
       roughness: 0.15,
       clearcoat: 1.0,
