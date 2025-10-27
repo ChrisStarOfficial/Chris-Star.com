@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { ScrollSection } from "@/components/layout/scroll-section"
 import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
 
 const spiritualSongs = [
@@ -178,7 +178,7 @@ export default function MusicPage() {
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
-          <AdvancedScrollSection direction="fade">
+          <ScrollSection direction="fade">
             <div className="mb-12">
               <div className="w-24 h-24 mx-auto bg-gradient-to-br from-amber-600 to-amber-700 rounded-2xl flex items-center justify-center shadow-2xl animate-luxury-glow mb-8">
                 <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -190,9 +190,9 @@ export default function MusicPage() {
             <h2 className="font-sans font-bold text-3xl md:text-5xl text-amber-400 mb-12 tracking-tight">
               Soundscapes
             </h2>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="up" delay={300}>
+          <ScrollSection direction="up" delay={300}>
             <p className="font-sans font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
               A side passion of mine is creating spiritual music that speaks to the soul. Through AI-assisted
               composition on Suno AI, I craft songs that explore consciousness, shadow work, starseed awakening, and the
@@ -202,9 +202,9 @@ export default function MusicPage() {
               Each song is designed to support your spiritual journey, whether you're integrating shadow aspects,
               awakening to your starseed mission, or simply seeking music that resonates with your higher self.
             </p>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="scale" delay={600}>
+          <ScrollSection direction="scale" delay={600}>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
               <button
                 onClick={handlePlayPause}
@@ -226,12 +226,12 @@ export default function MusicPage() {
                 Visit Suno AI Profile
               </a>
             </div>
-          </AdvancedScrollSection>
+          </ScrollSection>
         </div>
       </section>
 
       {/* Spiritual Songs Section */}
-      <AdvancedScrollSection direction="stagger">
+      <ScrollSection direction="stagger">
         <section className="py-32 px-6 bg-gray-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
@@ -245,7 +245,7 @@ export default function MusicPage() {
 
             <div className="grid md:grid-cols-2 gap-12">
               {spiritualSongs.map((collection, index) => (
-                <AdvancedScrollSection
+                <ScrollSection
                   key={collection.id}
                   direction={index % 2 === 0 ? "left" : "right"}
                   delay={index * 200}
@@ -303,15 +303,15 @@ export default function MusicPage() {
                       </div>
                     </div>
                   </div>
-                </AdvancedScrollSection>
+                </ScrollSection>
               ))}
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Featured Tracks */}
-      <AdvancedScrollSection direction="up">
+      <ScrollSection direction="up">
         <section className="py-32 px-6 bg-gray-800">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-20">
@@ -325,7 +325,7 @@ export default function MusicPage() {
 
             <div className="space-y-6">
               {featuredTracks.map((track, index) => (
-                <AdvancedScrollSection key={index} direction="fade" delay={index * 100}>
+                <ScrollSection key={index} direction="fade" delay={index * 100}>
                   <div
                     className="group bg-gray-900 border border-gray-700 rounded-xl shadow-md hover:shadow-lg hover:border-amber-600 transition-all duration-300 p-6 cursor-pointer"
                     onClick={() => handleTrackSelect(index)}
@@ -382,15 +382,15 @@ export default function MusicPage() {
                       </div>
                     </div>
                   </div>
-                </AdvancedScrollSection>
+                </ScrollSection>
               ))}
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Music Player Interface */}
-      <AdvancedScrollSection direction="scale">
+      <ScrollSection direction="scale">
         <section className="py-20 px-6 bg-gradient-to-br from-gray-900 to-amber-900 text-white">
           <div className="max-w-4xl mx-auto">
             <div className="bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-amber-600/20">
@@ -478,7 +478,7 @@ export default function MusicPage() {
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Footer */}
       <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">

@@ -2,7 +2,7 @@
 
 import { Canvas } from '@react-three/fiber'
 import { TexturedEarth } from '@/components/three/TexturedEarth'
-import { EarthBriefingOverlay } from '@/components/ui/EarthBriefingOverlay'
+import { EarthBriefingOverlay } from '@/components/ui/overlay/EarthBriefingOverlay'
 import { ShipSystems } from '@/components/ui/ShipSystems'
 import { ShipDecks } from '@/components/ui/ShipDecks'
 import { useState, useEffect } from 'react'

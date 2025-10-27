@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { ScrollSection } from "@/components/layout/scroll-section"
 import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
 
 const vaultFeatures = [
@@ -153,7 +153,7 @@ export default function VaultPage() {
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
-          <AdvancedScrollSection direction="fade">
+          <ScrollSection direction="fade">
             <div className="mb-12">
               <div className="w-24 h-24 mx-auto bg-gradient-to-br from-amber-600 to-amber-700 rounded-2xl flex items-center justify-center shadow-2xl animate-luxury-glow mb-8">
                 <span className="text-3xl">🌌</span>
@@ -163,9 +163,9 @@ export default function VaultPage() {
             <h2 className="font-sans font-bold text-3xl md:text-5xl text-amber-400 mb-12 tracking-tight">
               Taygetan Disclosure Archive
             </h2>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="up" delay={300}>
+          <ScrollSection direction="up" delay={300}>
             <p className="font-sans font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
               Access the complete Obsidian transcript vault backup of the Taygetan Disclosure—a comprehensive archive of
               stellar information, cosmic perspectives, and advanced knowledge from our galactic contacts.
@@ -174,9 +174,9 @@ export default function VaultPage() {
               This meticulously organized knowledge base preserves crucial information for current and future
               generations seeking understanding of our cosmic reality.
             </p>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="scale" delay={600}>
+          <ScrollSection direction="scale" delay={600}>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
               <button
                 className="bg-amber-600 text-white px-8 py-4 rounded-lg font-sans font-bold text-lg hover:bg-amber-700 transition-colors duration-300 shadow-lg"
@@ -191,12 +191,12 @@ export default function VaultPage() {
                 Download Vault
               </button>
             </div>
-          </AdvancedScrollSection>
+          </ScrollSection>
         </div>
       </section>
 
       {/* Vault Features */}
-      <AdvancedScrollSection direction="stagger">
+      <ScrollSection direction="stagger">
         <section className="py-32 px-6 bg-gray-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
@@ -209,7 +209,7 @@ export default function VaultPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {vaultFeatures.map((feature, index) => (
-                <AdvancedScrollSection key={feature.id} direction="up" delay={index * 150}>
+                <ScrollSection key={feature.id} direction="up" delay={index * 150}>
                   <div
                     className="group bg-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-amber-600 transition-all duration-500 overflow-hidden"
                     data-magnetic
@@ -233,15 +233,15 @@ export default function VaultPage() {
                       </div>
                     </div>
                   </div>
-                </AdvancedScrollSection>
+                </ScrollSection>
               ))}
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Archive Sections */}
-      <AdvancedScrollSection direction="left">
+      <ScrollSection direction="left">
         <section className="py-32 px-6 bg-gray-800">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
@@ -254,7 +254,7 @@ export default function VaultPage() {
 
             <div className="grid md:grid-cols-2 gap-12">
               {filteredSections.map((section, index) => (
-                <AdvancedScrollSection key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 200}>
+                <ScrollSection key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 200}>
                   <div
                     className="group bg-gray-900 border border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-amber-600 transition-all duration-500 overflow-hidden"
                     data-magnetic
@@ -286,15 +286,15 @@ export default function VaultPage() {
                       </div>
                     </div>
                   </div>
-                </AdvancedScrollSection>
+                </ScrollSection>
               ))}
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* GitHub Repository CTA */}
-      <AdvancedScrollSection direction="scale">
+      <ScrollSection direction="scale">
         <section className="py-32 px-6 bg-gradient-to-br from-amber-600 to-amber-700 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-12">
@@ -331,7 +331,7 @@ export default function VaultPage() {
             </p>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Footer */}
       <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { ScrollSection } from "@/components/layout/scroll-section"
 import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
 
 const communityFeatures = [
@@ -144,14 +144,14 @@ export default function CommunityPage() {
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
-          <AdvancedScrollSection direction="fade">
+          <ScrollSection direction="fade">
             <h1 className="font-sans font-bold text-6xl md:text-8xl text-white mb-8 tracking-tight">
               Spiritual Transformation
             </h1>
             <h2 className="font-sans font-bold text-4xl md:text-6xl text-amber-400 mb-12 tracking-tight">Community</h2>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="up" delay={300}>
+          <ScrollSection direction="up" delay={300}>
             <p className="font-sans font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
               Join my exclusive Skool community where lightworkers, starseeds, and spiritual seekers come together for
               real transformation. This is my main offering—a comprehensive platform for your spiritual and physical
@@ -161,9 +161,9 @@ export default function CommunityPage() {
               Weekly live calls, exclusive courses, shadow work guidance, carnivore nutrition protocols, and a
               supportive community that understands your path.
             </p>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="scale" delay={600}>
+          <ScrollSection direction="scale" delay={600}>
             <div className="flex items-center justify-center space-x-8">
               <div className="text-center">
                 <div className="text-4xl font-sans font-bold text-amber-400 mb-2">500+</div>
@@ -175,12 +175,12 @@ export default function CommunityPage() {
                 <p className="font-sans text-sm text-gray-400 uppercase tracking-wider">Transformation Rate</p>
               </div>
             </div>
-          </AdvancedScrollSection>
+          </ScrollSection>
         </div>
       </section>
 
       {/* Navigation Tabs */}
-      <AdvancedScrollSection direction="up">
+      <ScrollSection direction="up">
         <section className="py-16 px-6 bg-gray-800 border-b border-gray-700">
           <div className="max-w-4xl mx-auto">
             <div className="flex justify-center space-x-8">
@@ -205,11 +205,11 @@ export default function CommunityPage() {
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Features Section */}
       {activeTab === "features" && (
-        <AdvancedScrollSection direction="stagger">
+        <ScrollSection direction="stagger">
           <section className="py-32 px-6 bg-gray-900">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-20">
@@ -221,7 +221,7 @@ export default function CommunityPage() {
 
               <div className="grid md:grid-cols-3 gap-12">
                 {communityFeatures.map((feature, index) => (
-                  <AdvancedScrollSection key={index} direction="up" delay={index * 200}>
+                  <ScrollSection key={index} direction="up" delay={index * 200}>
                     <div
                       className="group bg-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-amber-600 transition-all duration-500 p-10"
                       data-magnetic
@@ -235,17 +235,17 @@ export default function CommunityPage() {
                         {feature.frequency}
                       </div>
                     </div>
-                  </AdvancedScrollSection>
+                  </ScrollSection>
                 ))}
               </div>
             </div>
           </section>
-        </AdvancedScrollSection>
+        </ScrollSection>
       )}
 
       {/* Benefits Section */}
       {activeTab === "benefits" && (
-        <AdvancedScrollSection direction="left">
+        <ScrollSection direction="left">
           <section className="py-32 px-6 bg-gray-800">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-20">
@@ -258,7 +258,7 @@ export default function CommunityPage() {
 
               <div className="space-y-8">
                 {communityBenefits.map((benefit, index) => (
-                  <AdvancedScrollSection key={index} direction="right" delay={index * 150}>
+                  <ScrollSection key={index} direction="right" delay={index * 150}>
                     <div
                       className="bg-gray-900 border border-gray-700 rounded-2xl shadow-lg hover:shadow-xl hover:border-amber-600 transition-all duration-500 overflow-hidden"
                       data-magnetic
@@ -277,17 +277,17 @@ export default function CommunityPage() {
                         </div>
                       </div>
                     </div>
-                  </AdvancedScrollSection>
+                  </ScrollSection>
                 ))}
               </div>
             </div>
           </section>
-        </AdvancedScrollSection>
+        </ScrollSection>
       )}
 
       {/* Testimonials Section */}
       {activeTab === "testimonials" && (
-        <AdvancedScrollSection direction="fade">
+        <ScrollSection direction="fade">
           <section className="py-32 px-6 bg-gray-900">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-20">
@@ -299,7 +299,7 @@ export default function CommunityPage() {
 
               <div className="grid md:grid-cols-3 gap-12">
                 {testimonials.map((testimonial, index) => (
-                  <AdvancedScrollSection key={index} direction="up" delay={index * 200}>
+                  <ScrollSection key={index} direction="up" delay={index * 200}>
                     <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-xl hover:border-amber-600 transition-all duration-500">
                       <blockquote className="font-sans italic text-lg text-gray-300 leading-relaxed mb-6">
                         "{testimonial.quote}"
@@ -312,16 +312,16 @@ export default function CommunityPage() {
                         </div>
                       </div>
                     </div>
-                  </AdvancedScrollSection>
+                  </ScrollSection>
                 ))}
               </div>
             </div>
           </section>
-        </AdvancedScrollSection>
+        </ScrollSection>
       )}
 
       {/* CTA Section */}
-      <AdvancedScrollSection direction="scale">
+      <ScrollSection direction="scale">
         <section className="py-32 px-6 bg-amber-600 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-sans font-bold text-5xl md:text-6xl mb-8 tracking-tight">Ready for Real Change?</h2>
@@ -345,7 +345,7 @@ export default function CommunityPage() {
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Footer */}
       <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">

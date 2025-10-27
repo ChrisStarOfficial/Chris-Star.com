@@ -1,7 +1,9 @@
+// components/ui/ShipDecks.tsx
 "use client"
 
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useLoading } from './LoadingContext'
 
 interface DeckItem {
   name: string
@@ -20,26 +22,42 @@ export function ShipDecks() {
   const pathname = usePathname()
   const router = useRouter()
   const [isValidRoute, setIsValidRoute] = useState(true)
+  const { startLoading, updateProgress, stopLoading } = useLoading()
 
-  // Check if current path is a valid deck route
   useEffect(() => {
     const isValid = decks.some(deck => deck.path === pathname) || pathname === '/'
     setIsValidRoute(isValid)
   }, [pathname])
 
-  const handleDeckClick = (path: string) => {
+  const handleDeckClick = async (path: string) => {
+    // Start hyperspace loading effect
+    startLoading(`WARPING TO ${path === '/' ? 'BRIDGE' : path.toUpperCase().replace('/', '')}`)
+    
+    // Simulate navigation loading
+    let progress = 0
+    const interval = setInterval(() => {
+      progress += Math.random() * 20
+      if (progress >= 80) {
+        clearInterval(interval)
+        progress = 80
+      }
+      updateProgress(progress)
+    }, 100)
+
+    // Navigate
     router.push(path)
+    
+    // Complete loading after navigation
+    setTimeout(() => {
+      updateProgress(100)
+      setTimeout(stopLoading, 300)
+    }, 1000)
   }
 
   const getCurrentDeck = () => {
-    // If we're on a valid deck page, return it
     const currentDeck = decks.find(deck => deck.path === pathname)
     if (currentDeck) return currentDeck.name
-    
-    // If we're on the root, return Bridge
     if (pathname === '/') return 'Bridge'
-    
-    // If we're on any invalid route, default to Lounge
     return 'Lounge'
   }
 
@@ -47,7 +65,7 @@ export function ShipDecks() {
 
   return (
     <div className="col-span-2 z-10 flex flex-col justify-center">
-      <div className="text-lg font-sans mb-4 opacity-90">SHIP DECKS</div>
+      <div className="text-lg font-serif mb-4 text-parchment opacity-90">SHIP DECKS</div>
       {decks.map((deck) => {
         const isCurrentDeck = deck.name === currentDeck
         
@@ -57,8 +75,8 @@ export function ShipDecks() {
             onClick={() => handleDeckClick(deck.path)}
             className={`text-left transition-colors cursor-pointer ${
               isCurrentDeck
-                ? 'text-blue-300 opacity-90' // Current deck - static blue, no hover effect
-                : 'opacity-80 hover:text-blue-300 hover:opacity-100' // Other decks - get blue on hover
+                ? 'text-electric opacity-90'
+                : 'text-clay opacity-80 hover:text-electric hover:opacity-100'
             }`}
           >
             {isCurrentDeck ? '▶ ' : ''}{deck.name}

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { ScrollSection } from "@/components/layout/scroll-section"
 import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
 
 export default function YouTubePage() {
@@ -79,7 +79,7 @@ export default function YouTubePage() {
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
-          <AdvancedScrollSection direction="fade">
+          <ScrollSection direction="fade">
             <div className="mb-12">
               <div className="w-24 h-24 mx-auto bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-2xl animate-luxury-glow mb-8">
                 <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -89,17 +89,17 @@ export default function YouTubePage() {
             </div>
             <h1 className="font-sans font-bold text-6xl md:text-8xl mb-8 tracking-tight">Spiritual</h1>
             <h2 className="font-sans font-bold text-3xl md:text-5xl text-red-400 mb-12 tracking-tight">Journey</h2>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="up" delay={300}>
+          <ScrollSection direction="up" delay={300}>
             <p className="font-sans font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-16">
               Join me on my authentic spiritual journey through long-form content that documents real transformation.
               From carnivore nutrition and muscle building to shadow work and starseed awakening—this is where I share
               what I've learned, not just what sounds good.
             </p>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="scale" delay={600}>
+          <ScrollSection direction="scale" delay={600}>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 mb-16">
               <div className="text-center">
                 <div className="text-4xl font-serif font-bold text-red-400 mb-2">85+</div>
@@ -116,9 +116,9 @@ export default function YouTubePage() {
                 <p className="font-sans text-sm text-gray-300 uppercase tracking-wider">Subscribers</p>
               </div>
             </div>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="scale" delay={900}>
+          <ScrollSection direction="scale" delay={900}>
             <button
               className="bg-red-600 text-white px-8 py-4 rounded-lg font-sans font-bold text-lg hover:bg-red-700 transition-colors duration-300 shadow-lg flex items-center space-x-3 mx-auto"
               data-magnetic
@@ -128,12 +128,12 @@ export default function YouTubePage() {
               </svg>
               <span>Subscribe to Channel</span>
             </button>
-          </AdvancedScrollSection>
+          </ScrollSection>
         </div>
       </section>
 
       {/* Featured Videos */}
-      <AdvancedScrollSection direction="stagger">
+      <ScrollSection direction="stagger">
         <section className="py-32 px-6 bg-gray-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
@@ -145,10 +145,10 @@ export default function YouTubePage() {
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Subscribe CTA */}
-      <AdvancedScrollSection direction="scale">
+      <ScrollSection direction="scale">
         <section className="py-32 px-6 bg-gradient-to-br from-red-600 to-red-700 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-12">
@@ -182,7 +182,7 @@ export default function YouTubePage() {
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Footer */}
       <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">

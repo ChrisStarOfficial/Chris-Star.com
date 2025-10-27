@@ -1,7 +1,58 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { OrbitControls, Environment, useProgress } from '@react-three/drei';
+import { useLoading } from '@/components/ui/LoadingContext';
+import { useEffect } from 'react';
+
+function BullRunScene() {
+  const { startLoading, updateProgress, stopLoading } = useLoading();
+  const { progress, active } = useProgress();
+
+  // Track 3D model and texture loading progress
+  useEffect(() => {
+    if (active) {
+      startLoading("INITIALIZING 3D ENVIRONMENT");
+    }
+  }, [active, startLoading]);
+
+  useEffect(() => {
+    if (!active && progress === 100) {
+      updateProgress(100);
+      setTimeout(stopLoading, 300);
+    } else if (active) {
+      updateProgress(progress);
+    }
+  }, [progress, active, updateProgress, stopLoading]);
+  
+  return (
+    <>
+      {/* Basic scene elements */}
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      
+      {/* Test objects */}
+      <mesh position={[0, 0, 0]} castShadow>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="orange" />
+      </mesh>
+      
+      <mesh position={[2, 0, 0]} castShadow>
+        <sphereGeometry args={[0.5, 16, 16]} />
+        <meshStandardMaterial color="hotpink" />
+      </mesh>
+      
+      {/* Ground */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
+        <planeGeometry args={[10, 10]} />
+        <meshStandardMaterial color="green" />
+      </mesh>
+      
+      <Environment preset="sunset" />
+      <OrbitControls />
+    </>
+  );
+}
 
 export default function BullRun3D() {
   return (

@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { DestinationInfoPanel } from './DestinationInfoPanel'
 import { DestinationOrbits } from './DestinationOrbits'
-import { NavigationControls } from './NavigationControls'
+import { NavigationControls } from '../ship-interface/NavigationControls'
 
 interface Destination {
   id: string

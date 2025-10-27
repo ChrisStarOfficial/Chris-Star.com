@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { ScrollSection } from "@/components/layout/scroll-section"
 import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
 
 const wikiProjects = [
@@ -133,7 +133,7 @@ export default function WikiPage() {
         </div>
 
         <div className="text-center relative z-10 max-w-5xl mx-auto">
-          <AdvancedScrollSection direction="fade">
+          <ScrollSection direction="fade">
             <div className="mb-12">
               <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-2xl animate-luxury-glow mb-8">
                 <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -143,9 +143,9 @@ export default function WikiPage() {
             </div>
             <h1 className="font-sans font-bold text-6xl md:text-8xl mb-8 tracking-tight">Community</h1>
             <h2 className="font-sans font-bold text-3xl md:text-5xl text-blue-400 mb-12 tracking-tight">Wiki Hub</h2>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="up" delay={300}>
+          <ScrollSection direction="up" delay={300}>
             <p className="font-sans font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
               Welcome to our community-driven wiki projects. These collaborative knowledge bases are built from
               transcript source materials and maintained by dedicated contributors who believe in preserving and
@@ -155,9 +155,9 @@ export default function WikiPage() {
               Each wiki is a specialized project focusing on different topics, all hosted on our custom wiki platform
               with advanced features for cross-referencing and community collaboration.
             </p>
-          </AdvancedScrollSection>
+          </ScrollSection>
 
-          <AdvancedScrollSection direction="scale" delay={600}>
+          <ScrollSection direction="scale" delay={600}>
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
               <button
                 className="bg-blue-600 text-white px-8 py-4 rounded-lg font-sans font-bold text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg"
@@ -172,12 +172,12 @@ export default function WikiPage() {
                 Contribute
               </button>
             </div>
-          </AdvancedScrollSection>
+          </ScrollSection>
         </div>
       </section>
 
       {/* Wiki Selection Interface */}
-      <AdvancedScrollSection direction="up">
+      <ScrollSection direction="up">
         <section className="py-32 px-6 bg-gray-800">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-20">
@@ -190,7 +190,7 @@ export default function WikiPage() {
 
             <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
               {wikiProjects.map((wiki, index) => (
-                <AdvancedScrollSection key={wiki.id} direction={index % 2 === 0 ? "left" : "right"} delay={index * 200}>
+                <ScrollSection key={wiki.id} direction={index % 2 === 0 ? "left" : "right"} delay={index * 200}>
                   <div
                     className={`group relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-700 cursor-pointer transform hover:scale-105 ${
                       wiki.featured ? "ring-2 ring-blue-400" : ""
@@ -261,15 +261,15 @@ export default function WikiPage() {
                     {/* Hover Effect Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                </AdvancedScrollSection>
+                </ScrollSection>
               ))}
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Wiki Features */}
-      <AdvancedScrollSection direction="stagger">
+      <ScrollSection direction="stagger">
         <section className="py-32 px-6 bg-gray-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
@@ -282,7 +282,7 @@ export default function WikiPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {wikiFeatures.map((feature, index) => (
-                <AdvancedScrollSection key={index} direction="up" delay={index * 150}>
+                <ScrollSection key={index} direction="up" delay={index * 150}>
                   <div
                     className="group bg-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-blue-600 transition-all duration-500 p-8"
                     data-magnetic
@@ -293,15 +293,15 @@ export default function WikiPage() {
                     </h3>
                     <p className="font-sans text-gray-300 leading-relaxed text-center">{feature.description}</p>
                   </div>
-                </AdvancedScrollSection>
+                </ScrollSection>
               ))}
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Community Contribution CTA */}
-      <AdvancedScrollSection direction="scale">
+      <ScrollSection direction="scale">
         <section className="py-32 px-6 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-12">
@@ -333,7 +333,7 @@ export default function WikiPage() {
             </div>
           </div>
         </section>
-      </AdvancedScrollSection>
+      </ScrollSection>
 
       {/* Footer */}
       <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">

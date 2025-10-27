@@ -3,6 +3,8 @@
 import { useRef, useMemo, useState, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
+import { useTexture, useProgress } from '@react-three/drei'
+import { useLoading } from '@/components/ui/LoadingContext'
 
 interface TexturedEarthProps {
   isZoomed?: boolean
@@ -10,6 +12,32 @@ interface TexturedEarthProps {
 
 export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
   const meshRef = useRef<THREE.Mesh>(null)
+  const { startLoading, updateProgress, stopLoading } = useLoading()
+  const { progress, active } = useProgress()
+
+  // Track texture loading progress
+  useEffect(() => {
+    if (active) {
+      startLoading("RENDERING STAR CHART")
+    }
+  }, [active, startLoading])
+
+  useEffect(() => {
+    if (!active && progress === 100) {
+      updateProgress(100)
+      setTimeout(stopLoading, 500)
+    } else if (active) {
+      updateProgress(progress)
+    }
+  }, [progress, active, updateProgress, stopLoading])
+
+  const [colorMap, normalMap, specularMap, cloudsMap] = useTexture([
+    '/textures/earth/earth_color.jpg',
+    '/textures/earth/earth_normal.jpg',
+    '/textures/earth/earth_specular.jpg',
+    '/textures/earth/earth_clouds.jpg',
+  ])
+
   const groupRef = useRef<THREE.Group>(null)
 
   const [targetRotation, setTargetRotation] = useState({ x: 0, y: Math.PI * 0.8 })

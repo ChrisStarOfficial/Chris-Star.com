@@ -1,6 +1,6 @@
 "use client"
 
-import { AdvancedScrollSection } from "@/components/archive/advanced-scroll-section"
+import { ScrollSection } from "@/components/layout/scroll-section"
 
 interface ServiceCardProps {
   service: {
@@ -13,10 +13,10 @@ interface ServiceCardProps {
 
 export const ServiceCard = ({ service, index }: ServiceCardProps) => {
   return (
-    <AdvancedScrollSection direction="up" delay={index * 200} threshold={0.4}>
+    <ScrollSection direction="up" delay={index * 200} threshold={0.4}>
       <div className="group h-full" data-magnetic>
         {/* Your service card JSX */}
       </div>
-    </AdvancedScrollSection>
+    </ScrollSection>
   )
 }
