@@ -31,13 +31,6 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
     }
   }, [progress, active, updateProgress, stopLoading])
 
-  const [colorMap, normalMap, specularMap, cloudsMap] = useTexture([
-    '/textures/earth/earth_color.jpg',
-    '/textures/earth/earth_normal.jpg',
-    '/textures/earth/earth_specular.jpg',
-    '/textures/earth/earth_clouds.jpg',
-  ])
-
   const groupRef = useRef<THREE.Group>(null)
 
   const [targetRotation, setTargetRotation] = useState({ x: 0, y: Math.PI * 0.8 })
