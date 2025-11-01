@@ -32,12 +32,15 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Chris Star Enterprises",
   description: "Where optimization meets transformation.",
+  icons: {
+    icon: '/favicon.ico',
+  }
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html

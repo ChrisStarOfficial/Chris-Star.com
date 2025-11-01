@@ -1,10 +1,15 @@
-import { useRef, useEffect } from 'react';
+"use client";
+
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 
 export default function SacredGeometryBackground() {
+  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setIsMounted(true);
+
     if (!containerRef.current) return;
 
     const container = containerRef.current;
@@ -23,6 +28,10 @@ export default function SacredGeometryBackground() {
 
   }, []);
 
+  if (!isMounted) {
+    return <div className='absolute inset-0 bg-cosmic' />
+  }
+  
   return (
     <div ref={containerRef} className="absolute inset-0 bg-cosmic overflow-hidden">
       {/* Base Grid - Static CSS */}
