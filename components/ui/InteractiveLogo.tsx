@@ -66,6 +66,23 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
     }
   }
 
+  // Don't render anything until mounted to avoid hydration mismatch
+  if (!isMounted) {
+    return (
+      <div className={`relative ${className}`}>
+        <div className="transition-all duration-500">
+          <Image
+            src="/Icon.png"
+            alt="CSE"
+            width={36}
+            height={36}
+            className="drop-shadow-lg"
+          />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={`relative ${className}`}>
       {/* Shockwave Effect */}
@@ -85,9 +102,9 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
 
       {/* CSE Logo with Easter Egg */}
       <div
-        onClick={(isMounted && isClient) ? handleClick : undefined}
+        onClick={isClient ? handleClick : undefined}
         className={`transition-all duration-500 ${
-          (isMounted && isClient) ? "cursor-pointer hover:scale-105" : ""
+          isClient ? "cursor-pointer hover:scale-105" : ""
         } ${
           isTransformed
             ? "shadow-2xl shadow-amber-400/50 animate-pulse scale-110"
