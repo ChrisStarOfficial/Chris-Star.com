@@ -1119,3 +1119,11 @@ body {
 html, body, #__next {
     --darkreader-inline-scheme: 'none' !important;
 }
+
+/* TARGETED FIX: Prevents Dark Reader from adding attributes and styles to images */
+img {
+  --darkreader-inline-color: transparent !important;
+  --darkreader-inline-bgcolor: transparent !important;
+  --darkreader-inline-scheme: 'none' !important;
+  /* This targets the final HTML element rendered by Next/Image */
+}

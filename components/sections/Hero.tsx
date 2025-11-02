@@ -53,7 +53,7 @@ export const HeroSection = ({ isLoaded, scrollY }: HeroSectionProps) => {
             lineHeight: "1.1",
           }}
         >
-          Chris Star
+          CHRIS STAR
         </h1>
 
         <h2
