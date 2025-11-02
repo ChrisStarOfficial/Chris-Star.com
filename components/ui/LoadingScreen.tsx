@@ -1,13 +1,39 @@
-// components/ui/LoadingScreen.tsx
 "use client"
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface LoadingScreenProps {
   loadingProgress: number
   message?: string
   variant?: 'default' | 'hyperspace' | 'minimal'
+}
+
+// Define a type for the dynamic particle positions
+interface ParticlePosition {
+  x: number
+  y: number
+  delay: number
+  duration: number
+}
+
+// Helper to generate the random positions (client-only)
+const generateDefaultParticlePositions = (count: number, width: number, height: number): ParticlePosition[] => {
+  return Array(count).fill(0).map(() => ({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    delay: Math.random() * 2,
+    duration: 2 + Math.random() * 2,
+  }))
+}
+
+const generateHyperspaceParticleTransitions = (count: number) => {
+  return Array(count).fill(0).map(() => ({
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    delay: Math.random() * 2,
+    duration: 1 + Math.random() * 2,
+  }))
 }
 
 export const LoadingScreen = ({ 
@@ -16,12 +42,28 @@ export const LoadingScreen = ({
   variant = 'default'
 }: LoadingScreenProps) => {
   const progressRef = useRef<HTMLDivElement>(null)
+  const [defaultParticles, setDefaultParticles] = useState<ParticlePosition[]>([])
+  const [hyperspaceParticles, setHyperspaceParticles] = useState<any[]>([])
+  
+  // Use a ref to check if client-side code is running
+  const isClient = typeof window !== 'undefined'
 
   useEffect(() => {
     if (progressRef.current) {
       progressRef.current.style.width = `${loadingProgress}%`
     }
   }, [loadingProgress])
+
+  // FIX 1: Generate random positions in useEffect (client-only)
+  useEffect(() => {
+    if (isClient) {
+      if (variant === 'default') {
+        setDefaultParticles(generateDefaultParticlePositions(20, window.innerWidth, window.innerHeight))
+      } else if (variant === 'hyperspace') {
+        setHyperspaceParticles(generateHyperspaceParticleTransitions(100))
+      }
+    }
+  }, [variant, isClient])
 
   if (variant === 'minimal') {
     return (
@@ -62,13 +104,13 @@ export const LoadingScreen = ({
       <div className="fixed inset-0 bg-black z-50 overflow-hidden">
         {/* Your existing hyperspace effect */}
         <div className="absolute inset-0">
-          {[...Array(100)].map((_, i) => (
+          {hyperspaceParticles.map((p, i) => (
             <motion.div
               key={i}
               className="absolute w-[2px] h-[2px] bg-white rounded-full"
               initial={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: p.left,
+                top: p.top,
                 scale: 0.1,
                 opacity: 0,
               }}
@@ -77,9 +119,9 @@ export const LoadingScreen = ({
                 opacity: [0, 1, 0.8, 0],
               }}
               transition={{
-                duration: 1 + Math.random() * 2,
+                duration: p.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: p.delay,
                 ease: "linear",
               }}
             />
@@ -125,13 +167,13 @@ export const LoadingScreen = ({
       >
         {/* Your enhanced cinematic loading screen code from previous response */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {defaultParticles.map((p, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-white/10 rounded-full"
               initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
+                x: p.x,
+                y: p.y,
               }}
               animate={{
                 y: [null, -20, 20, 0],
@@ -139,9 +181,9 @@ export const LoadingScreen = ({
                 opacity: [0.3, 0.8, 0.3],
               }}
               transition={{
-                duration: 2 + Math.random() * 2,
+                duration: p.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: p.delay,
               }}
             />
           ))}
