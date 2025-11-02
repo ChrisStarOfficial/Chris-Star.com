@@ -7,6 +7,7 @@ interface LoadingScreenProps {
   loadingProgress: number
   message?: string
   variant?: 'default' | 'hyperspace' | 'minimal'
+  showImmediately?: boolean
 }
 
 // Define a type for the dynamic particle positions
@@ -39,11 +40,13 @@ const generateHyperspaceParticleTransitions = (count: number) => {
 export const LoadingScreen = ({ 
   loadingProgress, 
   message = "LOADING",
-  variant = 'default'
+  variant = 'default',
+  showImmediately = false
 }: LoadingScreenProps) => {
   const progressRef = useRef<HTMLDivElement>(null)
   const [defaultParticles, setDefaultParticles] = useState<ParticlePosition[]>([])
   const [hyperspaceParticles, setHyperspaceParticles] = useState<any[]>([])
+  const [isVisible, setIsVisible] = useState(showImmediately)
   
   // Use a ref to check if client-side code is running
   const isClient = typeof window !== 'undefined'
@@ -53,6 +56,13 @@ export const LoadingScreen = ({
       progressRef.current.style.width = `${loadingProgress}%`
     }
   }, [loadingProgress])
+
+  // NEW: Show loading screen immediately on mount
+  useEffect(() => {
+    if (showImmediately) {
+      setIsVisible(true)
+    }
+  }, [showImmediately])
 
   // FIX 1: Generate random positions in useEffect (client-only)
   useEffect(() => {
@@ -65,6 +75,11 @@ export const LoadingScreen = ({
     }
   }, [variant, isClient])
 
+  // Don't render anything if not visible
+  if (!isVisible) {
+    return null
+  }
+
   if (variant === 'minimal') {
     return (
       <AnimatePresence>
@@ -72,7 +87,7 @@ export const LoadingScreen = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-black z-[100] flex items-center justify-center"
         >
           <div className="text-center space-y-4">
             <motion.div
@@ -101,7 +116,7 @@ export const LoadingScreen = ({
 
   if (variant === 'hyperspace') {
     return (
-      <div className="fixed inset-0 bg-black z-50 overflow-hidden">
+      <div className="fixed inset-0 bg-black z-[100] overflow-hidden">
         {/* Your existing hyperspace effect */}
         <div className="absolute inset-0">
           {hyperspaceParticles.map((p, i) => (
@@ -163,7 +178,7 @@ export const LoadingScreen = ({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 z-50 flex items-center justify-center overflow-hidden"
+        className="fixed inset-0 bg-black z-[100] flex items-center justify-center overflow-hidden"
       >
         {/* Your enhanced cinematic loading screen code from previous response */}
         <div className="absolute inset-0">

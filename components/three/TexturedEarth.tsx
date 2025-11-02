@@ -15,12 +15,20 @@ export function TexturedEarth({ isZoomed = false }: TexturedEarthProps) {
   const { startLoading, updateProgress, stopLoading } = useLoading()
   const { progress, active } = useProgress()
 
+  // FIX 2: Start loading immediately on component mount
+  useEffect(() => {
+    startLoading("LOADING STAR CHART")
+  }, [startLoading])
+
   // Track texture loading progress
   useEffect(() => {
-    if (active) {
-      startLoading("RENDERING STAR CHART")
+    if (!active && progress === 100) {
+      updateProgress(100)
+      setTimeout(stopLoading, 500)
+    } else if (active) {
+      updateProgress(progress)
     }
-  }, [active, startLoading])
+  }, [progress, active, updateProgress, stopLoading])
 
   useEffect(() => {
     if (!active && progress === 100) {

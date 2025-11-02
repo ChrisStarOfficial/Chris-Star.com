@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useCallback } from 'react'
 import { LoadingScreen } from '@/components/ui/LoadingScreen'
 
 interface LoadingContextType {
-  startLoading: (message?: string) => void
+  startLoading: (message?: string, showImmediately?: boolean) => void
   updateProgress: (progress: number) => void
   stopLoading: () => void
   isLoading: boolean
@@ -17,11 +17,13 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false)
   const [progress, setProgress] = useState(0)
   const [message, setMessage] = useState("LOADING")
+  const [showImmediately, setShowImmediately] = useState(false)
 
-  const startLoading = useCallback((customMessage?: string) => {
+  const startLoading = useCallback((customMessage?: string, immediate: boolean = false) => {
     setIsLoading(true)
     setProgress(0)
     setMessage(customMessage || "LOADING")
+    setShowImmediately(immediate)
   }, [])
 
   const updateProgress = useCallback((newProgress: number) => {
@@ -31,6 +33,7 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const stopLoading = useCallback(() => {
     setIsLoading(false)
     setProgress(100)
+    setShowImmediately(false)
     // Small delay to show 100% before hiding
     setTimeout(() => setProgress(0), 300)
   }, [])
@@ -48,6 +51,7 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
         <LoadingScreen 
           loadingProgress={progress} 
           message={message}
+          showImmediately={showImmediately}
         />
       )}
     </LoadingContext.Provider>

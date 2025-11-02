@@ -8,10 +8,16 @@ import { ShipDecks } from '@/components/ui/ShipDecks'
 import { useState, useEffect } from 'react'
 import { Footer } from "@/components/layout/Footer"
 import { NavigationEffect } from "@/components/layout/NavigationEffect"
+import { useLoading } from '@/components/ui/LoadingContext'
 
 export default function NavigationPage() {
   const [isBriefingOpen, setIsBriefingOpen] = useState(false)
   const [isEarthZoomed, setIsEarthZoomed] = useState(false)
+  const { startLoading } = useLoading()
+
+  useEffect(() => {
+    startLoading("INITIALIZING NAVIGATION SYSTEMS")
+  }, [startLoading])
 
   useEffect(() => {
     const handleEarthClick = () => {
