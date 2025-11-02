@@ -99,7 +99,7 @@ export default function NavigationPage() {
 
               {/* Click to Brief Text */}
               {!isEarthZoomed && (
-                <div className="absolute bottom-1/8.5 left-1/2 transform -translate-x-1/2 text-base tracking-[0.3em] opacity-80 font-light">
+                <div className="absolute bottom-1/8 left-1/2 transform -translate-x-1/2 text-base tracking-[0.3em] opacity-80 font-light">
                   CLICK TO BRIEF
                 </div>
               )}
