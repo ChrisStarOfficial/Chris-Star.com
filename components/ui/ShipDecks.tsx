@@ -64,8 +64,8 @@ export function ShipDecks() {
   const currentDeck = getCurrentDeck()
 
   return (
-    <div className="col-span-2 z-10 flex flex-col justify-center">
-      <div className="text-lg font-serif mb-4 text-parchment opacity-90">SHIP DECKS</div>
+    <div className="col-span-2 z-10 flex flex-col justify-end items-end">
+      <div className="text-lg font-serif mb-4 text-parchment opacity-90 text-right">SHIP DECKS</div>
       {decks.map((deck) => {
         const isCurrentDeck = deck.name === currentDeck
         
@@ -73,7 +73,7 @@ export function ShipDecks() {
           <button
             key={deck.path}
             onClick={() => handleDeckClick(deck.path)}
-            className={`text-left transition-colors cursor-pointer ${
+            className={`text-right transition-colors cursor-pointer w-full flex justify-end ${
               isCurrentDeck
                 ? 'text-electric opacity-90'
                 : 'text-clay opacity-80 hover:text-electric hover:opacity-100'
