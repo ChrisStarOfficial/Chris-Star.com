@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber'
 import { TexturedEarth } from '@/components/three/TexturedEarth'
 import { EarthBriefingOverlay } from '@/components/ui/overlay/EarthBriefingOverlay'
-import { ShipSystems } from '@/components/ui/ShipSystems'
+import { StatusReport } from '@/components/ui/StatusReport'
 import { ShipDecks } from '@/components/ui/ShipDecks'
 import { useState, useEffect } from 'react'
 import { Footer } from "@/components/layout/Footer"
@@ -69,7 +69,7 @@ export default function NavigationPage() {
             <div className="grid grid-cols-12 h-[calc(100%-80px)] gap-8">
               
               {/* Left - Ship Systems */}
-              <ShipSystems />
+              <StatusReport />
 
               {/* Center - Full Screen Earth */}
               <div className="col-span-8 relative flex items-center justify-center">
