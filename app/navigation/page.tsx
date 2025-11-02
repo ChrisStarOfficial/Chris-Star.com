@@ -81,7 +81,7 @@ export default function NavigationPage() {
             </div>
 
             {/* Main Earth Content - Full center */}
-            <div className="w-full h-full flex items-center justify-center" style={{ paddingTop: '80px' }}>
+            <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
               <div className="w-full h-full">
                 <Canvas
                   camera={{
@@ -99,7 +99,7 @@ export default function NavigationPage() {
 
               {/* Click to Brief Text */}
               {!isEarthZoomed && (
-                <div className="absolute bottom-1/8 left-1/2 transform -translate-x-1/2 text-base tracking-[0.3em] opacity-80 font-light">
+                <div className="absolute bottom-1/9 left-1/2 transform -translate-x-1/2 text-base tracking-[0.3em] opacity-80 font-light">
                   CLICK TO BRIEF
                 </div>
               )}
@@ -109,11 +109,12 @@ export default function NavigationPage() {
             <div className="absolute bottom-8 left-8 z-10">
               <div className='text-clay opacity-80'>Star Chart: 91048j27351a6088b39</div>
             </div>
-            
+
             {/* Bottom Right - Ship Name */}
             <div className="absolute bottom-8 right-8 z-10">
               <div className='text-clay opacity-80'>Starship: Dux Ferox</div>
             </div>
+
           </div>
         </div>
 
