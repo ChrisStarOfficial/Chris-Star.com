@@ -1109,3 +1109,13 @@ html {
   stroke: rgb(148 163 184) !important;
   fill: none !important;
 }
+
+/* ROOT-CAUSE FIX: Prevents Dark Reader from modifying the entire app container */
+body {
+  /* This custom CSS property is recognized by Dark Reader to prevent interference */
+  color-scheme: initial !important; 
+}
+/* If the above is not sufficient, a more specific property can be used */
+html, body, #__next {
+    --darkreader-inline-scheme: 'none' !important;
+}

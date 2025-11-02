@@ -66,13 +66,6 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
     }
   }
 
-  // NOTE: You were already conditionally rendering based on isMounted, which helps.
-  // The root element (div) mismatch is often avoided this way.
-  // We apply the fix below to the Image component itself for external attribute changes.
-  // The conditional render logic here is also unnecessary if you suppress the warning on Image.
-  // I will combine the two <Image> renders and remove the first conditional return.
-  
-  // FIX 2: Added suppressHydrationWarning to the Image component.
   const ImageComponent = ({ isTransformed, className }: { isTransformed: boolean, className: string }) => (
     <Image
       src="/Icon.png"
@@ -82,10 +75,8 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
       className={`drop-shadow-lg transition-all duration-500 ${className} ${
         isTransformed ? "brightness-110 contrast-125" : ""
       }`}
-      suppressHydrationWarning={true} // <-- THE KEY FIX
     />
   )
-  
 
   if (!isMounted) {
     return (
