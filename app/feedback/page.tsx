@@ -1,10 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Star, Send, X } from "lucide-react"
 import Button from "@/components/ui/forms/Button"
+import GlassOverlay, { GlassPanel } from "@/components/ui/overlay/FeedbackOverlay"
 
 export default function ProductReviewForm() {
   const [rating, setRating] = useState(0)
@@ -54,15 +54,8 @@ export default function ProductReviewForm() {
 
   if (submitted) {
     return (
-      <div
-        className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('/fractal-glass-background.jpg')`,
-        }}
-      >
-        <div className="bg-black/20 absolute inset-0" />
-
-        <div className="relative w-[800px] max-w-[800px] backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 transition-all duration-700 ease-out">
+      <GlassOverlay>
+        <GlassPanel>
           <button
             onClick={resetForm}
             className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white transition-all duration-300 hover:scale-110"
@@ -74,7 +67,7 @@ export default function ProductReviewForm() {
             <div className="text-6xl">🎉</div>
             <h2 className="text-2xl font-medium text-white">Thank You!</h2>
             <p className="text-white/80">
-              Your review has been submitted successfully. We appreciate your feedback! 💝
+              Your feedback has been received. We highly appreciate it! 💝
             </p>
             <Button
               onClick={() => window.open("https://www.youtube.com/@diecastbydollar", "_blank")}
@@ -83,21 +76,14 @@ export default function ProductReviewForm() {
               Subscribe on YouTube 📺
             </Button>
           </div>
-        </div>
-      </div>
+        </GlassPanel>
+      </GlassOverlay>
     )
   }
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url('/fractal-glass-background.jpg')`,
-      }}
-    >
-      <div className="bg-black/20 absolute inset-0" />
-
-      <div className="relative w-[800px] max-w-[800px] backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 transition-all duration-700 ease-out">
+    <GlassOverlay>
+      <GlassPanel>
         <div className="text-center mb-8">
           <h1 className="text-2xl font-medium text-white mb-2">Feedback Form</h1>
           <p className="text-white/60 text-sm">Share your experience with us to help us create the best solution possible.</p>
@@ -261,7 +247,7 @@ export default function ProductReviewForm() {
             )}
           </Button>
         </form>
-      </div>
-    </div>
+      </GlassPanel>
+    </GlassOverlay>
   )
 }
