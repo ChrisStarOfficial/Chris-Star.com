@@ -31,3 +31,8 @@ next-env.d.ts
 
 # opencode
 opencode.exe
+
+# git commits
+git show 00fbc83 --name-only.txt
+git show 00fbc83 --stat.txt
+git show 00fbc83.txt

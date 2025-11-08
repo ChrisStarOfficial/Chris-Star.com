@@ -6,7 +6,7 @@ interface UseOptionSelectionProps {
     onOptionSelect?: (optionId: string) => void
 }
 
-export function UseOptionSelection({ onOptionSelect }: UseOptionSelectionProps = {}) {
+export function useOptionSelection({ onOptionSelect }: UseOptionSelectionProps = {}) {
     const [selectedOption, setSelectedOption] = useState<string | null>(null)
     
     const handleOptionClick = (optionId: string) => {

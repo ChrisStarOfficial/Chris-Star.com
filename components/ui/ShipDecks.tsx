@@ -14,7 +14,7 @@ const decks: DeckItem[] = [
   { name: 'Bridge', path: '/' },
   { name: 'Navigation', path: '/navigation' },
   { name: 'The Archives', path: '/archives' },
-  { name: 'Personal Quarters', path: '/quarters' },
+  { name: 'Personal Quarters', path: '/chris' },
   { name: 'Lounge', path: '/not-found' },
 ]
 
