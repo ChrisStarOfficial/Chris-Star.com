@@ -3,40 +3,49 @@
 import { ReactNode } from 'react'
 
 interface OptionsGridProps {
-    children: ReactNode
-    title?: string
-    subtitle?: string
-    className?: string
+  children: ReactNode
+  title?: string
+  subtitle?: string
+  className?: string
 }
 
-export function OptionsGrid({
-    children,
-    title,
-    subtitle,
-    className = ""
+export function OptionsGrid({ 
+  children, 
+  title, 
+  subtitle, 
+  className = "" 
 }: OptionsGridProps) {
-    return (
-        <section className={`py-12 px-6 ${className}`}>
-            {/* Header */}
-            {(title || subtitle) && (
-                <div className='text-center mb-12'>
-                    {title && (
-                        <h2 className='text-3xl font-bold text-white font-sans mb-4 tracking-wide'>
-                            {title}
-                        </h2>
-                    )}
-                    {subtitle && (
-                        <p className='text-gray-400 text-lg font-light max-w-2xl mx-auto'>
-                            {subtitle}
-                        </p>
-                    )}
-                </div>
-            )}
+  return (
+    <section className={`min-h-screen py-12 px-6 bg-gray-900 text-white relative overflow-hidden ${className}`}>
+      {/* Background Glow */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-amber-600/20 to-transparent" />
+      </div>
 
-            {/* Grid */}
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto'>
-                {children}
-            </div>
-        </section>
-    )
+      <div className="max-w-6xl mx-auto relative z-10 h-full flex flex-col">
+        {/* Header - Stays at top */}
+        {(title || subtitle) && (
+          <div className="text-center mb-16 pt-8"> {/* Added pt-8 for top padding */}
+            {title && (
+              <h2 className="font-sans font-bold text-4xl md:text-5xl mb-6 tracking-tight">
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p className="font-sans text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto">
+                {subtitle}
+              </p>
+            )}
+          </div>
+        )}
+        
+        {/* Cards Container - Centered vertically */}
+        <div className="flex-grow flex items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center w-full">
+            {children}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }

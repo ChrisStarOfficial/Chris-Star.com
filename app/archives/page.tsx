@@ -1,74 +1,73 @@
-// Test - merge Vault with Wiki, this is their MOC note of sorts
-
 "use client"
 
 import { OptionsGrid } from '@/components/ui/OptionsGrid'
 import { OptionCard } from '@/components/ui/OptionCard'
-import { useOptionSelection } from '@/hooks/useOptionSelection'
+import { Footer } from "@/components/layout/Footer"
 
-function StarIcon() {
-    return (
-        <svg className='w-8 h-8' fill='currentColor' viewBox='0 0 24 24'>
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-    )
+function VaultIcon() {
+  return (
+    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+    </svg>
+  )
+}
+
+function WikiIcon() {
+  return (
+    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+  )
+}
+
+function CompendiaIcon() {
+  return (
+    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+    </svg>
+  )
 }
 
 export default function ArchivesPage() {
-    const { handleOptionClick } = useOptionSelection({
-        onOptionSelect: (optionId) => {
-            console.log('Selected option:', optionId)
-        }
-    })
+  const options = [
+    {
+      id: 'vault',
+      title: 'The Vault',
+      description: 'Secure repository of classified documents and artifacts',
+      href: '/archives/vault',
+      icon: <VaultIcon />
+    },
+    {
+      id: 'wiki',
+      title: 'StarWiki',
+      description: 'Comprehensive database of celestial knowledge and research',
+      href: '/archives/wiki',
+      icon: <WikiIcon />
+    },
+    {
+      id: 'compendia',
+      title: 'Project Compendia',
+      description: 'Collection of scientific research and experimental data',
+      href: '/archives/compendia',
+      icon: <CompendiaIcon />
+    }
+  ]
 
-    const options = [
-        {
-            id: 'archives',
-            title: 'The Archives',
-            description: 'Access historical data and mission logs',
-            href: '/archives',
-            icon: <StarIcon />
-        },
-        {
-            id: 'systems',
-            title: 'Ship Systems',
-            description: 'Monitor and control vessel operations',
-            onClick: () => handleOptionClick('systems'),
-            icon: <StarIcon />
-        },
-        {
-            id: 'navigation',
-            title: 'Stellar Navigation',
-            description: 'Plot courses through the galaxy',
-            href: '/navigation',
-            icon: <StarIcon />
-        },
-        {
-            id: 'communications',
-            title: 'Communications',
-            description: 'Establish contact with other vessels',
-            onClick: () => handleOptionClick('communications'),
-            icon: <StarIcon />
-        }
-    ]
-
-    return (
-        <OptionsGrid
-            title='Ship Operations'
-            subtitle='Select a system to access its functions'
-            className='bg-gray-900/50'
-        >
-            {options.map((option) => (
-                <OptionCard
-                    key={option.id}
-                    title={option.title}
-                    description={option.description}
-                    href={option.href}
-                    onClick={option.onClick}
-                    icon={option.icon}
-                    className='h-48'
-                />
-            ))}
-        </OptionsGrid>
-    )
+  return (
+    <div className="min-h-screen flex flex-col bg-gray-900">
+      <OptionsGrid title="The Archives">
+        {options.map((option) => (
+          <OptionCard
+            key={option.id}
+            title={option.title}
+            description={option.description}
+            href={option.href}
+            icon={option.icon}
+          />
+        ))}
+      </OptionsGrid>
+      
+      <Footer />
+    </div>
+  )
 }

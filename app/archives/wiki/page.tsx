@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
+import { Footer } from "@/components/layout/Footer"
 
 const wikiProjects = [
   {
@@ -141,8 +141,8 @@ export default function WikiPage() {
                 </svg>
               </div>
             </div>
-            <h1 className="font-sans font-bold text-6xl md:text-8xl mb-8 tracking-tight">Community</h1>
-            <h2 className="font-sans font-bold text-3xl md:text-5xl text-blue-400 mb-12 tracking-tight">Wiki Hub</h2>
+            <h1 className="font-sans font-bold text-6xl md:text-8xl mb-8 tracking-tight">Wikis</h1>
+            <h2 className="font-sans font-bold text-3xl md:text-5xl text-blue-400 mb-12 tracking-tight">by Chris Star</h2>
           </ScrollSection>
 
           <ScrollSection direction="up" delay={300}>
@@ -336,19 +336,7 @@ export default function WikiPage() {
       </ScrollSection>
 
       {/* Footer */}
-      <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <InteractiveLogo className="mx-auto mb-10" />
-          <p className="font-sans text-gray-400 mb-6 text-lg">
-            Copyright © 2025 Chris Star Enterprises LLC. All Rights Reserved.
-          </p>
-          <div className="flex items-center justify-center">
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-blue-600 to-transparent" />
-            <div className="w-2 h-2 bg-blue-600 rounded-full mx-4" />
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-blue-600 to-transparent" />
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         @keyframes float {
