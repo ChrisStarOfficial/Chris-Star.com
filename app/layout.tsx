@@ -30,7 +30,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: "Chris Star Enterprises",
+  title: "Chris Star Enterprises: Where Optimization Meets Transformation",
   description: "Where optimization meets transformation.",
   icons: {
     icon: '/favicon.ico',
