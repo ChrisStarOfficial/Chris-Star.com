@@ -1133,3 +1133,11 @@ img[alt="CSE"] {
   --darkreader-inline-color: transparent !important;
   color: transparent !important;
 }
+
+/* Ensure these rules are still present and working in globals.css */
+html, body, #__next {
+    --darkreader-inline-scheme: 'none' !important;
+}
+body {
+    color-scheme: initial !important; 
+}
