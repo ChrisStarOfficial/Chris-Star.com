@@ -3,6 +3,27 @@
 import { useState, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
 import { Footer } from "@/components/layout/Footer"
+import { OptionsGrid } from '@/components/ui/OptionsGrid'
+import { OptionCard } from '@/components/ui/OptionCard'
+
+// Add these icon components at the top with other imports
+function StarseedCentralIcon() {
+  return (
+    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  )
+}
+
+function StarseedAcademyIcon() {
+  return (
+    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14v6" />
+    </svg>
+  )
+}
 
 const communityFeatures = [
   {
@@ -75,6 +96,24 @@ export default function CommunityPage() {
   const [scrollY, setScrollY] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
+  // Community options for the top section
+  const communityOptions = [
+    {
+      id: 'starseedcentral',
+      title: 'Starseed Central',
+      description: 'Main community',
+      href: '/starseedcentral',
+      icon: <StarseedCentralIcon />
+    },
+    {
+      id: 'starseedacademy',
+      title: 'Starseed Academy',
+      description: 'Educational platform with courses, workshops, and structured learning paths',
+      href: '/starseedacademy', 
+      icon: <StarseedAcademyIcon />
+    }
+  ]
+
   // Handle mouse movement for parallax
   const handleMouseMove = (e: MouseEvent) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 2
@@ -103,6 +142,19 @@ export default function CommunityPage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
+
+      {/* NEW: Community Options Section - Same as Archives */}
+      <OptionsGrid title="Community Platforms">
+        {communityOptions.map((option) => (
+          <OptionCard
+            key={option.id}
+            title={option.title}
+            description={option.description}
+            href={option.href}
+            icon={option.icon}
+          />
+        ))}
+      </OptionsGrid>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-amber-900 via-gray-900 to-amber-800 overflow-hidden">
