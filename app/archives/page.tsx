@@ -33,21 +33,21 @@ export default function ArchivesPage() {
     {
       id: 'vault',
       title: 'The Vault',
-      description: 'Secure repository of classified documents and artifacts',
+      description: 'YouTube video transcripts',
       href: '/archives/vault',
       icon: <VaultIcon />
     },
     {
       id: 'wiki',
-      title: 'StarWiki',
-      description: 'Comprehensive database of celestial knowledge and research',
+      title: 'Wiki',
+      description: 'Stellar knowledge wiki',
       href: '/archives/wiki',
       icon: <WikiIcon />
     },
     {
       id: 'compendia',
       title: 'Project Compendia',
-      description: 'Collection of scientific research and experimental data',
+      description: "Stellar knowledge transcripts",
       href: '/archives/compendia',
       icon: <CompendiaIcon />
     }
