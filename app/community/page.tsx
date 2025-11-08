@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
+import { Footer } from "@/components/layout/Footer"
 
 const communityFeatures = [
   {
@@ -348,19 +348,7 @@ export default function CommunityPage() {
       </ScrollSection>
 
       {/* Footer */}
-      <footer className="py-20 px-6 bg-gray-900 text-white border-t border-gray-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <InteractiveLogo className="mx-auto mb-10" />
-          <p className="font-sans text-gray-400 mb-6 text-lg">
-            Copyright © 2025 Chris Star Enterprises LLC. All Rights Reserved.
-          </p>
-          <div className="flex items-center justify-center">
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-            <div className="w-2 h-2 bg-amber-600 rounded-full mx-4"></div>
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }
