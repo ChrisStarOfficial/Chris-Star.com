@@ -32,7 +32,7 @@ export const Footer = () => {
               <a href="/privacy" className="hover:text-white transition-colors text-white">Privacy Policy</a>
               <a href="/terms" className="hover:text-white transition-colors text-white">Terms of Service</a>
               <a href="/legal" className="hover:text-white transition-colors text-white">Legal</a>
-              <a href="/sitemap" className="hover:text-white transition-colors text-white">Sitemap</a>
+              <a href="/sitemap" className="hover:text-white transition-colors text-white">Site Map</a>
               <a href="/careers" className="hover:text-white transition-colors text-white">Careers</a>
               </div>
           </div>
