@@ -9,14 +9,19 @@ interface SitemapLayoutProps {
 export default function SitemapLayout({ children }: SitemapLayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <Header />
-      
-      <main className="relative py-16">
+      <div className="fixed inset-0">
         <PurpleGalaxyBackground />
-        {children}
-      </main>
+      </div>
+      
+      <div className="relative z-10">
+        <Header />
+        
+        <main className="relative py-16">
+          {children}
+        </main>
 
       <Footer />
+      </div>
     </div>
   )
 }
