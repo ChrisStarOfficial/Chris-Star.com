@@ -104,7 +104,7 @@ function getPlaceholderVideos(): YouTubeVideo[] {
     {
       id: "placeholder-1",
       title: "Spiritual Awakening Journey",
-      thumbnail: "/api/placeholder/400/225",
+      thumbnail: "/images/sample-thumb-1.png", // You can add actual sample images
       url: "https://youtube.com/@ChrisStarOfficial",
       publishedAt: new Date().toISOString(),
       duration: "25:00"
@@ -112,7 +112,7 @@ function getPlaceholderVideos(): YouTubeVideo[] {
     {
       id: "placeholder-2", 
       title: "Shadow Work & Inner Transformation",
-      thumbnail: "/api/placeholder/400/225",
+      thumbnail: "/images/sample-thumb-2.png",
       url: "https://youtube.com/@ChrisStarOfficial",
       publishedAt: new Date().toISOString(),
       duration: "32:15"
@@ -120,7 +120,7 @@ function getPlaceholderVideos(): YouTubeVideo[] {
     {
       id: "placeholder-3",
       title: "Health Optimization for Spiritual Growth",
-      thumbnail: "/api/placeholder/400/225",
+      thumbnail: "/images/sample-thumb-3.png",
       url: "https://youtube.com/@ChrisStarOfficial",
       publishedAt: new Date().toISOString(),
       duration: "28:45"
