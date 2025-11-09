@@ -150,19 +150,29 @@ export default function SpiritualHomepage() {
                         <div className="relative aspect-video bg-gray-700 overflow-hidden">
                           {/* Video thumbnail with sample image */}
                           <div className="w-full h-full bg-gradient-to-br from-amber-900/40 to-purple-900/40 flex items-center justify-center relative">
-                            {/* Sample thumbnail background based on video topic */}
+                            {video.thumbnail && !video.thumbnail.includes('placeholder') ? (
+                              // If we have a real thumbnail, use it
+                              <img 
+                                src={video.thumbnail} 
+                                alt={video.title}
+                                className="w-full h-full object-cover absolute inset-0"
+                              />
+                            ) : (
+                            // Otherwise use a clean gradient based on content type
                             <div className={`absolute inset-0 opacity-60 ${
                               video.title.includes('Shadow') ? 'bg-gradient-to-br from-gray-900 to-amber-900' :
                               video.title.includes('Starseed') ? 'bg-gradient-to-br from-blue-900 to-purple-900' :
                               video.title.includes('Health') ? 'bg-gradient-to-br from-green-900 to-amber-900' :
                               'bg-gradient-to-br from-amber-900 to-rose-900'
                             }`} />
+                            )}
+                            <div className="absolute inset-0 bg-black/40" />
                             
-                            {/* Play icon overlay */}
+                            {/* Real YouTube play button and duration */}
                             <div className="relative z-10 text-center text-white/90">
-                              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300 shadow-2xl">
-                                <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                  <path d="M8 5v14l11-7z"/>
+                              <div className="w-20 h-12 bg-black/70 rounded flex items-center justify-center mx-auto mb-3 group-hover:bg-black/80 transition-colors duration-300">
+                                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                                 </svg>
                               </div>
                               <span className="text-sm font-sans bg-black/50 px-2 py-1 rounded">{video.duration}</span>
