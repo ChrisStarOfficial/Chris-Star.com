@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Footer } from "@/components/layout/Footer"
+import { Header } from "@/components/layout/Header"
 import { ScrollSection } from "@/components/layout/scroll-section"
 import { useYouTubeVideos } from "@/hooks/useYouTubeVideos"
 
@@ -32,6 +33,7 @@ export default function SpiritualHomepage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
+      <Header />
       
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center px-6 overflow-hidden">
@@ -143,7 +145,7 @@ export default function SpiritualHomepage() {
                     {videos.map((video, index) => (
                       <div 
                         key={video.id}
-                        className="group bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-amber-600 transition-all duration-500 cursor-pointer transform hover:scale-105"
+                        className="group bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl hover:border-amber-600 transition-all duration-500 cursor-pointer transform hover:scale-105"
                         onClick={() => window.open(video.url, '_blank')}
                         data-magnetic
                       >
@@ -168,27 +170,26 @@ export default function SpiritualHomepage() {
                             )}
                             <div className="absolute inset-0 bg-black/40" />
                             
-                            {/* Real YouTube play button and duration */}
+                            {/* YouTube play button - centered and larger */}
                             <div className="relative z-10 text-center text-white/90">
-                              <div className="w-20 h-12 bg-black/70 rounded flex items-center justify-center mx-auto mb-3 group-hover:bg-black/80 transition-colors duration-300">
-                                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-                                </svg>
-                              </div>
-                              <span className="text-sm font-sans bg-black/50 px-2 py-1 rounded">{video.duration}</span>
+                              <svg className="w-16 h-14 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 68 48">
+                                <path fill="#f71c47" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"/>
+                                <path fill="white" d="M45,24L27,14v20L45,24z"/>
+                              </svg>
+                            </div>
+
+                            {/* Duration timestamp - bottom right corner */}
+                            <div className="absolute bottom-2 right-2 z-10">
+                              <span className="text-sm font-sans text-white px-1 py-0.5 rounded" style={{ backgroundColor: '#202124' }}>
+                                {video.duration}
+                              </span>
                             </div>
                           </div>
                         </div>
-                        <div className="p-6">
-                          <h3 className="font-sans font-semibold text-lg text-white mb-3 group-hover:text-amber-400 transition-colors line-clamp-2">
+                        <div className="p-2 text-center">
+                          <h3 className="font-sans font-semibold text-lg text-white group-hover:text-amber-400 transition-colors line-clamp-2">
                             {video.title}
                           </h3>
-                          <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-sans font-semibold hover:bg-amber-700 transition-colors duration-300 flex items-center justify-center space-x-2">
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <span>Watch Now</span>
-                          </button>
                         </div>
                       </div>
                     ))}
