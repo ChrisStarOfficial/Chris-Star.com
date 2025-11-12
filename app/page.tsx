@@ -104,8 +104,8 @@ export default function SpiritualHomepage() {
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
           <ScrollSection direction="fade">
-            <div className="text-center mb-16">
-              <h2 className="font-sans font-bold text-4xl md:text-5xl text-white mb-6 tracking-tight">
+            <div className="text-center mb-8">
+              <h2 className="font-sans font-bold text-4xl md:text-5xl text-white mb-4 tracking-tight">
                 Latest Free Content
               </h2>
               <p className="font-sans text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
@@ -117,12 +117,11 @@ export default function SpiritualHomepage() {
           {loading ? (
             <div className="grid md:grid-cols-3 gap-8">
               {[1, 2, 3].map((item) => (
-                <div key={item} className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden shadow-lg animate-pulse">
+                <div key={item} className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-lg animate-pulse">
                   <div className="aspect-video bg-gray-700"></div>
-                  <div className="p-6">
-                    <div className="h-4 bg-gray-700 rounded mb-3"></div>
-                    <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-                    <div className="h-10 bg-gray-700 rounded mt-4"></div>
+                  <div className="p-2 text-center">
+                    <div className="h-4 bg-gray-700 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-700 rounded w-3/4 mx-auto"></div>
                   </div>
                 </div>
               ))}
@@ -131,7 +130,7 @@ export default function SpiritualHomepage() {
             <>
               {/* Show error message as a gentle notification, not blocking content */}
               {error && (
-                <div className="text-center mb-8">
+                <div className="text-center mb-8"> {/* Equal spacing with mb-8 */}
                   <div className="inline-block bg-amber-500/20 border border-amber-500/30 text-amber-300 px-6 py-3 rounded-lg">
                     {error}
                   </div>
@@ -145,7 +144,7 @@ export default function SpiritualHomepage() {
                     {videos.map((video, index) => (
                       <div 
                         key={video.id}
-                        className="group bg-black/20 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl hover:border-amber-600 transition-all duration-500 cursor-pointer transform hover:scale-105"
+                        className="group bg-transparent border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl hover:border-amber-600 transition-all duration-500 cursor-pointer transform hover:scale-105"
                         onClick={() => window.open(video.url, '_blank')}
                         data-magnetic
                       >
@@ -173,7 +172,7 @@ export default function SpiritualHomepage() {
                             {/* YouTube play button - centered and larger */}
                             <div className="relative z-10 text-center text-white/90">
                               <svg className="w-16 h-14 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 68 48">
-                                <path fill="#f71c47" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"/>
+                                <path fill="#333333" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"/>
                                 <path fill="white" d="M45,24L27,14v20L45,24z"/>
                               </svg>
                             </div>
@@ -186,7 +185,8 @@ export default function SpiritualHomepage() {
                             </div>
                           </div>
                         </div>
-                        <div className="p-2 text-center">
+                        {/* True glassmorphism title area */}
+                        <div className="bg-black/40 backdrop-blur-md border-t border-white/10 p-2 text-center rounded-b-2xl">
                           <h3 className="font-sans font-semibold text-lg text-white group-hover:text-amber-400 transition-colors line-clamp-2">
                             {video.title}
                           </h3>
