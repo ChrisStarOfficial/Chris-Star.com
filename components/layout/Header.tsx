@@ -33,7 +33,7 @@ export const Header = () => {
             <Link href="/" className="flex items-center">
               <div className="relative w-40 h-10">
                 <Image
-                  src="/Transparent Rectangular Logo with Text.png"
+                  src="/logos/dark-mode/Transparent Rectangular Logo with Text.png"
                   alt="Chris Star Enterprises"
                   fill
                   className="object-contain"
