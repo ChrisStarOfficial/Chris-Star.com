@@ -68,7 +68,7 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
 
   const ImageComponent = ({ isTransformed, className }: { isTransformed: boolean, className: string }) => (
     <Image
-      src="/Icon.png"
+      src="/logos/Icon.png"
       alt="CSE"
       width={36}
       height={36}
