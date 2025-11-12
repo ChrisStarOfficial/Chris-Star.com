@@ -38,7 +38,7 @@ export default function NotFound() {
   }
 
   return (
-    <main className="min-h-screen bg-cosmic relative overflow-hidden">
+    <div className="min-h-screen bg-cosmic text-parchment relative overflow-hidden">
       <SacredGeometryBackground />
 
       {/* Protocol Overlay */}
@@ -120,6 +120,6 @@ export default function NotFound() {
       </div>
           
       <Footer />
-    </main>
+    </div>
   )
 }
