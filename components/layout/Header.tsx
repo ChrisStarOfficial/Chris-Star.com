@@ -8,7 +8,7 @@ import { NavigationIcon } from '@/components/ui/NavigationIcon';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [navSpacing, setNavSpacing] = useState('space-x-8');
+  const [linkSpacing, setLinkSpacing] = useState('space-x-8');
   const headerRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
@@ -26,30 +26,38 @@ export const Header = () => {
     { name: 'The Archives', href: '/archives' },
   ];
 
-  // Dynamic spacing calculation
+  // Dynamic equal spacing calculation
   useEffect(() => {
     const updateSpacing = () => {
       if (!headerRef.current) return;
 
       const header = headerRef.current;
-      const logoWidth = header.querySelector('a:first-child')?.clientWidth || 0;
-      const availableWidth = header.clientWidth - logoWidth - 48; // 48px for padding
+      const logo = header.querySelector('a:first-child') as HTMLElement;
+      const moonIcon = header.querySelector('button:last-child') as HTMLElement;
+      
+      if (!logo || !moonIcon) return;
 
-      // Calculate optimal spacing based on available width
-      let spacing;
-      if (availableWidth > 1200) {
-        spacing = 'space-x-32';
-      } else if (availableWidth > 1000) {
-        spacing = 'space-x-24';
-      } else if (availableWidth > 800) {
-        spacing = 'space-x-20';
-      } else if (availableWidth > 600) {
-        spacing = 'space-x-16';
-      } else {
-        spacing = 'space-x-12';
-      }
+      const logoWidth = logo.clientWidth;
+      const moonWidth = moonIcon.clientWidth;
+      const headerWidth = header.clientWidth;
+      const padding = 48; // Total padding (24px each side)
 
-      setNavSpacing(spacing);
+      // Calculate available space for links
+      const availableWidth = headerWidth - logoWidth - moonWidth - padding;
+      
+      // We have 5 text links, which creates 6 gaps (including before first and after last)
+      // Each gap should be equal
+      const gapWidth = availableWidth / 6; // 6 equal gaps between 7 total elements
+
+      // Convert gap width to Tailwind spacing class
+      let spacingClass;
+      if (gapWidth >= 32) spacingClass = 'space-x-8';    // 32px
+      else if (gapWidth >= 24) spacingClass = 'space-x-6'; // 24px
+      else if (gapWidth >= 20) spacingClass = 'space-x-5'; // 20px
+      else if (gapWidth >= 16) spacingClass = 'space-x-4'; // 16px
+      else spacingClass = 'space-x-3';                    // 12px
+
+      setLinkSpacing(spacingClass);
     };
 
     updateSpacing();
@@ -61,9 +69,57 @@ export const Header = () => {
     <>
       <header className="sticky top-0 z-50 py-2" ref={headerRef}>
         <div className="mx-auto w-[95%] max-w-7xl bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl px-6 lg:px-8 h-16 flex items-center">
-          <div className="flex items-center justify-between w-full">
+          {/* All elements in one flex container with dynamic spacing */}
+          <div className={`hidden lg:flex items-center justify-between w-full ${linkSpacing}`}>
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0">
+              <div className="relative w-40 h-10">
+                <Image
+                  src="/logos/dark-mode/Transparent Rectangular Logo with Text.png"
+                  alt="Chris Star Enterprises"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
+
+            {/* Navigation Links */}
+            {navigationLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
+              >
+                {link.name}
+              </Link>
+            ))}
             
-            {/* Logo - Left */}
+            {/* Navigation Text */}
+            <Link
+              href="/navigation"
+              className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
+            >
+              <NavigationText />
+            </Link>
+
+            {/* Dark Mode Toggle Icon - Thinner crescent facing left */}
+            <button className="text-white hover:text-gray-300 transition-colors duration-200 p-2 flex-shrink-0">
+              <svg 
+                className="w-6 h-6" 
+                fill="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                {/* Thin crescent moon facing left - about 1/4 full */}
+                <path d="M9.37 3.51a7.99 7.99 0 1 0 11.12 11.12 9 9 0 0 1-11.12-11.12z" 
+                      fillRule="evenodd" clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="flex lg:hidden items-center justify-between w-full">
+            {/* Logo */}
             <Link href="/" className="flex items-center flex-shrink-0">
               <div className="relative w-40 h-10">
                 <Image
@@ -76,43 +132,9 @@ export const Header = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Distributed with proper spacing */}
-            <nav className="hidden lg:flex items-center flex-1 ml-8"> {/* Added ml-8 for logo spacing */}
-              <div className={`flex items-center justify-between w-full ${navSpacing}`}>
-                {navigationLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <Link
-                  href="/navigation"
-                  className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
-                >
-                  <NavigationText />
-                </Link>
-              </div>
-            </nav>
-
-            {/* Dark Mode Toggle Icon */}
-            <div className="hidden lg:flex items-center justify-end flex-shrink-0 ml-8"> {/* Added ml-8 for spacing */}
-              <button className="text-white hover:text-gray-300 transition-colors duration-200 p-2">
-                <svg 
-                  className="w-6 h-6" 
-                  fill="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M21.64 13a1 1 0 00-1.05-.14 8.05 8.05 0 01-3.37.73 8.15 8.15 0 01-8.14-8.1 8.59 8.59 0 01.25-2A1 1 0 008 2.36a10.14 10.14 0 1012 11.69 1 1 0 00-.36-1.05z" />
-                </svg>
-              </button>
-            </div>
-
             {/* Mobile Hamburger/X */}
             <button
-              className="lg:hidden text-white p-2"
+              className="text-white p-2"
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
