@@ -24,14 +24,9 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
 
   useEffect(() => {
     if (isMounted && clickCount === 2 && isClient) {
-      // Discover the easter egg
       discoverEgg('footer')
-
-      // Trigger golden shockwave
       setShowShockwave(true)
       setIsTransformed(true)
-
-      // Reset click count after animation
       setTimeout(() => {
         setClickCount(0)
       }, 2000)
@@ -50,14 +45,11 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
     if (!isMounted || !isClient) return
 
     if (isTransformed) {
-      // Reset transformation state before navigating
       setIsTransformed(false)
       setShowShockwave(false)
-      // Navigate to home
       router.push("/")
     } else {
       setClickCount((prev) => prev + 1)
-      // Reset click count after 1 seconds if not reached 2
       setTimeout(() => {
         if (clickCount < 1) {
           setClickCount(0)
@@ -80,48 +72,51 @@ export function InteractiveLogo({ className = "" }: InteractiveLogoProps) {
 
   if (!isMounted) {
     return (
-      <div className={`relative ${className}`}>
-        <div className="transition-all duration-500">
-          <ImageComponent isTransformed={false} className="" />
-        </div>
+      <div className={`relative ${className}`} style={{ lineHeight: 0 }}>
+        <ImageComponent isTransformed={false} className="" />
       </div>
     )
   }
 
   return (
-    <div className={`relative ${className}`}>
+    // Key change: Added flex container to fill available space
+    <div className={`relative flex items-center justify-center ${className}`} style={{ contain: 'layout', height: '100%', minHeight: '1.5rem' }}>
       {/* Shockwave Effect */}
       {showShockwave && (
         <>
-          <div className="absolute inset-0 -m-8 rounded-full border-4 border-amber-400 animate-ping opacity-75" />
+          <div 
+            className="absolute inset-0 -m-8 rounded-full border-4 border-amber-400 animate-ping opacity-75"
+            style={{ pointerEvents: 'none' }}
+          />
           <div
             className="absolute inset-0 -m-12 rounded-full border-2 border-amber-300 animate-ping opacity-50"
-            style={{ animationDelay: "0.2s" }}
+            style={{ animationDelay: "0.2s", pointerEvents: 'none' }}
           />
           <div
             className="absolute inset-0 -m-16 rounded-full border border-amber-200 animate-ping opacity-25"
-            style={{ animationDelay: "0.4s" }}
+            style={{ animationDelay: "0.4s", pointerEvents: 'none' }}
           />
         </>
       )}
 
-      {/* CSE Logo with Easter Egg */}
+      {/* Logo Container - Now fills the available height */}
       <div
         onClick={isClient ? handleClick : undefined}
-        className={`transition-all duration-500 ${
+        className={`transition-all duration-500 flex items-center justify-center ${
           isClient ? "cursor-pointer hover:scale-105" : ""
         } ${
           isTransformed
             ? "shadow-2xl shadow-amber-400/50 animate-pulse scale-110"
             : "" 
         }`}
+        style={{ height: '100%' }}
       >
         <ImageComponent isTransformed={false} className="" />
       </div>
 
       {/* Hint text for transformed state */}
       {isTransformed && (
-        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs text-amber-400 font-sans animate-pulse whitespace-nowrap">
+        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs text-amber-400 font-sans animate-pulse whitespace-nowrap">
           Click to go home!
         </div>
       )}
