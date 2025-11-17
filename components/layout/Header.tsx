@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { NavigationText } from '@/components/ui/NavigationText';
@@ -8,6 +8,8 @@ import { NavigationIcon } from '@/components/ui/NavigationIcon';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [navSpacing, setNavSpacing] = useState('space-x-8');
+  const headerRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,14 +26,45 @@ export const Header = () => {
     { name: 'The Archives', href: '/archives' },
   ];
 
+  // Dynamic spacing calculation
+  useEffect(() => {
+    const updateSpacing = () => {
+      if (!headerRef.current) return;
+
+      const header = headerRef.current;
+      const logoWidth = header.querySelector('a:first-child')?.clientWidth || 0;
+      const availableWidth = header.clientWidth - logoWidth - 48; // 48px for padding
+
+      // Calculate optimal spacing based on available width
+      let spacing;
+      if (availableWidth > 1200) {
+        spacing = 'space-x-32';
+      } else if (availableWidth > 1000) {
+        spacing = 'space-x-24';
+      } else if (availableWidth > 800) {
+        spacing = 'space-x-20';
+      } else if (availableWidth > 600) {
+        spacing = 'space-x-16';
+      } else {
+        spacing = 'space-x-12';
+      }
+
+      setNavSpacing(spacing);
+    };
+
+    updateSpacing();
+    window.addEventListener('resize', updateSpacing);
+    return () => window.removeEventListener('resize', updateSpacing);
+  }, []);
+
   return (
     <>
-      <header className="sticky top-0 z-50 py-2">
+      <header className="sticky top-0 z-50 py-2" ref={headerRef}>
         <div className="mx-auto w-[95%] max-w-7xl bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl px-6 lg:px-8 h-16 flex items-center">
           <div className="flex items-center justify-between w-full">
             
             {/* Logo - Left */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center flex-shrink-0">
               <div className="relative w-40 h-10">
                 <Image
                   src="/logos/dark-mode/Transparent Rectangular Logo with Text.png"
@@ -43,21 +76,21 @@ export const Header = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Icon flush right */}
-            <nav className="hidden lg:flex items-center justify-end flex-1">
-              <div className="flex items-center justify-between w-full max-w-2xl">
+            {/* Desktop Navigation - Dynamic equal spacing */}
+            <nav className="hidden lg:flex items-center justify-end flex-1 min-w-0">
+              <div className={`flex items-center ${navSpacing}`}>
                 {navigationLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap flex-1 text-center"
+                    className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
                   >
                     {link.name}
                   </Link>
                 ))}
                 <Link
                   href="/navigation"
-                  className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap flex-1 text-center"
+                  className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
                 >
                   <NavigationText />
                 </Link>
