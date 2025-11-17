@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { NavigationText } from '@/components/ui/NavigationText';
 import { NavigationIcon } from '@/components/ui/NavigationIcon';
 
 export const Header = () => {
@@ -43,22 +44,22 @@ export const Header = () => {
             </Link>
 
             {/* Desktop Navigation - Icon flush right */}
-            <nav className="hidden lg:flex items-center justify-center flex-1">
-              <div className="flex items-center justify-between w-full max-w-3xl">
+            <nav className="hidden lg:flex items-center justify-end flex-1">
+              <div className="flex items-center justify-between w-full max-w-2xl">
                 {navigationLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap"
+                    className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap flex-1 text-center"
                   >
                     {link.name}
                   </Link>
                 ))}
                 <Link
                   href="/navigation"
-                  className="text-white hover:text-gray-300 transition-colors duration-200"
+                  className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-base whitespace-nowrap flex-1 text-center"
                 >
-                  <NavigationIcon className="w-5 h-5" />
+                  <NavigationText />
                 </Link>
               </div>
             </nav>
@@ -112,10 +113,15 @@ export const Header = () => {
               ))}
               <Link
                 href="/navigation"
-                className="text-white hover:text-gray-300 transition-colors duration-200 py-2"
+                className="text-white hover:text-gray-300 transition-colors duration-200 font-sans text-xl py-2 text-center"
                 onClick={closeMenu}
               >
-                <NavigationIcon className="w-8 h-8" />
+                <span className="flex items-baseline justify-center">
+                  <span>N</span>
+                  <NavigationIcon className="w-4 h-4 mx-0.5" />
+                  <span>vig</span>
+                  <span className="relative -top-px">ation</span>
+                </span>
               </Link>
             </div>
           </div>
