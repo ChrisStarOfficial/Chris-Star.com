@@ -220,7 +220,7 @@ export default function SpiritualHomepage() {
 
             <ScrollSection direction="up" delay={200}>
               <p className="font-sans text-xl text-gray-300 leading-relaxed mb-12 max-w-3xl mx-auto">
-                While YouTube gives you wisdom, our community gives you transformation. Move beyond one-way content and into personalized guidance, live interaction, and a supportive spiritual tribe.
+                Our community is designed for implementation. Move into personalized guidance, live interaction, and a supportive spiritual tribe on your journey to spiritual expansion.
               </p>
             </ScrollSection>
 
@@ -238,12 +238,12 @@ export default function SpiritualHomepage() {
                 },
                 {
                   icon: "🧘",
-                  title: "Exclusive Meditations & Practices",
+                  title: "Exclusive Courses & Live Lessons",
                   description: "Access guided sessions not available anywhere else"
                 },
                 {
                   icon: "⚡",
-                  title: "Monthly Growth Challenges",
+                  title: "Monthly & Weekly Growth Challenges",
                   description: "Practical exercises to integrate spiritual wisdom"
                 }
               ].map((feature, index) => (
