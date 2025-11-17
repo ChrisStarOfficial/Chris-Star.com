@@ -103,12 +103,12 @@ export const Footer = () => {
               style={{ width: secondRowWidth }}
             >
               {/* Logo */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 -ml-2">
                 <InteractiveLogo className="scale-75" />
               </div>
 
               {/* Legal Links - Dynamic spacing based on available width */}
-              <div className="flex-1 flex justify-between ml-3">
+              <div className="flex-1 flex justify-between ml-7">
                 <a href="/privacy" className={`hover:text-white transition-colors text-white whitespace-nowrap ${copyrightFontSize} flex items-center`}>Privacy</a>
                 <a href="/terms" className={`hover:text-white transition-colors text-white whitespace-nowrap ${copyrightFontSize} flex items-center`}>Terms</a>
                 <a href="/legal" className={`hover:text-white transition-colors text-white whitespace-nowrap ${copyrightFontSize} flex items-center`}>Legal</a>
