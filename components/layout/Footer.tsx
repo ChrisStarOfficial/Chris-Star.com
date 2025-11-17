@@ -24,21 +24,23 @@ export const Footer = () => {
       const containerPadding = 24; // px-3 = 12px on each side
       const availableWidth = footerContainer.clientWidth - containerPadding;
 
-      // Scale copyright text to fit available width
-      let fontSize = 'text-xs';
-      copyrightElement.className = `font-sans whitespace-nowrap text-white text-center leading-tight ${fontSize}`;
+      // Try progressively larger font sizes until we find one that fits
+      const fontSizes = ['text-[10px]', 'text-[11px]', 'text-xs', 'text-sm', 'text-base'];
+      let bestSize = 'text-xs';
       
-      if (copyrightElement.scrollWidth > availableWidth) {
-        fontSize = 'text-[11px]';
-        copyrightElement.className = `font-sans whitespace-nowrap text-white text-center leading-tight ${fontSize}`;
+      for (let i = fontSizes.length - 1; i >= 0; i--) {
+        const testSize = fontSizes[i];
+        copyrightElement.className = `font-sans whitespace-nowrap text-white text-center leading-tight ${testSize}`;
         
-        if (copyrightElement.scrollWidth > availableWidth) {
-          fontSize = 'text-[10px]';
-          copyrightElement.className = `font-sans whitespace-nowrap text-white text-center leading-tight ${fontSize}`;
+        if (copyrightElement.scrollWidth <= availableWidth) {
+          bestSize = testSize;
+          break;
         }
       }
 
-      setCopyrightFontSize(fontSize);
+      // Apply the best fitting size
+      copyrightElement.className = `font-sans whitespace-nowrap text-white text-center leading-tight ${bestSize}`;
+      setCopyrightFontSize(bestSize);
 
       // Set second row to match copyright width
       const copyrightWidth = copyrightElement.scrollWidth;
