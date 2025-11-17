@@ -85,67 +85,145 @@ npm run dev
 
 ## File Tree
 ├── 📂 app
+│   ├── 📂 api
+│   │   ├── 📂 debug-youtube
+│   │   │   └── 📄 route.ts
+│   │   └── 📂 youtube-videos
+│   │       └── 📄 route.ts
+│   ├── 📂 archives
+│   │   ├── 📂 compendia
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📂 vault
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📂 wiki
+│   │   │   └── 📄 page.tsx
+│   │   └── 📄 page.tsx
 │   ├── 📂 community
+│   │   └── 📄 page.tsx
+│   ├── 📂 feedback
 │   │   └── 📄 page.tsx
 │   ├── 📂 music
 │   │   └── 📄 page.tsx
 │   ├── 📂 navigation
 │   │   └── 📄 page.tsx
-│   ├── 📂 vault
+│   ├── 📂 sitemap
 │   │   └── 📄 page.tsx
-│   ├── 📂 wiki
-│   │   └── 📄 page.tsx
-│   ├── 📂 youtube
-│   │   └── 📄 page.tsx
-│   ├── 📂 Favicon.ico
+│   ├── 📂 favicon.ico
 │   ├── 📄 globals.css
 │   ├── 📄 layout.tsx
 │   ├── 📄 not-found.tsx
-│   └── 📄 page.tsx
+│   ├── 📄 page.tsx
+│   └── 📄 sitemap.ts
 ├── 📁 components
 │   ├── 📂 archive
-│   │   ├── 📂 Old Homepage
-│   │   │   ├── 📄 advanced-scroll-section.tsx
-│   │   │   ├── 📄 HeroSection.tsx
-│   │   │   ├── 📄 ServiceCard.tsx
-│   │   │   └── 📄 TransformationalLeadership.tsx
-│   │   ├── 📂 Old Navigation
-│   │   │   ├── 📄 AnimatedTransition.tsx
-│   │   │   ├── 📄 AudioManager.tsx
-│   │   │   ├── 📄 DestinationInfoPanel.tsx
-│   │   │   ├── 📄 DestinationOrbits.tsx
-│   │   │   ├── 📄 ErrorHeader.tsx
-│   │   │   ├── 📄 GeometricMandala.tsx
-│   │   │   ├── 📄 HyperspaceEffect.tsx
-│   │   │   ├── 📄 LoadingScreen.tsx
-│   │   │   ├── 📄 navigation-grid.tsx
-│   │   │   ├── 📄 NavigationButtons.tsx
-│   │   │   ├── 📄 NavigationControls.tsx
-│   │   │   ├── 📄 NavigationSection.tsx
-│   │   │   └── 📄 SacredGeometryBackground.tsx
-│   │   └── 📂 Old Unknown
-│   │       ├── 📄 scroll-reveal-section.tsx
-│   │       ├── 📄 scroll-triggered-counter.tsx
-│   │       └── 📄 theme-provider.tsx
+│   │   ├── 📂 navigation
+│   │   │   ├── 📂 effects
+│   │   │   │   ├── 📄 AudioManager.tsx
+│   │   │   │   └── 📄 HyperspaceEffect.tsx
+│   │   │   ├── 📂 grid-navigation
+│   │   │   │   └── 📄 navigation-grid.tsx
+│   │   │   ├── 📂 orbital-navigation
+│   │   │   │   ├── 📄 DestinationInfoPanel.tsx
+│   │   │   │   ├── 📄 DestinationOrbits.tsx
+│   │   │   │   └── 📄 NavigationSection.tsx
+│   │   │   └── 📂 ship-interface
+│   │   │       └── 📄 NavigationControls.tsx
+│   │   └── 📂 not-found
+│   │       ├── 📄 AnimatedTransition.tsx
+│   │       └── 📄 GeometricBackground.tsx
 │   ├── 📂 games 🎮
 │   │   ├── 📄 BullRun2D.tsx
 │   │   └── 📄 BullRun3D.tsx
-│   ├── 📄 EarthBriefingOverlay.tsx
-│   ├── 📄 EasterEggHint.tsx
-│   ├── 📄 Footer.tsx
-│   ├── 📄 InteractiveLogo.tsx
-│   └── 📄 TexturedEarth.tsx
+│   ├── 📂 layout
+│   │   ├── 📄 ClientLayout.tsx
+│   │   ├── 📄 Footer.tsx
+│   │   ├── 📄 Header.tsx
+│   │   ├── 📄 NavigationEffect.tsx
+│   │   ├── 📄 scroll-section.tsx
+│   │   └── 📄 ThemeProvider.tsx
+│   ├── 📂 sections
+│   │   ├── 📄 About.tsx
+│   │   ├── 📄 Hero.tsx
+│   │   └── 📄 Services.tsx
+│   ├── 📂 sitemap
+│   │   ├── 📄 CategoryCard.tsx
+│   │   ├── 📄 PageLink.tsx
+│   │   ├── 📄 SitemapLayout.tsx
+│   │   └── 📄 SitemapNotice.tsx
+│   ├── 📂 three 🎮
+│   │   ├── 📄 PrimeRadiant.tsx
+│   │   └── 📄 TexturedEarth.tsx
+│   ├── 📂 ui
+│   │   ├── 📂 background
+│   │   │   └── 📄 PurpleGalaxyBackground.tsx
+│   │   ├── 📂 data-display
+│   │   │   ├── 📂 Card
+│   │   │   │   ├── 📄 Card.tsx
+│   │   │   │   └── 📄 ServiceCard.tsx
+│   │   │   ├── 📂 Text
+│   │   │   │   └── 📄 Text.tsx
+│   │   │   └── 📄 counter.tsx
+│   │   ├── 📂 feedback
+│   │   │   └── 📄 EasterEggHint.tsx
+│   │   ├── 📂 forms
+│   │   │   ├── 📄 Button.tsx
+│   │   │   └── 📄 Input.tsx
+│   │   ├── 📂 layout
+│   │   │   ├── 📄 Container.tsx
+│   │   │   ├── 📄 Grid.tsx
+│   │   │   ├── 📄 Section.tsx
+│   │   │   └── 📄 Stack.tsx
+│   │   ├── 📂 overlay
+│   │   │   ├── 📄 EarthBriefingOverlay.tsx
+│   │   │   ├── 📄 FeedbackOverlay.tsx
+│   │   │   └── 📄 ProtocolOverlay.tsx
+│   │   ├── 📂 typography
+│   │   │   └── 📄 PageHeading.tsx
+│   │   ├── 📄 ActivateProtocol.tsx
+│   │   ├── 📄 InteractiveLogo.tsx
+│   │   ├── 📄 LoadingContext.tsx
+│   │   ├── 📄 LoadingScreen.tsx
+│   │   ├── 📄 NavigationErrorHeader.tsx
+│   │   ├── 📄 NavigationIcon.tsx
+│   │   ├── 📄 NavigationText.tsx
+│   │   ├── 📄 OptionCard.tsx
+│   │   ├── 📄 OptionOverlay.tsx
+│   │   ├── 📄 OptionsGrid.tsx
+│   │   ├── 📄 ShipDecks.tsx
+│   │   └── 📄 StatusReport.tsx
+│   └── 📄 ThemeWrapper.tsx
 ├── 📁 hooks
+│   ├── 📄 useBullRun2D.ts
 │   ├── 📄 useEasterEggs.ts
-│   └── 📄 useMousePosition.ts
+│   ├── 📄 useMousePosition.ts
+│   ├── 📄 useOptionSelection.ts
+│   └── 📄 useYouTubeVideos.ts
 ├── 📁 lib
 │   ├── 📄 asset-converter.ts
 │   ├── 📄 compatibility-check.ts
+│   ├── 📄 design-tokens.ts
 │   ├── 📄 game-config.ts 🎮
 │   ├── 📄 legacy-bridge.ts
-│   └── 📄 utils.ts
+│   ├── 📄 utils.ts
+│   └── 📄 voxel-converter.ts
 ├── 📁 public
 │   ├── 📂 games 🎮
+│   │   ├── 📂 bull-run-2d
+│   │   │   ├── 📂 audio
+│   │   │   │   ├── 📂 button-press.ogg
+│   │   │   │   ├── 📂 hit.ogg
+│   │   │   │   └── 📂 score-reached.ogg
+│   │   │   ├── 📂 default_100_percent
+│   │   │   │   ├── 📂 100-disabled.png
+│   │   │   │   ├── 📂 100-error-offline.png
+│   │   │   │   └── 📂 100-offline-sprite.png
+│   │   │   ├── 📂 default_200_percent
+│   │   │   │   ├── 📂 200-disabled.png
+│   │   │   │   ├── 📂 200-error-offline.png
+│   │   │   │   └── 📂 200-offline-sprite.png
+│   │   │   ├── 📄 BullRun2D.module.css
+│   │   │   ├── 📂 offline-sprite-1x.png
+│   │   │   └── 📂 offline-sprite-2x.png
 │   │   └── 📂 bull-run-3d
 │   │       ├── 📂 css
 │   │       │   ├── 📄 overrides.css
@@ -424,32 +502,51 @@ npm run dev
 │   │           ├── 📂 ground_face.jpg
 │   │           ├── 📂 ground_top.png
 │   │           └── 📂 ground_top.psd
-│   ├── 📁 textures
-│   │   └── 📂 earth
-│   │       ├── 📂 earth-clouds.jpg
-│   │       ├── 📂 earth-map.jpg
-│   │       ├── 📂 earth-nightmap.jpg
-│   │       ├── 📂 earth-normal.tif
-│   │       └── 📂 earth-specular.tif
-│   ├── 📂 Icon.png
-│   ├── 📂 Rectangular Logo with Text.png
-│   ├── 📂 Square Logo with Text.png
-│   ├── 📂 Square Logo.png
-│   └── 📂 Wordmark.png
+│   ├── 📂 images
+│   │   ├── 📂 sample-thumb-1.png
+│   │   ├── 📂 sample-thumb-2.png
+│   │   └── 📂 sample-thumb-3.png
+│   ├── 📂 logos
+│   │   ├── 📂 dark-mode
+│   │   │   └── 📂 Transparent Rectangular Logo with Text.png
+│   │   ├── 📂 light-mode
+│   │   │   ├── 📂 Transparent Rectangular Logo with Text.png
+│   │   │   └── 📂 Wordmark.png
+│   │   ├── 📂 Icon.png
+│   │   ├── 📂 Rectangular Logo with Text.png
+│   │   ├── 📂 Square Logo with Text.png
+│   │   └── 📂 Square Logo.png
+│   ├── 📁 models 🦖
+│   │   └── 📂 prime_radiant
+│   │       ├── 📂 PrimeRadiantFullHull.blend
+│   │       ├── 📂 PrimeRadiantFullHull.blend1
+│   │       ├── 📂 PrimeRadiantHalfToFull.blend
+│   │       ├── 📂 PrimeRadiantHalfToFull.blend1
+│   │       └── 📂 PrimeRadiantHalfToFull.glb
+│   └── 📁 textures
+│       └── 📂 earth
+│           ├── 📂 earth-clouds.jpg
+│           ├── 📂 earth-map.jpg
+│           ├── 📂 earth-nightmap.jpg
+│           ├── 📂 earth-normal.tif
+│           └── 📂 earth-specular.tif
 ├── 📂 styles
 │   └── 📄 globals.css
 ├── 📂 types
+│   ├── 📄 design-tokens.ts
 │   └── 📄 game.d.ts 🎮
+├── 📂 .env.local
 ├── 📂 .gitattributes
 ├── 📂 .gitignore
 ├── 📄 components.json
 ├── 📂 LICENSE
 ├── 📄 ListFileTree.js
+├── 📄 middleware.ts
 ├── 📄 next-env.d.ts
 ├── 📂 next.config.mjs
+├── 📂 opencode.exe
 ├── 📄 package.json
 ├── 📂 postcss.config.mjs
 ├── 📄 README.md
 ├── 📄 tailwind.config.js
-├── 📄 tsconfig.json
-└── 📂 tsconfig.tsbuildinfo
+└── 📄 tsconfig.json

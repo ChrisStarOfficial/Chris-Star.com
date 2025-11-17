@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NavigationText } from '@/components/ui/NavigationText';
 import { NavigationIcon } from '@/components/ui/NavigationIcon';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -103,18 +104,10 @@ export const Header = () => {
               <NavigationText />
             </Link>
 
-            {/* Dark Mode Toggle Icon - Thinner crescent facing left */}
-            <button className="text-white hover:text-gray-300 transition-colors duration-200 p-2 flex-shrink-0">
-              <svg 
-                className="w-6 h-6" 
-                fill="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                {/* Thin crescent moon facing left - about 1/4 full */}
-                <path d="M9.37 3.51a7.99 7.99 0 1 0 11.12 11.12 9 9 0 0 1-11.12-11.12z" 
-                      fillRule="evenodd" clipRule="evenodd" />
-              </svg>
-            </button>
+            {/* Theme Toggle Switch */}
+            <div className="flex-shrink-0">
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Mobile Layout */}
@@ -191,6 +184,11 @@ export const Header = () => {
                   <span className="relative -top-px">ation</span>
                 </span>
               </Link>
+
+              {/* ThemToggle in mobile menu */}
+              <div className="mt-8">
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>
