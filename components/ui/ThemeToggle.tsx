@@ -7,7 +7,6 @@ export const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
-  // Ensure component is mounted to avoid hydration mismatch
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -18,8 +17,8 @@ export const ThemeToggle = () => {
 
   if (!mounted) {
     return (
-      <div className="w-12 h-6 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 shadow-2xl flex items-center justify-center">
-        <div className="w-4 h-4 rounded-full bg-white/20 animate-pulse"></div>
+      <div className="w-14 h-7 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 shadow-xl flex items-center justify-center">
+        <div className="w-5 h-5 rounded-full bg-white/10 animate-pulse"></div>
       </div>
     )
   }
@@ -29,101 +28,115 @@ export const ThemeToggle = () => {
       onClick={toggleTheme}
       className="
         relative
-        w-12 h-6 
-        bg-black/20 backdrop-blur-xl 
-        border border-white/10 
-        shadow-2xl
+        w-14 h-7 
+        bg-black/20 backdrop-blur-xl
+        border border-white/10
         rounded-full
-        flex items-center
+        shadow-xl
         transition-all duration-300
-        hover:bg-black/30
         hover:border-white/20
+        hover:bg-black/30
         hover:shadow-2xl
         group
         overflow-hidden
       "
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
-      {/* Switch Track Background */}
-      <div className="absolute inset-0 rounded-full overflow-hidden">
-        {/* Light Mode Gradient */}
-        <div className={`
-          absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/10
-          transition-all duration-500 ease-in-out
-          ${theme === 'light' ? 'opacity-100' : 'opacity-0'}
-        `}></div>
-        
-        {/* Dark Mode Gradient */}
-        <div className={`
-          absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/20
-          transition-all duration-500 ease-in-out
-          ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}
-        `}></div>
-      </div>
-
-      {/* Icons Container with Sliding Animation */}
-      <div className="relative w-full h-full flex items-center justify-between px-1">
-        {/* Sun Icon (Light Mode) */}
-        <div className={`
-          transition-all duration-500 ease-in-out transform
-          ${theme === 'light' 
-            ? 'opacity-100 scale-110 text-yellow-300' 
-            : 'opacity-50 scale-90 text-white/60'
-          }
-          group-hover:scale-105
-        `}>
-          <svg 
-            className="w-3 h-3" 
-            fill="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <circle cx="12" cy="12" r="3.5" />
-            <g stroke="currentColor" strokeWidth="1" strokeLinecap="round">
-              <line x1="12" y1="3" x2="12" y2="5" />
-              <line x1="12" y1="19" x2="12" y2="21" />
-              <line x1="5" y1="12" x2="3" y2="12" />
-              <line x1="21" y1="12" x2="19" y2="12" />
-              <line x1="6.34" y1="6.34" x2="4.93" y2="4.93" />
-              <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
-              <line x1="6.34" y1="17.66" x2="4.93" y2="19.07" />
-              <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
-            </g>
-          </svg>
-        </div>
-
-        {/* Moon Icon (Dark Mode) */}
-        <div className={`
-          transition-all duration-500 ease-in-out transform
-          ${theme === 'dark' 
-            ? 'opacity-100 scale-110 text-blue-300' 
-            : 'opacity-50 scale-90 text-white/60'
-          }
-          group-hover:scale-105
-        `}>
-          <svg 
-            className="w-3 h-3" 
-            fill="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              d="M9.37 3.51a7.99 7.99 0 1 0 11.12 11.12 9 9 0 0 1-11.12-11.12z" 
-              fillRule="evenodd" 
-              clipRule="evenodd" 
-            />
-          </svg>
-        </div>
-      </div>
-
-      {/* Sliding Knob */}
+      {/* Colored background that shows through glassmorphism */}
       <div className={`
-        absolute top-0.5 bottom-0.5 w-5
-        bg-white/30 backdrop-blur-sm
-        border border-white/40
-        rounded-full
-        shadow-lg
+        absolute inset-0 rounded-full
+        transition-all duration-500
+        ${theme === 'light' 
+          ? 'bg-electric/30' 
+          : 'bg-luminance/30'
+        }
+        group-hover:opacity-80
+      `}></div>
+
+      {/* Glassmorphism overlay */}
+      <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-md"></div>
+
+      {/* Sun Icon - Always visible but moves */}
+      <div className={`
+        absolute top-1/2 transform -translate-y-1/2
         transition-all duration-500 ease-in-out
-        ${theme === 'light' ? 'left-0.5' : 'left-6'}
-        group-hover:bg-white/40
+        ${theme === 'light' 
+          ? 'left-2 opacity-100 scale-100' 
+          : 'left-9 opacity-40 scale-90 -translate-x-1'
+        }
+        group-hover:scale-110
+      `}>
+        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3.5" />
+          <g stroke="currentColor" strokeWidth="1" strokeLinecap="round">
+            <line x1="12" y1="3" x2="12" y2="5" />
+            <line x1="12" y1="19" x2="12" y2="21" />
+            <line x1="5" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="19" y2="12" />
+            <line x1="6.34" y1="6.34" x2="4.93" y2="4.93" />
+            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
+            <line x1="6.34" y1="17.66" x2="4.93" y2="19.07" />
+            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
+          </g>
+        </svg>
+      </div>
+
+      {/* Moon Icon - Always visible but moves */}
+      <div className={`
+        absolute top-1/2 transform -translate-y-1/2
+        transition-all duration-500 ease-in-out
+        ${theme === 'dark' 
+          ? 'right-2 opacity-100 scale-100' 
+          : 'right-9 opacity-40 scale-90 translate-x-1'
+        }
+        group-hover:scale-110
+      `}>
+        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path 
+            d="M9.37 3.51a7.99 7.99 0 1 0 11.12 11.12 9 9 0 0 1-11.12-11.12z" 
+            fillRule="evenodd" 
+            clipRule="evenodd" 
+          />
+        </svg>
+      </div>
+
+      {/* Glassmorphism Knob - Dark theme style */}
+      <div className={`
+        absolute top-1 bottom-1 w-6
+        bg-black/40 backdrop-blur-xl
+        border border-white/20
+        rounded-full
+        shadow-2xl
+        transition-all duration-500 ease-in-out
+        flex items-center justify-center
+        ${theme === 'light' ? 'left-1' : 'left-7'}
+        group-hover:bg-black/50
+        group-hover:border-white/30
+        group-hover:shadow-2xl
+      `}>
+        {/* Mini accent dot that changes color */}
+        <div className={`
+          w-1 h-1 rounded-full
+          transition-all duration-300
+          ${theme === 'light' 
+            ? 'bg-electric' 
+            : 'bg-luminance'
+          }
+          group-hover:scale-150
+          group-hover:opacity-100
+        `}></div>
+      </div>
+
+      {/* Electric pulse effect on active state */}
+      <div className={`
+        absolute inset-0 rounded-full
+        transition-all duration-300
+        ${theme === 'light' 
+          ? 'bg-electric/10' 
+          : 'bg-luminance/10'
+        }
+        group-hover:opacity-100
+        opacity-0
       `}></div>
     </button>
   )

@@ -29,6 +29,28 @@ module.exports = {
         electric: '#C724B1',
         luminance: '#E6B93D',
         
+        // Theme-aware colors
+        background: {
+          light: '#F2F2E9', // parchment
+          dark: '#070C0D',  // cosmic
+          DEFAULT: '#070C0D' // default to dark
+        },
+        surface: {
+          light: '#F2F2E9',
+          dark: '#192526',   // mineral
+          DEFAULT: '#192526'
+        },
+        text: {
+          light: '#070C0D',  // cosmic
+          dark: '#F2F2E9',   // parchment
+          DEFAULT: '#F2F2E9'
+        },
+        border: {
+          light: '#BFBBB4',  // clay
+          dark: '#585959',   // stone
+          DEFAULT: '#585959'
+        },
+
         // shadcn/ui colors (keeping structure but can reference brand colors)
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -134,6 +156,23 @@ module.exports = {
             transform: 'scale(1.02)',
           },
         },
+      },
+
+      // Theme-aware utility classes
+      backgroundColor: {
+        'theme-bg': 'var(--background)',
+        'theme-surface': 'var(--surface)',
+      },
+      textColor: {
+        'theme-text': 'var(--text)',
+      },
+      borderColor: {
+        'theme-border': 'var(--border)',
+      },
+      // Glassmorphism utilities
+      backgroundImage: {
+        'glass-dark': 'linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.1))',
+        'glass-light': 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1))',
       },
     },
   },
