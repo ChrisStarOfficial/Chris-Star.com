@@ -76,9 +76,9 @@ export const Header = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Dynamic equal spacing */}
-            <nav className="hidden lg:flex items-center justify-end flex-1 min-w-0">
-              <div className={`flex items-center ${navSpacing}`}>
+            {/* Desktop Navigation - Distributed with proper spacing */}
+            <nav className="hidden lg:flex items-center flex-1 ml-8"> {/* Added ml-8 for logo spacing */}
+              <div className={`flex items-center justify-between w-full ${navSpacing}`}>
                 {navigationLinks.map((link) => (
                   <Link
                     key={link.name}
@@ -96,6 +96,19 @@ export const Header = () => {
                 </Link>
               </div>
             </nav>
+
+            {/* Dark Mode Toggle Icon */}
+            <div className="hidden lg:flex items-center justify-end flex-shrink-0 ml-8"> {/* Added ml-8 for spacing */}
+              <button className="text-white hover:text-gray-300 transition-colors duration-200 p-2">
+                <svg 
+                  className="w-6 h-6" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21.64 13a1 1 0 00-1.05-.14 8.05 8.05 0 01-3.37.73 8.15 8.15 0 01-8.14-8.1 8.59 8.59 0 01.25-2A1 1 0 008 2.36a10.14 10.14 0 1012 11.69 1 1 0 00-.36-1.05z" />
+                </svg>
+              </button>
+            </div>
 
             {/* Mobile Hamburger/X */}
             <button
