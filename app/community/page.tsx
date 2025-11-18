@@ -1,149 +1,50 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ScrollSection } from "@/components/layout/scroll-section"
-import { Footer } from "@/components/layout/footer/Footer"
 import { OptionsGrid } from '@/components/ui/OptionsGrid'
 import { OptionCard } from '@/components/ui/OptionCard'
-
-// Add these icon components at the top with other imports
-function StarseedCentralIcon() {
-  return (
-    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  )
-}
-
-function StarseedAcademyIcon() {
-  return (
-    <svg className="w-full h-full text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14v6" />
-    </svg>
-  )
-}
-
-const communityFeatures = [
-  {
-    title: "Weekly Live Calls",
-    description: "Join me every week for deep-dive sessions on spiritual growth, health optimization, and shadow work integration.",
-    icon: "🎥",
-    frequency: "Every Tuesday",
-  },
-  {
-    title: "Exclusive Courses",
-    description: "Access comprehensive courses on carnivore nutrition, muscle building, consciousness expansion, and starseed awakening.",
-    icon: "📚",
-    frequency: "Monthly Releases",
-  },
-  {
-    title: "Shadow Work Guidance",
-    description: "Personalized support and group sessions for deep shadow integration and inner transformation work.",
-    icon: "🌑",
-    frequency: "Bi-weekly Sessions",
-  },
-]
-
-const communityBenefits = [
-  {
-    title: "Transformational Community",
-    description: "Connect with like-minded lightworkers, starseeds, and spiritual seekers on the path of authentic growth.",
-    value: "Priceless Network",
-  },
-  {
-    title: "Direct Access to Chris",
-    description: "Get personal guidance and answers to your questions during live calls and community discussions.",
-    value: "1-on-1 Support",
-  },
-  {
-    title: "Comprehensive Resources",
-    description: "Access to all courses, guides, meal plans, workout routines, and spiritual practices in one place.",
-    value: "$2000+ Value",
-  },
-  {
-    title: "Accountability Partners",
-    description: "Find your tribe and create lasting accountability partnerships for your health and spiritual journey.",
-    value: "Lifelong Bonds",
-  },
-]
-
-const testimonials = [
-  {
-    name: "Sarah M.",
-    role: "Lightworker & Health Coach",
-    quote: "Chris's community transformed my relationship with food and my spiritual practice. The carnivore approach combined with shadow work has been life-changing.",
-    transformation: "Lost 30lbs, Gained Clarity",
-  },
-  {
-    name: "Michael R.",
-    role: "Starseed Entrepreneur",
-    quote: "Finally found a community that understands both the spiritual journey and practical health optimization. The weekly calls are pure gold.",
-    transformation: "Built Muscle, Found Purpose",
-  },
-  {
-    name: "Luna K.",
-    role: "Spiritual Teacher",
-    quote: "The shadow work guidance here goes deeper than anything I've experienced. Chris creates a safe space for real transformation.",
-    transformation: "Integrated Shadows, Expanded Consciousness",
-  },
-]
+import { Footer } from "@/components/layout/footer/Footer"
+import { CommunityHero } from "@/app/community/components/CommunityHero"
+import { CommunityNavigation } from "@/app/community/components/CommunityNavigation"
+import { CommunityFeatures } from "@/app/community/components/CommunityFeatures"
+import { CommunityBenefits } from "@/app/community/components/CommunityBenefits"
+import { CommunityTestimonials } from "@/app/community/components/CommunityTestimonials"
+import { CommunityCTA } from "@/app/community/components/CommunityCTA"
+import { StarseedCentralIcon } from "@/app/community/components/StarseedCentralIcon"
+import { StarseedAcademyIcon } from "@/app/community/components/StarseedAcademyIcon"
 
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState("features")
   const [isLoaded, setIsLoaded] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  // Community options for the top section
   const communityOptions = [
     {
-      id: 'starseedcentral',
+      id: 'starseed-central',
       title: 'Starseed Central',
-      description: 'Main community',
+      description: 'Meet with other starseeds',
       href: '/starseedcentral',
       icon: <StarseedCentralIcon />
     },
     {
-      id: 'starseedacademy',
+      id: 'starseed-academy',
       title: 'Starseed Academy',
-      description: 'Educational platform with courses, workshops, and structured learning paths',
+      description: 'Become a starseed leader',
       href: '/starseedacademy', 
       icon: <StarseedAcademyIcon />
     }
   ]
-
-  // Handle mouse movement for parallax
-  const handleMouseMove = (e: MouseEvent) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2
-    const y = (e.clientY / window.innerHeight - 0.5) * 2
-    setMousePosition({ x, y })
-  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true)
     }, 500)
 
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('mousemove', handleMouseMove)
-
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('mousemove', handleMouseMove)
-    }
+    return () => clearTimeout(timer)
   }, [])
 
   return (
     <main className="min-h-screen bg-gray-900">
-
-      {/* NEW: Community Options Section - Same as Archives */}
+      {/* Community Options Section */}
       <OptionsGrid title="Community Platforms">
         {communityOptions.map((option) => (
           <OptionCard
@@ -157,247 +58,18 @@ export default function CommunityPage() {
       </OptionsGrid>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-amber-900 via-gray-900 to-amber-800 overflow-hidden">
-        {/* Layered Background Effects */}
-        <div className="absolute inset-0 opacity-20">
-          <div 
-            className="absolute top-20 left-10 w-40 h-40 bg-amber-600 rounded-full blur-3xl animate-parallax-float"
-            style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
-          />
-          <div
-            className="absolute bottom-20 right-10 w-60 h-60 bg-amber-500 rounded-full blur-3xl"
-            style={{ 
-              animationDelay: "2s",
-              transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
-            }}
-          />
-          <div
-            className="absolute top-1/3 right-1/4 w-32 h-32 bg-amber-400 rounded-full blur-2xl"
-            style={{ 
-              animationDelay: "4s",
-              transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`
-            }}
-          />
-        </div>
-
-        {/* Geometric Background Patterns */}
-        <div className="absolute inset-0 opacity-5">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: "50px 50px",
-              transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px)`,
-            }}
-          />
-        </div>
-
-        <div className="text-center relative z-10 max-w-5xl mx-auto">
-          <ScrollSection direction="fade">
-            <h1 className="font-sans font-bold text-6xl md:text-8xl text-white mb-8 tracking-tight">
-              Spiritual Transformation
-            </h1>
-            <h2 className="font-sans font-bold text-4xl md:text-6xl text-amber-400 mb-12 tracking-tight">Community</h2>
-          </ScrollSection>
-
-          <ScrollSection direction="up" delay={300}>
-            <p className="font-sans font-light text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
-              Join my exclusive Skool community where lightworkers, starseeds, and spiritual seekers come together for
-              real transformation. This is my main offering—a comprehensive platform for your spiritual and physical
-              optimization journey.
-            </p>
-            <p className="font-sans font-light text-lg text-amber-300 max-w-3xl mx-auto leading-relaxed mb-16">
-              Weekly live calls, exclusive courses, shadow work guidance, carnivore nutrition protocols, and a
-              supportive community that understands your path.
-            </p>
-          </ScrollSection>
-
-          <ScrollSection direction="scale" delay={600}>
-            <div className="flex items-center justify-center space-x-8">
-              <div className="text-center">
-                <div className="text-4xl font-sans font-bold text-amber-400 mb-2">500+</div>
-                <p className="font-sans text-sm text-gray-400 uppercase tracking-wider">Active Members</p>
-              </div>
-              <div className="w-px h-16 bg-amber-600 opacity-30"></div>
-              <div className="text-center">
-                <div className="text-4xl font-sans font-bold text-amber-400 mb-2">95%</div>
-                <p className="font-sans text-sm text-gray-400 uppercase tracking-wider">Transformation Rate</p>
-              </div>
-            </div>
-          </ScrollSection>
-        </div>
-      </section>
+      <CommunityHero />
 
       {/* Navigation Tabs */}
-      <ScrollSection direction="up">
-        <section className="py-16 px-6 bg-gray-800 border-b border-gray-700">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex justify-center space-x-8">
-              {[
-                { id: "features", label: "Features" },
-                { id: "benefits", label: "Benefits" },
-                { id: "testimonials", label: "Testimonials" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`font-sans text-lg px-6 py-3 rounded-lg transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? "bg-amber-600 text-white shadow-lg"
-                      : "text-gray-300 hover:text-amber-400 hover:bg-gray-700"
-                  }`}
-                  data-magnetic
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      </ScrollSection>
+      <CommunityNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* Features Section */}
-      {activeTab === "features" && (
-        <ScrollSection direction="stagger">
-          <section className="py-32 px-6 bg-gray-900">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-20">
-                <h2 className="font-sans font-bold text-5xl text-white mb-6 tracking-tight">Community Features</h2>
-                <p className="font-sans text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                  Everything you need for complete spiritual and physical transformation in one comprehensive platform.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-12">
-                {communityFeatures.map((feature, index) => (
-                  <ScrollSection key={index} direction="up" delay={index * 200}>
-                    <div
-                      className="group bg-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl hover:border-amber-600 transition-all duration-500 p-10"
-                      data-magnetic
-                    >
-                      <div className="text-6xl mb-6">{feature.icon}</div>
-                      <h3 className="font-sans font-bold text-2xl text-white mb-4 group-hover:text-amber-400 transition-colors">
-                        {feature.title}
-                      </h3>
-                      <p className="font-sans text-gray-300 leading-relaxed mb-6">{feature.description}</p>
-                      <div className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-sm font-sans font-semibold rounded-full">
-                        {feature.frequency}
-                      </div>
-                    </div>
-                  </ScrollSection>
-                ))}
-              </div>
-            </div>
-          </section>
-        </ScrollSection>
-      )}
-
-      {/* Benefits Section */}
-      {activeTab === "benefits" && (
-        <ScrollSection direction="left">
-          <section className="py-32 px-6 bg-gray-800">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-20">
-                <h2 className="font-sans font-bold text-5xl text-white mb-6 tracking-tight">Member Benefits</h2>
-                <p className="font-sans text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                  Join a community designed for real transformation, not just inspiration. Get everything you need to
-                  optimize your health and expand your consciousness.
-                </p>
-              </div>
-
-              <div className="space-y-8">
-                {communityBenefits.map((benefit, index) => (
-                  <ScrollSection key={index} direction="right" delay={index * 150}>
-                    <div
-                      className="bg-gray-900 border border-gray-700 rounded-2xl shadow-lg hover:shadow-xl hover:border-amber-600 transition-all duration-500 overflow-hidden"
-                      data-magnetic
-                    >
-                      <div className="p-10">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                          <div className="flex-1">
-                            <h3 className="font-sans font-bold text-3xl text-white mb-4">{benefit.title}</h3>
-                            <p className="font-sans text-lg text-gray-300 leading-relaxed">{benefit.description}</p>
-                          </div>
-                          <div className="mt-6 md:mt-0 md:ml-8">
-                            <span className="inline-block px-4 py-2 bg-amber-600 text-white rounded-full text-sm font-sans font-semibold">
-                              {benefit.value}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ScrollSection>
-                ))}
-              </div>
-            </div>
-          </section>
-        </ScrollSection>
-      )}
-
-      {/* Testimonials Section */}
-      {activeTab === "testimonials" && (
-        <ScrollSection direction="fade">
-          <section className="py-32 px-6 bg-gray-900">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-20">
-                <h2 className="font-sans font-bold text-5xl text-white mb-6 tracking-tight">Transformation Stories</h2>
-                <p className="font-sans text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                  Real results from community members who chose transformation over inspiration.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-12">
-                {testimonials.map((testimonial, index) => (
-                  <ScrollSection key={index} direction="up" delay={index * 200}>
-                    <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-xl hover:border-amber-600 transition-all duration-500">
-                      <blockquote className="font-sans italic text-lg text-gray-300 leading-relaxed mb-6">
-                        "{testimonial.quote}"
-                      </blockquote>
-                      <div className="border-t border-gray-700 pt-6">
-                        <h4 className="font-sans font-bold text-xl text-white mb-1">{testimonial.name}</h4>
-                        <p className="font-sans text-amber-400 text-sm mb-3">{testimonial.role}</p>
-                        <div className="inline-block px-3 py-1 bg-green-100 text-green-800 text-xs font-sans font-semibold rounded-full">
-                          {testimonial.transformation}
-                        </div>
-                      </div>
-                    </div>
-                  </ScrollSection>
-                ))}
-              </div>
-            </div>
-          </section>
-        </ScrollSection>
-      )}
+      {/* Dynamic Content Sections */}
+      {activeTab === "features" && <CommunityFeatures />}
+      {activeTab === "benefits" && <CommunityBenefits />}
+      {activeTab === "testimonials" && <CommunityTestimonials />}
 
       {/* CTA Section */}
-      <ScrollSection direction="scale">
-        <section className="py-32 px-6 bg-amber-600 text-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-sans font-bold text-5xl md:text-6xl mb-8 tracking-tight">Ready for Real Change?</h2>
-            <p className="font-sans text-xl leading-relaxed mb-12 opacity-90">
-              Join my Skool community and start your journey of authentic transformation. This isn't about
-              motivation—it's about lasting change through practical spirituality and optimized health.
-            </p>
-            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
-              <button
-                className="bg-white text-amber-600 px-12 py-4 rounded-lg font-sans font-bold text-lg hover:bg-gray-50 transition-colors duration-300 shadow-lg"
-                data-magnetic
-              >
-                Join the Community
-              </button>
-              <button
-                className="border-2 border-white text-white px-12 py-4 rounded-lg font-sans font-bold text-lg hover:bg-white hover:text-amber-600 transition-all duration-300"
-                data-magnetic
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
-        </section>
-      </ScrollSection>
+      <CommunityCTA />
 
       {/* Footer */}
       <Footer />
