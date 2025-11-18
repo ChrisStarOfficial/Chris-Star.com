@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { Footer } from "@/components/layout/Footer"
+import { Footer } from "@/components/layout/footer/Footer"
 
 const vaultFeatures = [
   {

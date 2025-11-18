@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { HyperspaceEffect } from "@/components/archive/navigation/effects/HyperspaceEffect"
+import { HyperspaceEffect } from "@/components/layout/HyperspaceEffect"
 import { useState, useEffect } from "react"
 
 export function NavigationEffect({ children }: { children: React.ReactNode }) {

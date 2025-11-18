@@ -1,4 +1,3 @@
-// hooks/useBullRun2D.ts
 import { MutableRefObject, useRef, useCallback, useMemo, useEffect } from "react"; // Import new hooks
 
 /**

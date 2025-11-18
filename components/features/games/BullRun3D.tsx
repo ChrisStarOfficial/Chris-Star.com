@@ -2,7 +2,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment, useProgress } from '@react-three/drei';
-import { useLoading } from '@/components/ui/LoadingContext';
+import { useLoading } from '@/components/shared/contexts/LoadingContext';
 import { useEffect } from 'react';
 
 function BullRunScene() {

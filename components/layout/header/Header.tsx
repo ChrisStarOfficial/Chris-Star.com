@@ -3,9 +3,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { NavigationText } from '@/components/ui/NavigationText';
-import { NavigationIcon } from '@/components/ui/NavigationIcon';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { NavigationText } from '@/components/shared/header/NavigationText';
+import { NavigationIcon } from '@/components/shared/header/NavigationIcon';
+import { ThemeToggle } from '@/components/ui/theme/ThemeToggle';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

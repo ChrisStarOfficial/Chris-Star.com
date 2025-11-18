@@ -1,14 +1,14 @@
 "use client"
 
 import { Canvas } from '@react-three/fiber'
-import { TexturedEarth } from '@/components/three/TexturedEarth'
-import { EarthBriefingOverlay } from '@/components/ui/overlay/EarthBriefingOverlay'
-import { StatusReport } from '@/components/ui/StatusReport'
-import { ShipDecks } from '@/components/ui/ShipDecks'
+import { TexturedEarth } from '@/components/features/three/TexturedEarth'
+import { EarthBriefingOverlay } from '@/components/pages/navigation/EarthBriefingOverlay'
+import { StatusReport } from '@/components/pages/navigation/StatusReport'
+import { ShipDecks } from '@/components/pages/navigation/ShipDecks'
 import { useState, useEffect } from 'react'
-import { Footer } from "@/components/layout/Footer"
+import { Footer } from "@/components/layout/footer/Footer"
 import { NavigationEffect } from "@/components/layout/NavigationEffect"
-import { useLoading } from '@/components/ui/LoadingContext'
+import { useLoading } from '@/components/shared/contexts/LoadingContext'
 
 export default function NavigationPage() {
   const [isBriefingOpen, setIsBriefingOpen] = useState(false)

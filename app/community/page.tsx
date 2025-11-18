@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { Footer } from "@/components/layout/Footer"
+import { Footer } from "@/components/layout/footer/Footer"
 import { OptionsGrid } from '@/components/ui/OptionsGrid'
 import { OptionCard } from '@/components/ui/OptionCard'
 

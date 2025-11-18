@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
+import { InteractiveLogo } from "@/components/layout/footer/InteractiveLogo"
 
 const spiritualSongs = [
   {

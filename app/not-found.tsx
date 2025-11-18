@@ -2,14 +2,14 @@
 
 import { useEffect, useState, Suspense } from "react"
 import Link from "next/link"
-import { Footer } from "@/components/layout/Footer"
-import SacredGeometryBackground from '@/components/archive/not-found/GeometricBackground'
-import ErrorHeader from '@/components/ui/NavigationErrorHeader'
-import { PrimeRadiant } from '@/components/three/PrimeRadiant'
+import { Footer } from "@/components/layout/footer/Footer"
+import SacredGeometryBackground from '@/components/ui/background/GeometricBackground'
+import ErrorHeader from '@/components/pages/not-found/NavigationErrorHeader'
+import { PrimeRadiant } from '@/components/features/three/PrimeRadiant'
 import { Canvas } from '@react-three/fiber'
-import { ActivateProtocol } from '@/components/ui/ActivateProtocol'
-import { ProtocolOverlay } from '@/components/ui/overlay/ProtocolOverlay'
-import { ShipDecks } from '@/components/ui/ShipDecks'
+import { ActivateProtocol } from '@/components/pages/not-found/ActivateProtocol'
+import { ProtocolOverlay } from '@/components/pages/not-found/ProtocolOverlay'
+import { ShipDecks } from '@/components/pages/navigation/ShipDecks'
 import * as THREE from 'three'
 
 export default function NotFound() {

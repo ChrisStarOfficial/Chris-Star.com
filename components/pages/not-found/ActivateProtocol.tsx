@@ -1,6 +1,6 @@
 "use client"
 
-import { useLoading } from "./LoadingContext"
+import { useLoading } from "@/components/shared/contexts/LoadingContext"
 
 interface ActivateProtocolProps {
   onClick: () => void

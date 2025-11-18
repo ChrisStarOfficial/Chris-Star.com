@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { useEasterEggs } from "@/hooks/useEasterEggs"
+import { useEasterEggs } from "@/components/shared/hooks/useEasterEggs"
 
 interface InteractiveLogoProps {
   className?: string

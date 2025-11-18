@@ -1,9 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, DM_Sans, Cinzel, Montserrat } from "next/font/google"
-import "./globals.css"
-import { ThemeWrapper } from "@/components/ThemeWrapper"
-import { LoadingProvider } from "@/components/ui/LoadingContext"
+import "@/app/globals.css"
+import { ThemeWrapper } from "@/components/ui/theme/ThemeWrapper"
+import { LoadingProvider } from "@/components/shared/contexts/LoadingContext"
 
 const inter = Inter({
   subsets: ["latin"],

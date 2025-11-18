@@ -1,9 +1,9 @@
 "use client"
 
-import { ThemeProvider } from "@/components/layout/ThemeProvider"
-import { LoadingProvider } from '@/components/ui/LoadingContext'
+import { ThemeProvider } from "@/components/ui/theme/ThemeProvider"
+import { LoadingProvider } from '@/components/shared/contexts/LoadingContext'
 import { usePathname } from "next/navigation"
-import { HyperspaceEffect } from "@/components/archive/navigation/effects/HyperspaceEffect"
+import { HyperspaceEffect } from "@/components/layout/HyperspaceEffect"
 import { useState, useEffect } from "react"
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {

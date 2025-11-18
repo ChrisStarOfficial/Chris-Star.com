@@ -1,7 +1,7 @@
 "use client"
 
 import React, { createContext, useContext, useState, useCallback } from 'react'
-import { LoadingScreen } from '@/components/ui/LoadingScreen'
+import { LoadingScreen } from '@/components/shared/contexts/LoadingScreen'
 
 interface LoadingContextType {
   startLoading: (message?: string, showImmediately?: boolean) => void

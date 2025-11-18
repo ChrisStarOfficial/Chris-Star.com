@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
-import { Footer } from "@/components/layout/Footer"
+import { InteractiveLogo } from "@/components/layout/footer/InteractiveLogo"
+import { Footer } from "@/components/layout/footer/Footer"
 
 export default function YouTubePage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null)

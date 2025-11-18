@@ -1,9 +1,8 @@
-// components/ui/ShipDecks.tsx
 "use client"
 
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useLoading } from './LoadingContext'
+import { useLoading } from '@/components/shared/contexts/LoadingContext'
 
 interface DeckItem {
   name: string

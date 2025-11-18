@@ -2,7 +2,7 @@
 
 import { OptionsGrid } from '@/components/ui/OptionsGrid'
 import { OptionCard } from '@/components/ui/OptionCard'
-import { Footer } from "@/components/layout/Footer"
+import { Footer } from "@/components/layout/footer/Footer"
 
 function VaultIcon() {
   return (

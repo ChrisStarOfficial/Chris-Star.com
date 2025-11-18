@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from 'react';
-import { InteractiveLogo } from "@/components/ui/InteractiveLogo"
+import { InteractiveLogo } from "@/components/layout/footer/InteractiveLogo"
 
 export const Footer = () => {
   const copyrightRef = useRef<HTMLParagraphElement>(null);

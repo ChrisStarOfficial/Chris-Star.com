@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, Suspense } from "react"
-import { useEasterEggs } from '@/hooks/useEasterEggs'
-import BullRun3D from '@/components/games/BullRun3D'
-import BullRun2D from '@/components/games/BullRun2D'
-import AnimatedTransition from '@/components/archive/not-found/AnimatedTransition'
+import { useEasterEggs } from '@/components/shared/hooks/useEasterEggs'
+import BullRun3D from '@/components/features/games/BullRun3D'
+import BullRun2D from '@/components/features/games/BullRun2D'
+import AnimatedTransition from '@/components/pages/not-found/AnimatedTransition'
 
 interface ProtocolOverlayProps {
   isOpen: boolean

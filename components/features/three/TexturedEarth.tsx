@@ -4,7 +4,7 @@ import { useRef, useMemo, useState, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useTexture, useProgress } from '@react-three/drei'
-import { useLoading } from '@/components/ui/LoadingContext'
+import { useLoading } from '@/components/shared/contexts/LoadingContext'
 
 interface TexturedEarthProps {
   isZoomed?: boolean

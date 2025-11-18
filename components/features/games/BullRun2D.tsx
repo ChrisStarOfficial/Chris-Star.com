@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react"; // Import useCallback
 import styles from "@/public/games/bull-run-2d/BullRun2D.module.css";
-import useBullRun2D from "@/hooks/useBullRun2D";
+import useBullRun2D from "@/components/shared/hooks/useBullRun2D";
 
 export type BullRun2DProps = {
   onScoreUpdate?: (score: number) => void;

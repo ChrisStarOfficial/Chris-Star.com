@@ -1,10 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Footer } from "@/components/layout/Footer"
-import { Header } from "@/components/layout/Header"
+import { Footer } from "@/components/layout/footer/Footer"
+import { Header } from "@/components/layout/header/Header"
 import { ScrollSection } from "@/components/layout/scroll-section"
-import { useYouTubeVideos } from "@/hooks/useYouTubeVideos"
+import { useYouTubeVideos } from "@/components/shared/hooks/useYouTubeVideos"
 
 export default function SpiritualHomepage() {
   const [isLoaded, setIsLoaded] = useState(false)
