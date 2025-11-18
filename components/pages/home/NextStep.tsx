@@ -27,9 +27,10 @@ const FEATURES = [
 
 export function NextStepSection() {
   return (
-    <ScrollSection direction="up">
-      <section className="py-20 px-6 bg-gray-900">
-        <div className="max-w-4xl mx-auto text-center">
+    <section className="min-h-[calc(100vh-80px)] bg-gray-900">
+      {/* First Viewport - Centered CTA */}
+      <div className="h-[calc(100vh-80px)] flex items-center justify-center px-6">
+        <div className="max-w-4xl mx-auto text-center w-full">
           <ScrollSection direction="fade">
             <h2 className="font-sans font-bold text-4xl md:text-5xl text-white mb-8 tracking-tight">
               Ready to Go Deeper?
@@ -42,17 +43,7 @@ export function NextStepSection() {
             </p>
           </ScrollSection>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {FEATURES.map((feature, index) => (
-              <FeatureCard 
-                key={feature.title}
-                feature={feature}
-                index={index}
-              />
-            ))}
-          </div>
-
-          <ScrollSection direction="scale" delay={600}>
+          <ScrollSection direction="scale" delay={400}>
             <a
               href="/community"
               className="inline-block bg-amber-600 text-white px-12 py-4 rounded-lg font-sans font-bold text-lg hover:bg-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -62,8 +53,25 @@ export function NextStepSection() {
             </a>
           </ScrollSection>
         </div>
-      </section>
-    </ScrollSection>
+      </div>
+
+      {/* Second Part - Feature Cards - No top padding */}
+      <div className="px-6 pb-20">
+        <div className="max-w-4xl mx-auto">
+          <ScrollSection direction="up">
+            <div className="grid md:grid-cols-2 gap-8">
+              {FEATURES.map((feature, index) => (
+                <FeatureCard 
+                  key={feature.title}
+                  feature={feature}
+                  index={index}
+                />
+              ))}
+            </div>
+          </ScrollSection>
+        </div>
+      </div>
+    </section>
   )
 }
 
