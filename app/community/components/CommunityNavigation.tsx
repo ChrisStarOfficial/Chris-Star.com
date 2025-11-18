@@ -16,7 +16,7 @@ export function CommunityNavigation({ activeTab, setActiveTab }: CommunityNaviga
 
   return (
     <ScrollSection direction="up">
-      <section className="py-16 px-6 bg-gray-800 border-b border-gray-700">
+      <section className="py-4 px-6 bg-gray-800 border-b border-gray-700">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center space-x-8">
             {tabs.map((tab) => (

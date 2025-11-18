@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { OptionsGrid } from '@/components/ui/OptionsGrid'
 import { OptionCard } from '@/components/ui/OptionCard'
+import { Header } from "@/components/layout/header/Header"
 import { Footer } from "@/components/layout/footer/Footer"
 import { CommunityHero } from "@/app/community/components/CommunityHero"
 import { CommunityNavigation } from "@/app/community/components/CommunityNavigation"
@@ -44,8 +45,11 @@ export default function CommunityPage() {
 
   return (
     <main className="min-h-screen bg-gray-900">
+      {/* Add Header Component */}
+      <Header />
+
       {/* Community Options Section */}
-      <OptionsGrid title="Community Platforms">
+      <OptionsGrid title="Choose a community">
         {communityOptions.map((option) => (
           <OptionCard
             key={option.id}

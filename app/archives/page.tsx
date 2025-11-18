@@ -2,6 +2,7 @@
 
 import { OptionsGrid } from '@/components/ui/OptionsGrid'
 import { OptionCard } from '@/components/ui/OptionCard'
+import { Header } from "@/components/layout/header/Header"
 import { Footer } from "@/components/layout/footer/Footer"
 
 function VaultIcon() {
@@ -55,6 +56,8 @@ export default function ArchivesPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900">
+      <Header />
+
       <OptionsGrid title="The Archives">
         {options.map((option) => (
           <OptionCard
