@@ -1,4 +1,4 @@
-import { NavigationIcon } from "@/components/shared/header/NavigationIcon";
+import { NavigationIcon } from "@/components/layout/header/NavigationIcon";
 
 export const NavigationText = ({ className = "" }: { className?: string }) => {
   return (

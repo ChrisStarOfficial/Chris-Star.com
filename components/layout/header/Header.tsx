@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { NavigationText } from '@/components/shared/header/NavigationText';
-import { NavigationIcon } from '@/components/shared/header/NavigationIcon';
+import { NavigationText } from '@/components/layout/header/NavigationText';
+import { NavigationIcon } from '@/components/layout/header/NavigationIcon';
 import { ThemeToggle } from '@/components/ui/theme/ThemeToggle';
 
 export const Header = () => {
