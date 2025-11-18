@@ -5,139 +5,95 @@ import { useTheme } from 'next-themes'
 
 export const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false)
+  const [isHover, setIsHover] = useState(false)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
-
   if (!mounted) {
     return (
-      <div className="w-14 h-7 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 shadow-xl flex items-center justify-center">
-        <div className="w-5 h-5 rounded-full bg-white/10 animate-pulse"></div>
+      <div className="w-13 h-6 rounded-full bg-white/[0.03] backdrop-blur-[40px] border border-white/20 flex items-center justify-center">
+        <div className="w-6 h-6 rounded-full bg-white/20 animate-pulse" />
       </div>
     )
   }
 
+  const isLight = theme === 'light'
+
   return (
     <button
-      onClick={toggleTheme}
+      onClick={() => setTheme(isLight ? 'dark' : 'light')}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
       className="
-        relative
-        w-14 h-7 
-        bg-black/20 backdrop-blur-xl
-        border border-white/10
+        relative w-10 h-6
         rounded-full
-        shadow-xl
-        transition-all duration-300
-        hover:border-white/20
-        hover:bg-black/30
-        hover:shadow-2xl
-        group
-        overflow-hidden
+        transition-all duration-300 ease-out
+        hover:scale-[1.02]
+        active:scale-[0.98]
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2
+        mt-1
       "
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${isLight ? 'dark' : 'light'} mode`}
     >
-      {/* Colored background that shows through glassmorphism */}
-      <div className={`
-        absolute inset-0 rounded-full
-        transition-all duration-500
-        ${theme === 'light' 
-          ? 'bg-electric/30' 
-          : 'bg-luminance/30'
-        }
-        group-hover:opacity-80
-      `}></div>
+      {/* Layer 1: Base glass layer */}
+      <div 
+        className="absolute inset-0 rounded-full transition-all duration-350 ease-out"
+        style={{
+          background: isLight 
+            ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%)'
+            : 'linear-gradient(135deg, rgba(230, 185, 61, 0.25) 0%, rgba(230, 185, 61, 0.18) 50%, rgba(230, 185, 61, 0.12) 100%)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+        }}
+      />
 
-      {/* Glassmorphism overlay */}
-      <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-md"></div>
+      {/* Layer 3: Glass border */}
+      <div 
+        className="absolute inset-0 rounded-full transition-all duration-350"
+        style={{
+          border: '1px solid rgba(255, 255, 255, 0.4)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          boxShadow: '0 6px 32px rgba(0, 0, 0, 0.1)',
+        }}
+      />
 
-      {/* Sun Icon - Always visible but moves */}
-      <div className={`
-        absolute top-1/2 transform -translate-y-1/2
-        transition-all duration-500 ease-in-out
-        ${theme === 'light' 
-          ? 'left-2 opacity-100 scale-100' 
-          : 'left-9 opacity-40 scale-90 -translate-x-1'
-        }
-        group-hover:scale-110
-      `}>
-        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="3.5" />
-          <g stroke="currentColor" strokeWidth="1" strokeLinecap="round">
-            <line x1="12" y1="3" x2="12" y2="5" />
-            <line x1="12" y1="19" x2="12" y2="21" />
-            <line x1="5" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="19" y2="12" />
-            <line x1="6.34" y1="6.34" x2="4.93" y2="4.93" />
-            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
-            <line x1="6.34" y1="17.66" x2="4.93" y2="19.07" />
-            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
-          </g>
-        </svg>
-      </div>
+      {/* Layer 4: Hover glow */}
+      {isHover && (
+        <div 
+          className="absolute inset-0 rounded-full transition-opacity duration-350"
+          style={{
+            background: isLight 
+              ? 'radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15), transparent 70%)'
+              : 'radial-gradient(circle at 80% 50%, rgba(230, 185, 61, 0.25), transparent 70%)',
+            opacity: 0.7,
+          }}
+        />
+      )}
 
-      {/* Moon Icon - Always visible but moves */}
-      <div className={`
-        absolute top-1/2 transform -translate-y-1/2
-        transition-all duration-500 ease-in-out
-        ${theme === 'dark' 
-          ? 'right-2 opacity-100 scale-100' 
-          : 'right-9 opacity-40 scale-90 translate-x-1'
-        }
-        group-hover:scale-110
-      `}>
-        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-          <path 
-            d="M9.37 3.51a7.99 7.99 0 1 0 11.12 11.12 9 9 0 0 1-11.12-11.12z" 
-            fillRule="evenodd" 
-            clipRule="evenodd" 
-          />
-        </svg>
-      </div>
-
-      {/* Glassmorphism Knob - Dark theme style */}
-      <div className={`
-        absolute top-1 bottom-1 w-6
-        bg-black/40 backdrop-blur-xl
-        border border-white/20
-        rounded-full
-        shadow-2xl
-        transition-all duration-500 ease-in-out
-        flex items-center justify-center
-        ${theme === 'light' ? 'left-1' : 'left-7'}
-        group-hover:bg-black/50
-        group-hover:border-white/30
-        group-hover:shadow-2xl
-      `}>
-        {/* Mini accent dot that changes color */}
-        <div className={`
-          w-1 h-1 rounded-full
-          transition-all duration-300
-          ${theme === 'light' 
-            ? 'bg-electric' 
-            : 'bg-luminance'
-          }
-          group-hover:scale-150
-          group-hover:opacity-100
-        `}></div>
-      </div>
-
-      {/* Electric pulse effect on active state */}
-      <div className={`
-        absolute inset-0 rounded-full
-        transition-all duration-300
-        ${theme === 'light' 
-          ? 'bg-electric/10' 
-          : 'bg-luminance/10'
-        }
-        group-hover:opacity-100
-        opacity-0
-      `}></div>
+      {/* THE KNOB - Larger, centered, with identical white gradient outline */}
+      <div 
+        className={`
+          absolute top-0 w-6 h-6
+          rounded-full
+          transition-all duration-350 ease-out
+          ${isLight ? 'left-0' : 'left-4'}
+        `}
+        style={{
+          transform: isHover ? 'scale(1.05)' : 'scale(1)',
+          background: 'rgba(255, 255, 255, 0.25)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.4)',
+          boxShadow: `
+            0 4px 24px rgba(0, 0, 0, 0.15),
+            0 2px 6px rgba(255, 255, 255, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3)
+          `,
+        }}
+      />
     </button>
   )
 }
