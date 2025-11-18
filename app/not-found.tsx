@@ -5,11 +5,11 @@ import Link from "next/link"
 import { Footer } from "@/components/layout/footer/Footer"
 import SacredGeometryBackground from '@/components/ui/background/GeometricBackground'
 import ErrorHeader from '@/components/pages/not-found/NavigationErrorHeader'
-import { PrimeRadiant } from '@/components/features/three/PrimeRadiant'
+import { PrimeRadiant } from '@/components/pages/not-found/three/PrimeRadiant'
 import { Canvas } from '@react-three/fiber'
 import { ActivateProtocol } from '@/components/pages/not-found/ActivateProtocol'
 import { ProtocolOverlay } from '@/components/pages/not-found/ProtocolOverlay'
-import { ShipDecks } from '@/components/pages/navigation/ShipDecks'
+import { ShipDecks } from '@/app/navigation/components/ShipDecks'
 import * as THREE from 'three'
 
 export default function NotFound() {

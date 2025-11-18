@@ -2,8 +2,8 @@
 
 import { useEffect, Suspense } from "react"
 import { useEasterEggs } from '@/components/shared/hooks/useEasterEggs'
-import BullRun3D from '@/components/features/games/BullRun3D'
-import BullRun2D from '@/components/features/games/BullRun2D'
+import BullRun3D from '@/components/pages/not-found/games/BullRun3D'
+import BullRun2D from '@/components/pages/not-found/games/BullRun2D'
 import AnimatedTransition from '@/components/pages/not-found/AnimatedTransition'
 
 interface ProtocolOverlayProps {

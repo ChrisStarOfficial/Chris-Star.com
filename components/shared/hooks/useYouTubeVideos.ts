@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-interface YouTubeVideo {
+export interface YouTubeVideo {
   id: string
   title: string
   thumbnail: string

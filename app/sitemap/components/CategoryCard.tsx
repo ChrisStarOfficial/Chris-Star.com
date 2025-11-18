@@ -1,4 +1,4 @@
-import PageLink from '@/components/features/sitemap/PageLink'
+import PageLink from '@/app/sitemap/components/PageLink'
 
 interface Category {
   name: string

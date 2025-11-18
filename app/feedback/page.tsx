@@ -4,7 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { Star, Send, X } from "lucide-react"
 import Button from "@/components/ui/forms/Button"
-import GlassOverlay, { GlassPanel } from "@/components/pages/feedback/FeedbackOverlay"
+import GlassOverlay, { GlassPanel } from "@/app/feedback/components/FeedbackOverlay"
 
 export default function ProductReviewForm() {
   const [rating, setRating] = useState(0)

@@ -1,10 +1,10 @@
 "use client"
 
 import { Canvas } from '@react-three/fiber'
-import { TexturedEarth } from '@/components/features/three/TexturedEarth'
-import { EarthBriefingOverlay } from '@/components/pages/navigation/EarthBriefingOverlay'
-import { StatusReport } from '@/components/pages/navigation/StatusReport'
-import { ShipDecks } from '@/components/pages/navigation/ShipDecks'
+import { TexturedEarth } from '@/app/navigation/components/three/TexturedEarth'
+import { EarthBriefingOverlay } from '@/app/navigation/components/EarthBriefingOverlay'
+import { StatusReport } from '@/app/navigation/components/StatusReport'
+import { ShipDecks } from '@/app/navigation/components/ShipDecks'
 import { useState, useEffect } from 'react'
 import { Footer } from "@/components/layout/footer/Footer"
 import { NavigationEffect } from "@/components/layout/NavigationEffect"

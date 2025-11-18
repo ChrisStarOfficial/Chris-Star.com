@@ -1,7 +1,7 @@
-import CategoryCard from '@/components/features/sitemap/CategoryCard'
-import SitemapNotice from '@/components/features/sitemap/SitemapNotice'
+import CategoryCard from '@/app/sitemap/components/CategoryCard'
+import SitemapNotice from '@/app/sitemap/components/SitemapNotice'
 import Container from '@/components/ui/layout/Container'
-import SitemapLayout from '@/components/features/sitemap/SitemapLayout'
+import SitemapLayout from '@/app/sitemap/components/SitemapLayout'
 import PageHeading from '@/components/ui/typography/PageHeading'
 
 export default function SitemapPage() {
