@@ -12,7 +12,7 @@ interface LatestVideosSectionProps {
 
 export function LatestVideosSection({ mousePosition, videos, loading, error }: LatestVideosSectionProps) {
   return (
-    <section className="h-screen flex items-center justify-center px-6 bg-gray-800 relative overflow-hidden">
+    <section className="min-h-[calc(100vh-80px)] flex items-center justify-center px-6 bg-gray-800 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div 
@@ -28,7 +28,7 @@ export function LatestVideosSection({ mousePosition, videos, loading, error }: L
         />
       </div>
 
-      <div className="max-w-7xl mx-auto w-full relative z-10">
+      <div className="max-w-7xl mx-auto w-full relative z-10 py-8">
         <ScrollSection direction="fade">
           <div className="text-center mb-8">
             <h2 className="font-sans font-bold text-4xl md:text-5xl text-white mb-4 tracking-tight">

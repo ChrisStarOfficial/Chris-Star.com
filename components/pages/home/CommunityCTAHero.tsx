@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ mousePosition }: HeroSectionProps) {
   return (
-    <section className="relative h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center px-6 overflow-hidden">
       {/* Subtle Background Effects */}
       <div className="absolute inset-0 opacity-10">
         <div 
@@ -21,7 +21,7 @@ export function HeroSection({ mousePosition }: HeroSectionProps) {
         />
       </div>
 
-      <div className="text-center relative z-10 max-w-4xl mx-auto">
+      <div className="text-center relative z-10 max-w-4xl mx-auto w-full">
         <ScrollSection direction="fade">
           <h1 className="font-sans font-bold text-5xl md:text-7xl text-white mb-6 tracking-tight leading-tight">
             Deepen Your Spiritual Practice with Chris Star
