@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react"
 import { Footer } from "@/components/layout/footer/Footer"
 import { Header } from "@/components/layout/header/Header"
-import { HeroSection } from "@/components/pages/home/CommunityCTAHero"
-import { LatestVideosSection } from "@/components/pages/home/LatestVideos"
-import { NextStepSection } from "@/components/pages/home/NextStep"
+import { HeroSection } from "@/app/components/home/CommunityCTAHero"
+import { LatestVideosSection } from "@/app/components/home/LatestVideos"
+import { NextStepSection } from "@/app/components/home/NextStep"
 import { useYouTubeVideos } from "@/components/shared/hooks/useYouTubeVideos"
 
 export default function SpiritualHomepage() {

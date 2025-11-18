@@ -4,11 +4,11 @@ import { useEffect, useState, Suspense } from "react"
 import Link from "next/link"
 import { Footer } from "@/components/layout/footer/Footer"
 import SacredGeometryBackground from '@/components/ui/background/GeometricBackground'
-import ErrorHeader from '@/components/pages/not-found/NavigationErrorHeader'
-import { PrimeRadiant } from '@/components/pages/not-found/three/PrimeRadiant'
+import ErrorHeader from '@/app/components/not-found/NavigationErrorHeader'
+import { PrimeRadiant } from '@/app/components/not-found/PrimeRadiant'
 import { Canvas } from '@react-three/fiber'
-import { ActivateProtocol } from '@/components/pages/not-found/ActivateProtocol'
-import { ProtocolOverlay } from '@/components/pages/not-found/ProtocolOverlay'
+import { ActivateProtocol } from '@/app/components/not-found/ActivateProtocol'
+import { ProtocolOverlay } from '@/app/components/not-found/ProtocolOverlay'
 import { ShipDecks } from '@/app/navigation/components/ShipDecks'
 import * as THREE from 'three'
 
@@ -16,7 +16,6 @@ export default function NotFound() {
   const [showOverlay, setShowOverlay] = useState(false)
   const [minigameScore, setMinigameScore] = useState(0)
   const [minigameHighScore, setMinigameHighScore] = useState(0)
-  const [use3DGame, setUse3DGame] = useState(true)
   const [isMounted, setIsMounted] = useState(false)
 
   // Prevent hydration issues by only rendering client-side components after mount
@@ -32,11 +31,6 @@ export default function NotFound() {
     setShowOverlay(false)
   }
 
-  const toggleGameVersion = () => {
-    setUse3DGame(!use3DGame)
-    setMinigameScore(0)
-  }
-
   return (
     <div className="min-h-screen bg-cosmic text-parchment relative overflow-hidden">
       <SacredGeometryBackground />
@@ -47,10 +41,8 @@ export default function NotFound() {
         onClose={handleCloseOverlay}
         minigameScore={minigameScore}
         minigameHighScore={minigameHighScore}
-        use3DGame={use3DGame}
         onScoreUpdate={setMinigameScore}
         onHighScoreUpdate={setMinigameHighScore}
-        onToggleGameVersion={toggleGameVersion}
       />
 
       {/* Header - Absolutely positioned */}

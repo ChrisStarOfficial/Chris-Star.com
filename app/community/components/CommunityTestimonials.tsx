@@ -1,6 +1,6 @@
 "use client"
 
-import { ScrollSection } from "@/components/layout/scroll-section"
+import { ScrollSection } from "@/components/layout/ScrollSection"
 
 const testimonials = [
   {

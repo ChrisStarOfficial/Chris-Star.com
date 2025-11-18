@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ScrollSection } from "@/components/layout/scroll-section"
+import { ScrollSection } from "@/components/layout/ScrollSection"
 import { Footer } from "@/components/layout/footer/Footer"
 
 const wikiProjects = [

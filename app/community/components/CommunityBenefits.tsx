@@ -1,7 +1,7 @@
 // components/community/CommunityBenefits.tsx
 "use client"
 
-import { ScrollSection } from "@/components/layout/scroll-section"
+import { ScrollSection } from "@/components/layout/ScrollSection"
 
 const communityBenefits = [
   {

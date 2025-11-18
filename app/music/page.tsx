@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { ScrollSection } from "@/components/layout/scroll-section"
+import { ScrollSection } from "@/components/layout/ScrollSection"
 import { InteractiveLogo } from "@/components/layout/footer/InteractiveLogo"
 
 const spiritualSongs = [

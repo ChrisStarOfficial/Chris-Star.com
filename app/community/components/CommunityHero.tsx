@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ScrollSection } from "@/components/layout/scroll-section"
+import { ScrollSection } from "@/components/layout/ScrollSection"
 
 export function CommunityHero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
