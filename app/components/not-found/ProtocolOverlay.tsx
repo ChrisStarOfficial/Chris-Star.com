@@ -65,43 +65,17 @@ export function ProtocolOverlay({
         </button>
 
         {/* Content */}
-        <div className="h-full flex flex-col">
-          <AnimatedTransition show={true}>
-            <div className="flex-1 bg-mineral/50 backdrop-blur-sm rounded-3xl p-8 border border-stone/50 flex flex-col">
-              {/* Game Header */}
-              <div className="mb-6">
-                <div className="flex items-center justify-center mb-6">
-                  <div className="w-20 h-px bg-gradient-to-r from-transparent via-luminance/30 to-transparent" />
-                  <div
-                    className="mx-6 px-8 py-3 border border-luminance/25 bg-gradient-to-r from-luminance/8 to-luminance/20 backdrop-blur-sm"
-                    style={{ clipPath: "polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)" }}
-                  >
-                    <span className="text-luminance font-sans text-sm tracking-[0.2em] font-light">
-                      ◊ BULL RUN PROTOCOL ◊
-                    </span>
-                  </div>
-                  <div className="w-20 h-px bg-gradient-to-r from-transparent via-luminance/30 to-transparent" />
-                </div>
+        <div className="h-full">
+          <AnimatedTransition show={true} className="h-full">
 
-                <div className="flex justify-between items-center mb-4">
-                  <div className="text-parchment font-sans">
-                    <span className="text-lg font-bold">SCORE: {minigameScore}</span>
-                  </div>
-                  <div className="text-luminance font-sans">
-                    <span className="text-lg font-bold">HIGH SCORE: {minigameHighScore}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Game Container */}
-              <div className="flex-1 flex items-center justify-center">
-                <div className="w-full max-w-4xl">
-                  <BullRun
-                    onScoreUpdate={onScoreUpdate}
-                    onHighScoreUpdate={onHighScoreUpdate}
-                    initialHighScore={minigameHighScore}
-                  />
-                </div>
+            {/* Game Container - centered in the full space */}
+            <div className="h-full flex items-center justify-center">
+              <div className="w-full max-w-4xl">
+                <BullRun
+                  onScoreUpdate={onScoreUpdate}
+                  onHighScoreUpdate={onHighScoreUpdate}
+                  initialHighScore={minigameHighScore}
+                />
               </div>
             </div>
           </AnimatedTransition>

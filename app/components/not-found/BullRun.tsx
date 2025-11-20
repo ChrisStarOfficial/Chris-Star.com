@@ -117,16 +117,7 @@ export default function BullRun({
 
   return (
     <div className={styles.container} style={{ width: "100%", maxWidth: 900 }}>
-      <div className={styles.header}>
-        <div className={styles.scoreBox}>
-          <div className={styles.scoreLabel}>SCORE</div>
-          <div className={styles.scoreValue}>{score}</div>
-        </div>
-        <div className={styles.highScoreBox}>
-          <div className={styles.scoreLabel}>HIGH</div>
-          <div className={styles.scoreValue}>{highScore}</div>
-        </div>
-      </div>
+
 
       <div className={styles.canvasWrap}>
         <canvas
@@ -146,36 +137,9 @@ export default function BullRun({
             }}
           >
             <div className={styles.overlayText}>PRESS SPACE TO START</div>
-            <div className={styles.overlayHint}>
-              (Space / Click to jump, Down to crouch)
-            </div>
+            <div className={styles.overlayHint}>↓ to crouch</div>
           </div>
         )}
-      </div>
-
-      <div className={styles.controls}>
-        <button
-          className={styles.btn}
-          onClick={() => {
-            api.jump();
-            // No need to setRunning(true) here, jump will start if not running
-          }}
-        >
-          JUMP
-        </button>
-        <button className={styles.btn} onPointerDown={() => api.crouch()} onPointerUp={() => api.uncrouch()}>
-          CROUCH
-        </button>
-        <button className={styles.btnSecondary} onClick={toggleRunning}>
-          {running ? "PAUSE" : "RESUME"}
-        </button>
-      </div>
-
-      <div className={styles.hint}>
-        <small>
-          Tip: press <b>Space</b> to start and jump. Use <b>Down Arrow</b> to
-          crouch.
-        </small>
       </div>
     </div>
   );
