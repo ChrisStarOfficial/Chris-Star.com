@@ -84,206 +84,194 @@ npm run dev
 ---
 
 ## File Tree
-    ├── 📂 app
-    │   ├── 📂 api
-    │   │   ├── 📂 debug-youtube
-    │   │   │   └── 📄 route.ts
-    │   │   └── 📂 youtube-videos
-    │   │       └── 📄 route.ts
-    │   ├── 📂 archives
-    │   │   ├── 📂 compendia
-    │   │   │   └── 📄 page.tsx
-    │   │   ├── 📂 vault
-    │   │   │   └── 📄 page.tsx
-    │   │   ├── 📂 wiki
-    │   │   │   └── 📄 page.tsx
-    │   │   └── 📄 page.tsx
-    │   ├── 📂 community
-    │   │   ├── 📁 components
-    │   │   │   ├── 📄 CommunityBenefits.tsx
-    │   │   │   ├── 📄 CommunityCTA.tsx
-    │   │   │   ├── 📄 CommunityFeatures.tsx
-    │   │   │   ├── 📄 CommunityHero.tsx
-    │   │   │   ├── 📄 CommunityNavigation.tsx
-    │   │   │   ├── 📄 CommunityTestimonials.tsx
-    │   │   │   ├── 📄 StarseedAcademyIcon.tsx
-    │   │   │   └── 📄 StarseedCentralIcon.tsx
-    │   │   └── 📄 page.tsx
-    │   ├── 📁 components
-    │   │   ├── 📂 home
-    │   │   │   ├── 📄 CommunityCTAHero.tsx
-    │   │   │   ├── 📄 CompanySloganHero.tsx
-    │   │   │   ├── 📄 LatestVideos.tsx
-    │   │   │   ├── 📄 NextStep.tsx
-    │   │   │   └── 📄 TransformationalLeadership.tsx
-    │   │   └── 📂 not-found
-    │   │       ├── 📄 ActivateProtocol.tsx
-    │   │       ├── 📄 AnimatedTransition.tsx
-    │   │       ├── 📄 BullRun.tsx
-    │   │       ├── 📄 NavigationErrorHeader.tsx
-    │   │       ├── 📄 PrimeRadiant.tsx
-    │   │       └── 📄 ProtocolOverlay.tsx
-    │   ├── 📂 feedback
-    │   │   ├── 📁 components
-    │   │   │   └── 📄 FeedbackOverlay.tsx
-    │   │   └── 📄 page.tsx
-    │   ├── 📂 music
-    │   │   └── 📄 page.tsx
-    │   ├── 📂 navigation
-    │   │   ├── 📁 components
-    │   │   │   ├── 📂 effects
-    │   │   │   │   └── 📄 AudioManager.tsx
-    │   │   │   ├── 📂 grid-navigation
-    │   │   │   │   └── 📄 navigation-grid.tsx
-    │   │   │   ├── 📂 orbital-navigation
-    │   │   │   │   ├── 📄 DestinationInfoPanel.tsx
-    │   │   │   │   ├── 📄 DestinationOrbits.tsx
-    │   │   │   │   └── 📄 NavigationSection.tsx
-    │   │   │   ├── 📂 ship-interface
-    │   │   │   │   └── 📄 NavigationControls.tsx
-    │   │   │   ├── 📂 three 🎮
-    │   │   │   │   └── 📄 TexturedEarth.tsx
-    │   │   │   ├── 📄 EarthBriefingOverlay.tsx
-    │   │   │   ├── 📄 ShipDecks.tsx
-    │   │   │   └── 📄 StatusReport.tsx
-    │   │   └── 📄 page.tsx
-    │   ├── 📂 sitemap
-    │   │   ├── 📁 components
-    │   │   │   ├── 📄 CategoryCard.tsx
-    │   │   │   ├── 📄 PageLink.tsx
-    │   │   │   ├── 📄 SitemapLayout.tsx
-    │   │   │   └── 📄 SitemapNotice.tsx
-    │   │   └── 📄 page.tsx
-    │   ├── 📂 favicon.ico
-    │   ├── 📄 globals.css
-    │   ├── 📄 layout.tsx
-    │   ├── 📄 not-found.tsx
-    │   ├── 📄 page.tsx
-    │   └── 📄 sitemap.ts
-    ├── 📁 components
-    │   ├── 📂 layout
-    │   │   ├── 📂 footer
-    │   │   │   ├── 📄 Footer.tsx
-    │   │   │   └── 📄 InteractiveLogo.tsx
-    │   │   ├── 📂 header
-    │   │   │   ├── 📄 Header.tsx
-    │   │   │   ├── 📄 NavigationIcon.tsx
-    │   │   │   └── 📄 NavigationText.tsx
-    │   │   ├── 📄 ClientLayout.tsx
-    │   │   ├── 📄 HyperspaceEffect.tsx
-    │   │   ├── 📄 NavigationEffect.tsx
-    │   │   └── 📄 ScrollSection.tsx
-    │   ├── 📂 shared
-    │   │   ├── 📂 contexts
-    │   │   │   ├── 📄 LoadingContext.tsx
-    │   │   │   └── 📄 LoadingScreen.tsx
-    │   │   └── 📁 hooks
-    │   │       ├── 📄 useBullRun.ts
-    │   │       ├── 📄 useEasterEggs.ts
-    │   │       ├── 📄 useMousePosition.ts
-    │   │       ├── 📄 useOptionSelection.ts
-    │   │       └── 📄 useYouTubeVideos.ts
-    │   └── 📂 ui
-    │       ├── 📂 background
-    │       │   ├── 📄 GeometricBackground.tsx
-    │       │   └── 📄 PurpleGalaxyBackground.tsx
-    │       ├── 📂 data-display
-    │       │   ├── 📂 Card
-    │       │   │   ├── 📄 Card.tsx
-    │       │   │   └── 📄 ServiceCard.tsx
-    │       │   ├── 📂 Text
-    │       │   │   └── 📄 Text.tsx
-    │       │   └── 📄 counter.tsx
-    │       ├── 📂 feedback
-    │       │   └── 📄 EasterEggHint.tsx
-    │       ├── 📂 forms
-    │       │   ├── 📄 Button.tsx
-    │       │   └── 📄 Input.tsx
-    │       ├── 📂 layout
-    │       │   ├── 📄 Container.tsx
-    │       │   ├── 📄 Grid.tsx
-    │       │   ├── 📄 Section.tsx
-    │       │   └── 📄 Stack.tsx
-    │       ├── 📂 theme
-    │       │   ├── 📄 ThemeProvider.tsx
-    │       │   ├── 📄 ThemeToggle.tsx
-    │       │   └── 📄 ThemeWrapper.tsx
-    │       ├── 📂 typography
-    │       │   └── 📄 PageHeading.tsx
-    │       ├── 📄 OptionCard.tsx
-    │       ├── 📄 OptionOverlay.tsx
-    │       └── 📄 OptionsGrid.tsx
-    ├── 📁 lib
-    │   ├── 📄 asset-converter.ts
-    │   ├── 📄 compatibility-check.ts
-    │   ├── 📄 design-tokens.ts
-    │   ├── 📄 game-config.ts 🎮
-    │   ├── 📄 legacy-bridge.ts
-    │   ├── 📄 utils.ts
-    │   └── 📄 voxel-converter.ts
-    ├── 📁 public
-    │   ├── 📂 game 🎮
-    │   │   ├── 📂 audio
-    │   │   │   ├── 📂 button-press.ogg
-    │   │   │   ├── 📂 hit.ogg
-    │   │   │   └── 📂 score-reached.ogg
-    │   │   ├── 📂 default_100_percent
-    │   │   │   ├── 📂 100-disabled.png
-    │   │   │   ├── 📂 100-error-offline.png
-    │   │   │   └── 📂 100-offline-sprite.png
-    │   │   ├── 📂 default_200_percent
-    │   │   │   ├── 📂 200-disabled.png
-    │   │   │   ├── 📂 200-error-offline.png
-    │   │   │   └── 📂 200-offline-sprite.png
-    │   │   ├── 📄 BullRun.module.css
-    │   │   ├── 📂 offline-sprite-1x.png
-    │   │   └── 📂 offline-sprite-2x.png
-    │   ├── 📂 images
-    │   │   ├── 📂 sample-thumb-1.png
-    │   │   ├── 📂 sample-thumb-2.png
-    │   │   └── 📂 sample-thumb-3.png
-    │   ├── 📂 logos
-    │   │   ├── 📂 dark-mode
-    │   │   │   └── 📂 Transparent Rectangular Logo with Text.png
-    │   │   ├── 📂 light-mode
-    │   │   │   ├── 📂 Transparent Rectangular Logo with Text.png
-    │   │   │   └── 📂 Wordmark.png
-    │   │   ├── 📂 Icon.png
-    │   │   ├── 📂 Rectangular Logo with Text.png
-    │   │   ├── 📂 Square Icon.png
-    │   │   ├── 📂 Square Logo with Text.png
-    │   │   └── 📂 Square Logo.png
-    │   ├── 📁 models 🦖
-    │   │   └── 📂 prime_radiant
-    │   │       ├── 📂 PrimeRadiantFullHull.blend
-    │   │       ├── 📂 PrimeRadiantFullHull.blend1
-    │   │       ├── 📂 PrimeRadiantHalfToFull.blend
-    │   │       ├── 📂 PrimeRadiantHalfToFull.blend1
-    │   │       └── 📂 PrimeRadiantHalfToFull.glb
-    │   └── 📁 textures
-    │       └── 📂 earth
-    │           ├── 📂 earth-clouds.jpg
-    │           ├── 📂 earth-map.jpg
-    │           ├── 📂 earth-nightmap.jpg
-    │           ├── 📂 earth-normal.tif
-    │           └── 📂 earth-specular.tif
-    ├── 📂 styles
-    │   └── 📄 globals.css
-    ├── 📂 types
-    │   ├── 📄 design-tokens.ts
-    │   └── 📄 game.d.ts 🎮
-    ├── 📂 .env.local
-    ├── 📂 .gitattributes
-    ├── 📂 .gitignore
-    ├── 📄 components.json
-    ├── 📂 LICENSE
-    ├── 📄 ListFileTree.js
-    ├── 📄 middleware.ts
-    ├── 📄 next-env.d.ts
-    ├── 📂 next.config.mjs
-    ├── 📂 opencode.exe
-    ├── 📄 package.json
-    ├── 📂 postcss.config.mjs
-    ├── 📄 README.md
-    ├── 📄 tailwind.config.js
-    └── 📄 tsconfig.json
+├── 📂 app
+│   ├── 📂 api
+│   │   ├── 📂 debug-youtube
+│   │   │   └── 📄 route.ts
+│   │   └── 📂 youtube-videos
+│   │       └── 📄 route.ts
+│   ├── 📂 archives
+│   │   ├── 📂 compendia
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📂 vault
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📂 wiki
+│   │   │   └── 📄 page.tsx
+│   │   └── 📄 page.tsx
+│   ├── 📂 community
+│   │   ├── 📁 components
+│   │   │   ├── 📄 CommunityBenefits.tsx
+│   │   │   ├── 📄 CommunityCTA.tsx
+│   │   │   ├── 📄 CommunityFeatures.tsx
+│   │   │   ├── 📄 CommunityHero.tsx
+│   │   │   ├── 📄 CommunityNavigation.tsx
+│   │   │   ├── 📄 CommunityTestimonials.tsx
+│   │   │   ├── 📄 StarseedAcademyIcon.tsx
+│   │   │   └── 📄 StarseedCentralIcon.tsx
+│   │   └── 📄 page.tsx
+│   ├── 📁 components
+│   │   ├── 📂 home
+│   │   │   ├── 📄 CommunityCTAHero.tsx
+│   │   │   ├── 📄 CompanySloganHero.tsx
+│   │   │   ├── 📄 LatestVideos.tsx
+│   │   │   ├── 📄 NextStep.tsx
+│   │   │   └── 📄 TransformationalLeadership.tsx
+│   │   └── 📂 not-found
+│   │       ├── 📄 ActivateProtocol.tsx
+│   │       ├── 📄 AnimatedTransition.tsx
+│   │       ├── 📄 BullRun.tsx
+│   │       ├── 📄 NavigationErrorHeader.tsx
+│   │       ├── 📄 PrimeRadiant.tsx
+│   │       └── 📄 ProtocolOverlay.tsx
+│   ├── 📂 feedback
+│   │   ├── 📁 components
+│   │   │   └── 📄 FeedbackOverlay.tsx
+│   │   └── 📄 page.tsx
+│   ├── 📂 music
+│   │   └── 📄 page.tsx
+│   ├── 📂 navigation
+│   │   ├── 📁 components
+│   │   │   ├── 📂 effects
+│   │   │   │   └── 📄 AudioManager.tsx
+│   │   │   ├── 📂 grid-navigation
+│   │   │   │   └── 📄 navigation-grid.tsx
+│   │   │   ├── 📂 orbital-navigation
+│   │   │   │   ├── 📄 DestinationInfoPanel.tsx
+│   │   │   │   ├── 📄 DestinationOrbits.tsx
+│   │   │   │   └── 📄 NavigationSection.tsx
+│   │   │   ├── 📂 ship-interface
+│   │   │   │   └── 📄 NavigationControls.tsx
+│   │   │   ├── 📂 three 🎮
+│   │   │   │   └── 📄 TexturedEarth.tsx
+│   │   │   ├── 📄 EarthBriefingOverlay.tsx
+│   │   │   ├── 📄 ShipDecks.tsx
+│   │   │   └── 📄 StatusReport.tsx
+│   │   └── 📄 page.tsx
+│   ├── 📂 sitemap
+│   │   ├── 📁 components
+│   │   │   ├── 📄 CategoryCard.tsx
+│   │   │   ├── 📄 PageLink.tsx
+│   │   │   ├── 📄 SitemapLayout.tsx
+│   │   │   └── 📄 SitemapNotice.tsx
+│   │   └── 📄 page.tsx
+│   ├── 📂 favicon.ico
+│   ├── 📄 globals.css
+│   ├── 📄 layout.tsx
+│   ├── 📄 not-found.tsx
+│   ├── 📄 page.tsx
+│   └── 📄 sitemap.ts
+├── 📁 components
+│   ├── 📂 layout
+│   │   ├── 📂 footer
+│   │   │   ├── 📄 Footer.tsx
+│   │   │   └── 📄 InteractiveLogo.tsx
+│   │   ├── 📂 header
+│   │   │   ├── 📄 Header.tsx
+│   │   │   ├── 📄 NavigationIcon.tsx
+│   │   │   └── 📄 NavigationText.tsx
+│   │   ├── 📄 ClientLayout.tsx
+│   │   ├── 📄 HyperspaceEffect.tsx
+│   │   ├── 📄 NavigationEffect.tsx
+│   │   └── 📄 ScrollSection.tsx
+│   ├── 📂 shared
+│   │   ├── 📂 contexts
+│   │   │   ├── 📄 LoadingContext.tsx
+│   │   │   └── 📄 LoadingScreen.tsx
+│   │   └── 📁 hooks
+│   │       ├── 📄 useBullRun.ts
+│   │       ├── 📄 useEasterEggs.ts
+│   │       └── 📄 useYouTubeVideos.ts
+│   └── 📂 ui
+│       ├── 📂 background
+│       │   ├── 📄 GeometricBackground.tsx
+│       │   └── 📄 PurpleGalaxyBackground.tsx
+│       ├── 📂 data-display
+│       │   ├── 📂 Card
+│       │   │   ├── 📄 Card.tsx
+│       │   │   └── 📄 ServiceCard.tsx
+│       │   ├── 📂 Text
+│       │   │   └── 📄 Text.tsx
+│       │   └── 📄 counter.tsx
+│       ├── 📂 feedback
+│       │   └── 📄 EasterEggHint.tsx
+│       ├── 📂 forms
+│       │   ├── 📄 Button.tsx
+│       │   └── 📄 Input.tsx
+│       ├── 📂 layout
+│       │   ├── 📄 Container.tsx
+│       │   ├── 📄 Grid.tsx
+│       │   ├── 📄 Section.tsx
+│       │   └── 📄 Stack.tsx
+│       ├── 📂 theme
+│       │   ├── 📄 ThemeProvider.tsx
+│       │   ├── 📄 ThemeToggle.tsx
+│       │   └── 📄 ThemeWrapper.tsx
+│       ├── 📂 typography
+│       │   └── 📄 PageHeading.tsx
+│       ├── 📄 OptionCard.tsx
+│       ├── 📄 OptionOverlay.tsx
+│       └── 📄 OptionsGrid.tsx
+├── 📁 lib
+│   └── 📄 utils.ts
+├── 📁 public
+│   ├── 📂 game 🎮
+│   │   ├── 📂 audio
+│   │   │   ├── 📂 button-press.ogg
+│   │   │   ├── 📂 hit.ogg
+│   │   │   └── 📂 score-reached.ogg
+│   │   ├── 📂 default_100_percent
+│   │   │   ├── 📂 100-disabled.png
+│   │   │   ├── 📂 100-error-offline.png
+│   │   │   └── 📂 100-offline-sprite.png
+│   │   ├── 📂 default_200_percent
+│   │   │   ├── 📂 200-disabled.png
+│   │   │   ├── 📂 200-error-offline.png
+│   │   │   └── 📂 200-offline-sprite.png
+│   │   ├── 📄 BullRun.module.css
+│   │   ├── 📂 offline-sprite-1x.png
+│   │   └── 📂 offline-sprite-2x.png
+│   ├── 📂 images
+│   │   ├── 📂 sample-thumb-1.png
+│   │   ├── 📂 sample-thumb-2.png
+│   │   └── 📂 sample-thumb-3.png
+│   ├── 📂 logos
+│   │   ├── 📂 dark-mode
+│   │   │   └── 📂 Transparent Rectangular Logo with Text.png
+│   │   ├── 📂 light-mode
+│   │   │   ├── 📂 Transparent Rectangular Logo with Text.png
+│   │   │   └── 📂 Wordmark.png
+│   │   ├── 📂 Icon.png
+│   │   ├── 📂 Rectangular Logo with Text.png
+│   │   ├── 📂 Square Icon.png
+│   │   ├── 📂 Square Logo with Text.png
+│   │   └── 📂 Square Logo.png
+│   ├── 📁 models 🦖
+│   │   └── 📂 prime_radiant
+│   │       ├── 📂 PrimeRadiantFullHull.blend
+│   │       ├── 📂 PrimeRadiantFullHull.blend1
+│   │       ├── 📂 PrimeRadiantHalfToFull.blend
+│   │       ├── 📂 PrimeRadiantHalfToFull.blend1
+│   │       └── 📂 PrimeRadiantHalfToFull.glb
+│   └── 📁 textures
+│       └── 📂 earth
+│           ├── 📂 earth-clouds.jpg
+│           ├── 📂 earth-map.jpg
+│           ├── 📂 earth-nightmap.jpg
+│           ├── 📂 earth-normal.tif
+│           └── 📂 earth-specular.tif
+├── 📂 types
+│   └── 📄 design-tokens.ts
+├── 📂 .env.local
+├── 📂 .gitattributes
+├── 📂 .gitignore
+├── 📄 components.json
+├── 📂 LICENSE
+├── 📄 ListFileTree.js
+├── 📄 middleware.ts
+├── 📄 next-env.d.ts
+├── 📂 next.config.mjs
+├── 📄 package.json
+├── 📂 postcss.config.mjs
+├── 📄 README.md
+├── 📄 tailwind.config.js
+└── 📄 tsconfig.json

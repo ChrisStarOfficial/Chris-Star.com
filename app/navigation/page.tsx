@@ -1,7 +1,7 @@
 "use client"
 
 import { Canvas } from '@react-three/fiber'
-import { TexturedEarth } from '@/app/navigation/components/three/TexturedEarth'
+import { TexturedEarth } from '@/app/navigation/components/TexturedEarth'
 import { EarthBriefingOverlay } from '@/app/navigation/components/EarthBriefingOverlay'
 import { StatusReport } from '@/app/navigation/components/StatusReport'
 import { ShipDecks } from '@/app/navigation/components/ShipDecks'
