@@ -7,7 +7,6 @@ interface ErrorHeaderProps {
 export default function ErrorHeader({ 
   title = "DESTINATION PATH INVALID", 
   subtitle = "NAVIGATION ERROR",
-  description = "You have been redirected to the Lounge."
 }: ErrorHeaderProps) {
   return (
     <div className="mb-8 flex flex-col items-center justify-center text-center">
@@ -27,9 +26,6 @@ export default function ErrorHeader({
       <h2 className="font-sans font-medium text-2xl md:text-3xl text-parchment mb-6 tracking-wide">
         {title}
       </h2>
-      <p className="font-sans text-lg text-clay mb-24 leading-relaxed max-w-2xl mx-auto">
-        {description}
-      </p>
     </div>
   )
 }
