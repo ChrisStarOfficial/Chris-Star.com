@@ -56,7 +56,7 @@ export function ProtocolOverlay({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-[110] w-10 h-10 flex items-center justify-center text-parchment/80 hover:text-parchment bg-parchment/10 hover:bg-parchment/20 rounded-full backdrop-blur-sm border border-clay transition-all duration-300 pointer-events-auto"
+          className="absolute top-6 right-6 z-[110] w-10 h-10 flex items-center justify-center text-parchment/80 hover:text-parchment bg-transparent hover:bg-parchment/20 rounded-full backdrop-blur-sm transition-all duration-300 pointer-events-auto"
           aria-label="Close overlay"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
